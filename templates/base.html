@@ -8,14 +8,21 @@
     </head>
     <body>
         <header>
-            <h1>ChatMe
-                <span class="banner"><a href="{{ url_for('main.profile') }}"><img class="image" id="myProfile" src="{{ url_for('static', filename='profile.png') }}"></a></span>
+            <h1><a href="{{ url_for('main.index') }}">ChatMe:</a>
+                <span class="banner">
+                    {% if current_user.is_authenticated: %}
+                    Welcome back {{current_user.name}}
+                    <a href="{{ url_for('main.profile', user_id=current_user.id) }}"><img class="image" id="myProfile" src="{{ url_for('static', filename='profile.png') }}"></a></span>
+                    {% endif %}
             </h1>
-            <div class="newTweet"><a href="{{ url_for('main.index') }}">Post new chat</a></div>
+            
         </header>
         <section class="content">
             {% block content %}{% endblock %}
         </section>
+        {% if current_user.is_authenticated: %}
+        <a href="{{ url_for('auth.logout') }}">Logout</a>
+        {% endif %}
         <footer><small>Developed for Web applications</small></footer>
     </body>
 </html>

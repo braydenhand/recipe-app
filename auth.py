@@ -40,6 +40,7 @@ def login():
 
 @bp.route("/login", methods=["POST"])
 def login_post():
+
     email = request.form.get("email")
     password = request.form.get("password")
 
@@ -53,3 +54,9 @@ def login_post():
     else:
         flash("Wrong email/password")
         return redirect(url_for("auth.login"))
+
+@bp.route("/logout")
+@flask_login.login_required
+def logout():
+    flask_login.logout_user()
+    return redirect(url_for("auth.login"))

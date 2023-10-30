@@ -6,11 +6,31 @@
 
     <div class="userProfile">
         <img id="userIcon" src="{{ url_for('static', filename='profile.png') }}">
-        <h1>{{current_user.name}}</h1>
-        <input type="button" class="submit-center" fname="wantToFollow" value="Follow">
+        <h1>{{user.name}}</h1>
+{% if follow_button == "follow" %}
+    <form action="{{ url_for('main.follow', user_id=user.id) }}" method="post">
+        <input type="submit" value="Follow">
+    </form>
+{% elif follow_button == "unfollow" %}
+    <form action="{{ url_for('main.unfollow', user_id=user.id) }}" method="post">
+        <input type="submit" value="Unfollow">
+    </form>
+{% endif %}
     </div>
+
     <section>
-        <h2>Latest posts from {{current_user.name}}</h2>
+        <h2>Following:</h2>
+        {% include 'following_template.html' %}
+    </section>
+
+    <section>
+        <h2>Followers:</h2>
+        {% include 'followers_template.html' %}
+    </section>
+
+
+    <section>
+        <h2>Latest posts from {{user.name}}</h2>
         {% include 'posts_template.html' %}
     </section>
     {% endif %}

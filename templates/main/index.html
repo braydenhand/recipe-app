@@ -1,6 +1,13 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<div class="newTweet">Post new chat:
+    <form action="{{ url_for('main.new_post') }}" method="post">
+        <label for="new_post">What do you want to say?:</label><br>
+        <input type="text" id="new_post" name="new_post"><br>
+        <input type="submit" value="Submit">
+    </form>
+</div>
     <section>
         <h2>Latest posts from the people you follow</h2>
         {% include 'posts_template.html' %}

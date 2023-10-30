@@ -3,6 +3,14 @@
 {% block content %}
 
 {% include 'post_template.html' %}
+<div class="newTweet">Post reply:
+    <form action="{{ url_for('main.new_post') }}" method="post">
+        <label for="new_post">What do you want to say?:</label><br>
+        <input type="text" id="new_post" name="new_post"><br>
+        <input type="hidden" name="response_to" value="{{ post.id }}">
+        <input type="submit" value="Submit">
+    </form>
+</div>
 <section>
     <h2>Replies:</h2>
     {% include 'posts_template.html' %}
