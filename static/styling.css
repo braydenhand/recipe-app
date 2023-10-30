@@ -1,0 +1,68 @@
+.image {
+    max-width: 40px;
+    height: auto;
+}
+
+header {
+    background: rgb(155, 154, 154);
+    font-size: large;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+#myProfile {
+    float: right;
+}
+
+.message {
+    border-radius: 10px;
+    background-color: beige;
+    padding: 10px;
+    border: 2px solid black;
+    margin: 3px;
+    
+}
+
+.metadata {
+    font-size: small;
+}
+
+.tweet {
+    font-size: large;
+    
+
+}
+
+.submit {
+    float: right;
+    padding: 3px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+.submit-center {
+    padding: 3px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+
+.submit:active {
+    background-color: white;
+}
+
+.userProfile {
+    margin: auto;
+    width: 50%;
+    border: 3px solid green;
+    padding: 10px;
+    text-align: center;
+}
+
+
+#userIcon {
+    display: block;
+    max-width: 100px;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}

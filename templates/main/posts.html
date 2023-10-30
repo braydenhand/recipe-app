@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% include 'post_template.html' %}
+<section>
+    <h2>Replies:</h2>
+    {% include 'posts_template.html' %}
+</section>
+{% endblock %}

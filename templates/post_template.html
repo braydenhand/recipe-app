@@ -1,0 +1,14 @@
+
+<div class="message">
+    <div>
+        <a href="{{ url_for('main.profile') }}"><img class="image" id="pfp" src="{{ url_for('static', filename='profile.png') }}"></a>
+        <a href="{{ url_for('main.posts') }}"><input type="button" class="submit" fname="wantToFollow" value="View Replies"></a>
+    </div>
+    <div class="tweet">
+        {{ post.text }}
+    </div>
+    <div class="metadata">
+        <span class="author">{{ post.user.name }}</span>
+        <span class="date">{{ post.timestamp }}</span>
+    </div>
+</div>

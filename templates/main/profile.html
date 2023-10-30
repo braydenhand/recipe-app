@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if current_user.is_authenticated: %}
+    <div>User: </div>
+
+    <div class="userProfile">
+        <img id="userIcon" src="{{ url_for('static', filename='profile.png') }}">
+        <h1>{{current_user.name}}</h1>
+        <input type="button" class="submit-center" fname="wantToFollow" value="Follow">
+    </div>
+    <section>
+        <h2>Latest posts from {{current_user.name}}</h2>
+        {% include 'posts_template.html' %}
+    </section>
+    {% endif %}
+{% endblock %}
