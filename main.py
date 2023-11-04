@@ -11,6 +11,7 @@ bp = Blueprint("main", __name__)
 @bp.route("/")
 @flask_login.login_required
 def index():
+    """
     followers = db.aliased(model.User)
     query = (
     db.select(model.Message)
@@ -21,9 +22,15 @@ def index():
     .order_by(model.Message.timestamp.desc())
     .limit(10)
 )
+"""
+    query = (
+        db.select(model.Recipe)
+        .where(model.Recipe.user_id == flask_login.current_user.id)
+    )
     
-    posts = db.session.execute(query).scalars().all()
-    return render_template("main/index.html", posts=posts)
+    recipies = db.session.execute(query).scalars().all()
+    
+    return render_template("main/index.html", recipies=recipies)
 
 
 @bp.route('/profile/<int:user_id>')

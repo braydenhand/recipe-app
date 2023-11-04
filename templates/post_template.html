@@ -1,17 +1,17 @@
 
 <div class="message">
     <div>
-        <a href="{{ url_for('main.profile', user_id=post.user.id) }}"><img class="image" id="pfp" src="{{ url_for('static', filename='profile.png') }}"></a>
-        {% if post.response_to is none %}
-        <a href="{{ url_for('main.post', message_id=post.id) }}"><input type="button" class="submit" fname="wantToFollow" value="View Replies"></a>
+        <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}"><img class="image" id="pfp" src="{{ url_for('static', filename='profile.png') }}"></a> 
+        {% if recipe.response_to is none %}  
+        <a href="{{ url_for('main.post', message_id=recipe.id) }}"><input type="button" class="submit" fname="wantToFollow" value="View Replies"></a>
         {% endif %}
     </div>
     <div class="tweet">
-        {{ post.text }}
+        {{ recipe.text }}
         
     </div>
     <div class="metadata">
-        <span class="author">{{ post.user.name }}</span>
-        <span class="date">{{ post.timestamp }}</span>
+        <span class="author">{{ recipe.user.name }}</span>
+        <span class="date">{{ recipe.timestamp }}</span>
     </div>
 </div>

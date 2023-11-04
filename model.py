@@ -38,6 +38,7 @@ class Recipe(db.Model):
     description = db.Column(db.String(512), nullable=False)
     cooking_time = db.Column(db.Integer, nullable=False)
     number_people = db.Column(db.Integer, nullable=False)
+    timestamp = db.Column(db.DateTime(), nullable=False)
  
    #Need to add relationship to QIngredients and Steps 
     response_to_id = db.Column(db.Integer, db.ForeignKey('message.id'))
