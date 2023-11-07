@@ -2,13 +2,17 @@ from . import db
 import flask_login
 
 
-class FollowingAssociation(db.Model):
-    follower_id = db.Column(
-        db.Integer, db.ForeignKey("user.id"), primary_key=True, nullable=False
-    )
-    followed_id = db.Column(
-        db.Integer, db.ForeignKey("user.id"), primary_key=True, nullable=False
-    )
+# Define an association table for the many-to-many relationship between Recipe and QIngredients
+recipe_ingredients = db.Table('recipe_ingredients',
+    db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
+    db.Column('ingredient_id', db.Integer, db.ForeignKey('qingredient.id'))
+)
+#I am a little confused on what exactly should occur between our tables. Can someone 
+#talk with him during lab about exactly what tables should backpopulate what and why? 
+# Also why do we need an ingredients and qingredients table? Can we not define the ingredient 
+# with a quantity each time? 
+
+
 
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -16,20 +20,6 @@ class User(flask_login.UserMixin, db.Model):
     name = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(100), nullable=False)
     recipes = db.relationship('Recipe', back_populates='user')
-    following = db.relationship(
-    "User",
-    secondary=FollowingAssociation.__table__,
-    primaryjoin=FollowingAssociation.follower_id == id,
-    secondaryjoin=FollowingAssociation.followed_id == id,
-    back_populates="followers",
-    )
-    followers = db.relationship(
-        "User",
-        secondary=FollowingAssociation.__table__,
-        primaryjoin=FollowingAssociation.followed_id == id,
-        secondaryjoin=FollowingAssociation.follower_id == id,
-        back_populates="following",
-    )
 
 class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,9 +31,6 @@ class Recipe(db.Model):
     timestamp = db.Column(db.DateTime(), nullable=False)
  
    #Need to add relationship to QIngredients and Steps 
-    response_to_id = db.Column(db.Integer, db.ForeignKey('message.id'))
-    response_to = db.relationship('Message', back_populates='responses', remote_side=[id])
-    responses = db.relationship('Message', back_populates='response_to', remote_side=[response_to_id])
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
