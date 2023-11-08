@@ -9,7 +9,6 @@ bp = Blueprint("main", __name__)
 
 
 @bp.route("/")
-@flask_login.login_required
 def index():
     """
     followers = db.aliased(model.User)
@@ -25,22 +24,31 @@ def index():
 """
     query = (
         db.select(model.Recipe)
-        .where(model.Recipe.user_id == flask_login.current_user.id)
+        .limit(10)#can adjust this later
     )
-    
     recipies = db.session.execute(query).scalars().all()
-    
+    #not sure how to render the recipes here with the filters we're looking for 
     return render_template("main/index.html", recipies=recipies)
 
+#potential function to append recipe for infinite scroll
 
+
+
+#we will need user, recipes, ratings, and bookmarked
 @bp.route('/profile/<int:user_id>')
 @flask_login.login_required
 def profile(user_id):
     user = db.session.get(model.User, user_id)
-    query = db.select(model.Message).where(model.Message.response_to == None).where(model.Message.user_id == user_id).order_by(model.Message.timestamp.desc()).limit(10)
-    posts = db.session.execute(query).scalars().all()
     if not user:
         abort(404, "User id {} doesn't exist.".format(user_id))
+
+    query = db.select(model.Recipe).where(model.Recipe.user_id == user_id).order_by(model.Recipe.timestamp.desc())
+    recipes = db.session.execute(query).scalars().all()
+    query = db.select(model.Rating).where(model.Rating.user_id == user_id)
+    ratings = db.session.execute(query).scalars().all()
+    query = db.select(model.Bookmark).where(model.Bookmark.user_id == user_id)
+    bookmarks = db.session.execute(query).scalars().all()
+    '''
     if flask_login.current_user.id == user_id:
         followValue=None
     elif flask_login.current_user in user.followers:
@@ -49,8 +57,10 @@ def profile(user_id):
         followValue="follow"
     following = user.following
     followers = user.followers
-    return render_template('main/profile.html',user=user, posts=posts,follow_button=followValue, followers=followers, following=following)
+    '''
+    return render_template('main/profile.html',user=user, recipes=recipes, ratings=ratings, bookmarks=bookmarks)
 
+#we will need recipes, steps, photos, ingredients, and ratings
 @bp.route("/post/<int:message_id>")
 @flask_login.login_required
 def post(message_id):
@@ -63,7 +73,7 @@ def post(message_id):
     replies = db.session.execute(query).scalars().all()
     return render_template("main/posts.html", post=message, posts=replies)
 
-
+#will need recipe, steps, ingredients, and photo
 @bp.route("/new_post", methods=["POST"])
 @flask_login.login_required
 def new_post():
@@ -87,7 +97,7 @@ def new_post():
         db.session.commit()
         return redirect(url_for("main.post", message_id=request.form.get("response_to")))
 
-    
+   #no use case yet
 @bp.route("/follow/<int:user_id>", methods=["POST"])
 @flask_login.login_required
 def follow(user_id):
@@ -104,6 +114,7 @@ def follow(user_id):
     followers = user.followers
     return render_template('main/profile.html',user=user, posts=posts,follow_button="unfollow",followers=followers, following=following)
     
+#no use case yet    
 @bp.route("/unfollow/<int:user_id>", methods=["POST"])
 @flask_login.login_required
 def unfollow(user_id):
@@ -117,4 +128,3 @@ def unfollow(user_id):
     posts = db.session.execute(query).scalars().all()
     db.session.commit()
     return render_template("main/index.html", posts=posts)
-    
