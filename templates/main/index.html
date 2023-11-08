@@ -1,10 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="newTweet">Post new chat:
+<div class="newRecipe">Post new chat:
     <form action="{{ url_for('main.new_post') }}" method="post">
-        <label for="new_post">What do you want to say?:</label><br>
-        <input type="text" id="new_post" name="new_post"><br>
+        <label for="new_post">What do want to cook?:</label><br>
+        <input type="text" id="description" name="description"><br>
+        <input type="number" id="number_people" name="number_people"><br>
+        <input type="number" id="cooking_time" name="cooking_time"><br>
         <input type="submit" value="Submit">
     </form>
 </div>

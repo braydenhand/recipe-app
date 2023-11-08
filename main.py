@@ -61,31 +61,47 @@ def profile(user_id):
     return render_template('main/profile.html',user=user, recipes=recipes, ratings=ratings, bookmarks=bookmarks)
 
 #we will need recipes, steps, photos, ingredients, and ratings
-@bp.route("/post/<int:message_id>")
+@bp.route("/post/<int:recipe_id>")
 @flask_login.login_required
-def post(message_id):
-    message = db.session.get(model.Message, message_id)
-    if not message:
-        abort(404, "Post id {} doesn't exist.".format(message_id))
-    if message.response_to != None:
-        abort(403)
-    query = db.select(model.Message).where(model.Message.response_to_id == message_id).order_by(model.Message.timestamp.desc())
-    replies = db.session.execute(query).scalars().all()
-    return render_template("main/posts.html", post=message, posts=replies)
+def post(recipe_id):
+    recipe = db.session.get(model.Recipe, recipe_id)
+    if not recipe:
+        abort(404, "Recipe id {} doesn't exist.".format(recipe_id))
+
+    query = db.select(model.Step).where(model.Step.recipe_id == recipe_id).order_by(model.Step.position)
+    steps = db.session.execute(query).scalars().all()
+    if not steps:
+        abort(410, "Recipe steps for {} doesn't exist.".format(recipe_id))
+
+    #not sure if qingredients should be extracted now as well or in another place
+    query = db.select(model.Ingredient).where(model.Ingredient.recipe_id == recipe_id)
+    ingredients = db.session.execute(query).scalars().all()
+    if not ingredients:
+        abort(410, "Recipe ingredients for {} doesn't exist.".format(recipe_id))
+
+    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).order_by(model.Rating.timestamp.desc())
+    ratings = db.session.execute(query).scalars().all()
+    query = db.select(model.Photo).where(model.Photo.recipe_id == recipe_id).order_by(model.Photo.timestamp.desc())
+    photos = db.session.execute(query).scalars().all()
+
+    return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos)
 
 #will need recipe, steps, ingredients, and photo
 @bp.route("/new_post", methods=["POST"])
 @flask_login.login_required
 def new_post():
-    if not request.form.get("response_to"):
-        message = model.Message(
-        text = request.form.get("new_post"),
+    recipe = model.Recipe(
+        description = request.form.get("description"),
         user = flask_login.current_user,
-        timestamp=datetime.datetime.now(dateutil.tz.tzlocal()),
-        response_to=None)
-        db.session.add(message)
-        db.session.commit()
-        return redirect(url_for("main.post", message_id=message.id))
+        timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
+        number_people = request.form.get("number_people"),
+        cooking_time = request.form.get("cooking_time"),
+    )
+        #not sure where to submit the other steps and ingredients
+    db.session.add(recipe)
+    db.session.commit()
+    return redirect(url_for("main.post", recipe_id=recipe.id))
+    '''
     else:
         message = model.Message(
         text = request.form.get("new_post"),
@@ -95,9 +111,9 @@ def new_post():
         response_to_id=request.form.get("response_to"))
         db.session.add(message)
         db.session.commit()
-        return redirect(url_for("main.post", message_id=request.form.get("response_to")))
+        return redirect(url_for("main.post", message_id=request.form.get("response_to")))'''
 
-   #no use case yet
+#no use case  for this function yet, possibly can be used for staying up to date on following certain users
 @bp.route("/follow/<int:user_id>", methods=["POST"])
 @flask_login.login_required
 def follow(user_id):

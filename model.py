@@ -65,6 +65,7 @@ class Rating(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', back_populates='ratings')
     value = db.Column(db.Integer, nullable=False)
+    timestamp = db.Column(db.DateTime(), nullable=False)
 
 class Photo(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -74,6 +75,7 @@ class Photo(db.Model):
     user = db.relationship('User', back_populates='photos')
     #need to determine how to store photo
     value = db.Column(db.Integer, nullable=False)    
+    timestamp = db.Column(db.DateTime(), nullable=False)
 
 
 #need to add bookmarked entities
