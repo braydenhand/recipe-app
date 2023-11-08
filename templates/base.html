@@ -1,52 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Microblogging app</title>
-        <link rel="stylesheet"
-              href="{{ url_for('static', filename='microblog.css') }}">
-    </head>
-    <body>
-        <header>
-            <h1><a href="{{ url_for('main.index') }}">Let's Cook:</a>
-                
-                <span class="banner">
-                    {% if current_user.is_authenticated: %}
-                    Welcome back {{current_user.name}}
-                    <a href="{{ url_for('main.profile', user_id=current_user.id) }}"><img class="image" id="myProfile" src="{{ url_for('static', filename='profile.png') }}"></a></span>
-                    {% endif %}
-                    #add option for login
-            </h1>
-            
-        </header>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Microblogging app</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='microblog.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <h1>
+        <a href="{{ url_for('main.index') }}">Let's Cook:</a>
 
+        <span class="banner">
+          {% if current_user.is_authenticated: %} Welcome back
+          {{current_user.name}}
+          <a href="{{ url_for('main.profile', user_id=current_user.id) }}"
+            ><img
+              class="image"
+              id="myProfile"
+              src="{{ url_for('static', filename='profile.png') }}" /></a
+        ></span>
+        {% endif %} #add option for login
+      </h1>
+    </header>
 
-        
-        <section class="filter">
-            <span>
-                <form class="recipe">
-                    Sort by: <br><select><option>Rating Highest to Lowest<option>Rating Lowest to Highest<option>Cook Time Fastest To Slowest<option>Cook Time Fastest to Slowest<option>Newest<option>Oldest</select><br/>
-                </form>
-            </span>
-            <span>
-                #options to add diet restricitons
-            </span>
-            <span>
-                #faster than a certain cook time
-            </span>
-        </section>
+    <section class="filter">
+      <span>
+        <form class="recipe">
+          Sort by: <br /><select>
+            <option>Rating Highest to Lowest</option>
+            <option>Rating Lowest to Highest</option>
+            <option>Cook Time Fastest To Slowest</option>
+            <option>Cook Time Fastest to Slowest</option>
+            <option>Newest</option>
+            <option>Oldest</option></select
+          ><br />
+        </form>
+      </span>
+      <span> #options to add diet restricitons </span>
+      <span> #faster than a certain cook time </span>
+    </section>
 
-        #actively switch over all the recipes
-        <section class="content">
-            {% block content %}{% endblock %}
-        </section>
+    #actively switch over all the recipes
+    <section class="content">{% block content %}{% endblock %}</section>
 
-
-
-        {% if current_user.is_authenticated: %}
-        <a href="{{ url_for('auth.logout') }}">Logout</a>
-        {% endif %}
-        <footer><small>Developed for Web Applications</small></footer>
-    </body>
+    {% if current_user.is_authenticated: %}
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
+    {% endif %}
+    <footer><small>Developed for Web Applications</small></footer>
+  </body>
 </html>
-
