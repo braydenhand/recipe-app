@@ -3,10 +3,14 @@ import flask_login
 
 
 # Define an association table for the many-to-many relationship between Recipe and QIngredients
+'''
 recipe_ingredients = db.Table('recipe_ingredients',
     db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
     db.Column('ingredient_id', db.Integer, db.ForeignKey('qingredient.id'))
 )
+'''
+
+
 
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,7 +19,6 @@ class User(flask_login.UserMixin, db.Model):
     password = db.Column(db.String(100), nullable=False)
     recipes = db.relationship('Recipe', back_populates='user')
     ratings = db.relationship('Rating', back_populates='user')
-    steps = db.relationship('Step', back_populates='user')
     photos = db.relationship('Photo', back_populates='user')
     bookmarks = db.relationship('Bookmark', back_populates='user')
 
