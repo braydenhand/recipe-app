@@ -5,6 +5,51 @@ current_user.is_authenticated: %}
 <div class="userProfile">
   <img id="userIcon" src="{{ url_for('static', filename='profile.png') }}" />
   <h1>{{user.name}}</h1>
+  {% if user.id == current_user.id %}
+  <div class="toolbar">
+    <button onclick="toggleButton(1)" id="button1">My Recipes</button>
+    <button onclick="toggleButton(2)" id="button2">My Ratings</button>
+    <button onclick="toggleButton(3)" id="button3">My Bookmarks</button>
+  </div>
+  
+  <script>
+    function toggleButton(buttonNumber) {
+      // Reset all buttons to inactive state
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById(`button${i}`).classList.remove('active');
+      }
+  
+      // Activate the clicked button
+      document.getElementById(`button${buttonNumber}`).classList.add('active');
+
+      //check which button is active and populate with the correct content
+      //REQUIURES POPULATE FUNCTION
+    }
+  </script>
+
+  {% else %}
+  <div class="toolbar">
+    <button onclick="toggleButton(1)" id="button1">Recipes</button>
+    <button onclick="toggleButton(2)" id="button2">Ratings</button>
+  </div>
+  
+  <script>
+    function toggleButton(buttonNumber) {
+      // Reset all buttons to inactive state
+      for (let i = 1; i <= 2; i++) {
+        document.getElementById(`button${i}`).classList.remove('active');
+      }
+  
+      // Activate the clicked button
+      document.getElementById(`button${buttonNumber}`).classList.add('active');
+
+      //check which button is active and populate with the correct content
+      //REQUIURES POPULATE FUNCTION
+    }
+  </script>
+  
+  {% endif %}
+
   {% if follow_button == "follow" %}
   <form action="{{ url_for('main.follow', user_id=user.id) }}" method="post">
     <input type="submit" value="Follow" />
@@ -13,21 +58,10 @@ current_user.is_authenticated: %}
   <form action="{{ url_for('main.unfollow', user_id=user.id) }}" method="post">
     <input type="submit" value="Unfollow" />
   </form>
-  {% endif %}
+  
 </div>
 
-<section>
-  <h2>Following:</h2>
-  {% include 'following_template.html' %}
-</section>
 
-<section>
-  <h2>Followers:</h2>
-  {% include 'followers_template.html' %}
-</section>
 
-<section>
-  <h2>Latest posts from {{user.name}}</h2>
-  {% include 'posts_template.html' %}
-</section>
 {% endif %} {% endblock %}
+
