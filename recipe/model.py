@@ -81,8 +81,6 @@ class Photo(db.Model):
 #need to add bookmarked entities
 class Bookmark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
-    recipe = db.relationship('Recipe', back_populates='bookmarks')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', back_populates='bookmarks')
     value = db.Column(db.Integer, nullable=False)
