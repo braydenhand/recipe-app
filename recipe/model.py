@@ -26,6 +26,7 @@ class Recipe(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', back_populates='recipes')
+    name = db.Column(db.String(64), nullable=False)
     description = db.Column(db.String(512), nullable=False)
     cooking_time = db.Column(db.Integer, nullable=False)
     number_people = db.Column(db.Integer, nullable=False)
