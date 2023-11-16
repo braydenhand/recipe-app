@@ -1,7 +1,8 @@
 import datetime
 import dateutil.tz
 import flask_login
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
+import pathlib
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, current_app1
 from . import db, bcrypt
 from . import model
 
@@ -144,3 +145,41 @@ def unfollow(user_id):
     posts = db.session.execute(query).scalars().all()
     db.session.commit()
     return render_template("main/index.html", posts=posts)
+
+'''
+@bp.route('/recipe/<int:recipe_id>/upload_photo', methods=['POST'])
+@flask_login.login_required
+def upload_photo(recipe_id):
+    recipe = Recipe.query.get_or_404(recipe_id)
+    uploaded_file = request.files['photo']
+
+    if uploaded_file.filename != '':
+        content_type = uploaded_file.content_type
+        if content_type == "image/png":
+            file_extension = "png"
+        elif content_type == "image/jpeg":
+            file_extension = "jpg"
+        else:
+            abort(400, f"Unsupported file type {content_type}")
+
+        photo = Photo(
+            user=flask_login.current_user,
+            recipe=recipe,
+            file_extension=file_extension
+        )
+        db.session.add(photo)
+        db.session.commit()
+
+        path = (
+            pathlib.Path(current_app.root_path)
+            / "static"
+            / "photos"
+            / f"photo-{photo.id}.{file_extension}"
+        )
+        uploaded_file.save(path)
+
+        return redirect(url_for('recipe_view', recipe_id=recipe_id))
+
+    abort(400, "No file uploaded")
+'''
+
