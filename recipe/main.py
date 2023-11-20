@@ -107,7 +107,7 @@ def new_post():
 @flask_login.login_required
 def new_review(value, recipe_id):
     rating = model.Rating(
-        recipe = db.session.get(model.Recipe, recipe_id)
+        recipe = db.session.get(model.Recipe, recipe_id),
         user = flask_login.current_user,
         value = value,
         timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
