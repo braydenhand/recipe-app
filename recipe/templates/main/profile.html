@@ -11,29 +11,22 @@ current_user.is_authenticated: %}
     <button onclick="populateRatings()" id="button2">My Ratings</button>
     <button onclick="populateBookMarks()" id="button3">My Bookmarks</button>
   </div>
-  
-  <script>
-    function toggleButton(buttonNumber) {
-      // Reset all buttons to inactive state
-      for (let i = 1; i <= 3; i++) {
-        document.getElementById(`button${i}`).classList.remove('active');
-      }
-  
-      // Activate the clicked button
-      document.getElementById(`button${buttonNumber}`).classList.add('active');
+  <div class="display">
+    <div id="recipes">
+      {% for recipe in recipes %} {% include 'recipe_template.html' %} {% endfor %}
+    </div>
 
-      //check which button is active and populate with the correct content
-      //REQUIURES POPULATE FUNCTION
-    }
-  </script>
-
-  {% else %}
-  <div class="toolbar">
-    <button onclick="populateRecipes()" id="button1">Recipes</button>
-    <button onclick="populateRatings()" id="button2">Ratings</button>
+    //need to adjust for user specific ratings
+    <div id="ratings">
+      {% for rating in ratings %} {% include 'recipe_template.html' %} {% endfor %}
+    </div>
+    <div id="bookmarks">
+      {% for boomark in bookmarks %} {% include 'recipe_template.html' %} {% endfor %}
+    </div>
   </div>
-  
   <script>
+    populateRecipes()
+
     function populateRecipes() {
       // Reset all buttons to inactive state
       for (let i = 1; i <= 2; i++) {
@@ -41,7 +34,9 @@ current_user.is_authenticated: %}
       }
       // Activate the clicked button
       document.getElementById(`button${1}`).classList.add('active');
-      //REQUIURES POPULATE FUNCTION
+      document.getElementById("recipes").style.display = "block"; 
+      document.getElementById("ratings").style.display = "none"; 
+      document.getElementById("bookomarks").style.display = "none"; 
       
     }
 
@@ -52,7 +47,65 @@ current_user.is_authenticated: %}
       }
       // Activate the clicked button
       document.getElementById(`button${2}`).classList.add('active');
-      //REQUIURES POPULATE FUNCTION
+
+      document.getElementById("recipes").style.display = "none"; 
+      document.getElementById("ratings").style.display = "block"; 
+      document.getElementById("bookomarks").style.display = "none"; 
+    }
+    function populateBookMarks() {
+      // Reset all buttons to inactive state
+      for (let i = 1; i <= 3; i++) {
+        document.getElementById(`button${i}`).classList.remove('active');
+      }
+      // Activate the clicked button
+      document.getElementById(`button${3}`).classList.add('active');
+
+      document.getElementById("recipes").style.display = "none"; 
+      document.getElementById("ratings").style.display = "none"; 
+      document.getElementById("bookomarks").style.display = "block"; 
+    }
+  </script>
+
+  {% else %}
+  <div class="toolbar">
+    <button onclick="populateRecipes()" id="button1">Recipes</button>
+    <button onclick="populateRatings()" id="button2">Ratings</button>
+  </div>
+  <div class="display">
+   <div id="recipes">
+      {% for recipe in recipes %} {% include 'recipe_template.html' %} {% endfor %}
+    </div>
+
+    //need to adjust for user specific ratings
+    <div id="ratings">
+      {% for rating in ratings %} {% include 'recipe_template.html' %} {% endfor %}
+    </div>
+  </div>
+  <script>
+    populateRecipes()
+
+    function populateRecipes() {
+      // Reset all buttons to inactive state
+      for (let i = 1; i <= 2; i++) {
+        document.getElementById(`button${i}`).classList.remove('active');
+      }
+      // Activate the clicked button
+      document.getElementById(`button${1}`).classList.add('active');
+      document.getElementById("recipes").style.display = "block"; 
+      document.getElementById("ratings").style.display = "none"; 
+      
+    }
+
+    function populateRatings() {
+      // Reset all buttons to inactive state
+      for (let i = 1; i <= 2; i++) {
+        document.getElementById(`button${i}`).classList.remove('active');
+      }
+      // Activate the clicked button
+      document.getElementById(`button${2}`).classList.add('active');
+
+      document.getElementById("recipes").style.display = "none"; 
+      document.getElementById("ratings").style.display = "block"; 
     }
   </script>
   
