@@ -1,6 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
 from . import db, bcrypt
 import flask_login
+import datetime
+import dateutil
 from . import model
 
 bp = Blueprint("auth", __name__)
@@ -27,7 +29,7 @@ def signup_post():
         flash("Sorry, the email you provided is already registered")
         return redirect(url_for("auth.signup"))
     password_hash = bcrypt.generate_password_hash(password).decode("utf-8")
-    new_user = model.User(email=email, name=username, password=password_hash)
+    new_user = model.User(email=email, name=username, password=password_hash, timestamp=datetime.datetime.now(dateutil.tz.tzlocal()))
     db.session.add(new_user)
     db.session.commit()
     flash("You've successfully signed up!")
