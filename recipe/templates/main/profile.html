@@ -7,9 +7,9 @@ current_user.is_authenticated: %}
   <h1>{{user.name}}</h1>
   {% if user.id == current_user.id %}
   <div class="toolbar">
-    <button onclick="toggleButton(1)" id="button1">My Recipes</button>
-    <button onclick="toggleButton(2)" id="button2">My Ratings</button>
-    <button onclick="toggleButton(3)" id="button3">My Bookmarks</button>
+    <button onclick="populateRecipes()" id="button1">My Recipes</button>
+    <button onclick="populateRatings()" id="button2">My Ratings</button>
+    <button onclick="populateBookMarks()" id="button3">My Bookmarks</button>
   </div>
   
   <script>
@@ -29,21 +29,29 @@ current_user.is_authenticated: %}
 
   {% else %}
   <div class="toolbar">
-    <button onclick="toggleButton(1)" id="button1">Recipes</button>
-    <button onclick="toggleButton(2)" id="button2">Ratings</button>
+    <button onclick="populateRecipes()" id="button1">Recipes</button>
+    <button onclick="populateRatings()" id="button2">Ratings</button>
   </div>
   
   <script>
-    function toggleButton(buttonNumber) {
+    function populateRecipes() {
       // Reset all buttons to inactive state
       for (let i = 1; i <= 2; i++) {
         document.getElementById(`button${i}`).classList.remove('active');
       }
-  
       // Activate the clicked button
-      document.getElementById(`button${buttonNumber}`).classList.add('active');
+      document.getElementById(`button${1}`).classList.add('active');
+      //REQUIURES POPULATE FUNCTION
+      
+    }
 
-      //check which button is active and populate with the correct content
+    function populateRatings() {
+      // Reset all buttons to inactive state
+      for (let i = 1; i <= 2; i++) {
+        document.getElementById(`button${i}`).classList.remove('active');
+      }
+      // Activate the clicked button
+      document.getElementById(`button${2}`).classList.add('active');
       //REQUIURES POPULATE FUNCTION
     }
   </script>

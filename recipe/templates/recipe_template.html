@@ -1,6 +1,6 @@
 <div class="recipe">
   <div>
-    <span>
+    <span class="photos">
      # we can use chat to get the bookmarking technology down
       <a><img /></a>
     </span>
@@ -18,6 +18,25 @@
       </div>
     </span>
   </div>
+
+  #need to fix the quantity of ingredients section to render
+
+  <div class = "ingredients">
+    {%for ingredient in recipe.ingredients%}
+    <div class="ingredient">
+      {{ingredient.postion}}. {{ingredient.name}}
+    </div>  
+    {%endfor%}
+  </div>
+
+  <div class = "steps">
+    {%for step in recipe.steps%}
+    <div class="step">
+      {{step.postion}}. {{step.text}}
+    </div>  
+    {%endfor%}
+  </div>
+
 </div>
 
 <!--

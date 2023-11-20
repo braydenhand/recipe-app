@@ -1,87 +1,101 @@
 {% extends 'base.html' %} {% block content %}
 <div class="newRecipe">
-  Post new chat:
+  Post new recipe:
   <form action="{{ url_for('main.new_post') }}" method="post">
     <label for="new_post">What do want to cook?:</label><br />
     <input type="text" id="description" name="description" /><br />
     <input type="number" id="number_people" name="number_people" /><br />
     <input type="number" id="cooking_time" name="cooking_time" /><br />
+    <div id="ingredientPopup">
+      <h2>Add Ingredient</h2>
+      <form id="ingredientForm">
+        <label for="units">Number of Units:</label>
+        <input type="number" id="units" name="units" required /><br />
+
+        <label for="unit">Unit:</label>
+        <input type="text" id="unit" name="unit" required /><br />
+
+        <label for="ingredientName">Ingredient:</label>
+        <input
+          type="text"
+          id="ingredientName"
+          name="ingredientName"
+          list="ingredients"
+          required
+        /><br />
+        <datalist id="ingredients">
+          <option value="basil"></option>
+          <option value="beef"></option>
+          <option value="bell-pepper"></option>
+          <option value="broccoli"></option>
+          <option value="butter"></option>
+          <option value="carrot"></option>
+          <option value="cheese"></option>
+          <option value="chicken"></option>
+          <option value="chili-powder"></option>
+          <option value="cinnamon"></option>
+          <option value="cucumber"></option>
+          <option value="cumin"></option>
+          <option value="egg"></option>
+          <option value="flour"></option>
+          <option value="garlic"></option>
+          <option value="garlic-powder"></option>
+          <option value="ginger"></option>
+          <option value="honey"></option>
+          <option value="ketchup"></option>
+          <option value="lemon"></option>
+          <option value="lettuce"></option>
+          <option value="lime"></option>
+          <option value="mayonnaise"></option>
+          <option value="milk"></option>
+          <option value="mustard"></option>
+          <option value="nutmeg"></option>
+          <option value="olive-oil"></option>
+          <option value="onion"></option>
+          <option value="onion-powder"></option>
+          <option value="paprika"></option>
+          <option value="pasta"></option>
+          <option value="pepper"></option>
+          <option value="pork"></option>
+          <option value="potato"></option>
+          <option value="rice"></option>
+          <option value="rosemary"></option>
+          <option value="salt"></option>
+          <option value="soy-sauce"></option>
+          <option value="spinach"></option>
+          <option value="sugar"></option>
+          <option value="thyme"></option>
+          <option value="tomato"></option>
+          <option value="vanilla-extract"></option>
+          <option value="vinegar"></option>
+          <option value="yogurt"></option>
+        </datalist>
+
+        <button onclick="addIngredient()" type="submit">Add</button>
+      </form>
+    </div>
+    #need to renovate this
+    <div name="steps">
+      Steps:
+      <div id="formSteps"></div>
+      <button type="button" onclick="addStep()">Add Step</button>
+    </div>
+    <input type="text" id="steps" name="steps" /><br />
+    <input type="text" id="photo" name="photo" /><br />
     <input type="submit" value="Submit" />
   </form>
 </div>
-<section>
-  <h2>Latest posts from the people you follow</h2>
-  {% include 'posts_template.html' %}
-</section>
-{% endblock %} {% block ingredientpopup %}
-<div id="ingredientPopup" class="popup">
-  <h2>Add Ingredient</h2>
-  #need to hook this into the db, but only on final submission
-  <form id="ingredientForm">
-    <label for="units">Number of Units:</label>
-    <input type="number" id="units" name="units" required /><br />
-
-    <label for="unit">Unit:</label>
-    <input type="text" id="unit" name="unit" required /><br />
-
-    <label for="ingredientName">Ingredient:</label>
-    <input
-      type="text"
-      id="ingredientName"
-      name="ingredientName"
-      list="ingredients"
-      required
-    /><br />
-    <datalist id="ingredients">
-      <option value="basil"></option>
-      <option value="beef"></option>
-      <option value="bell-pepper"></option>
-      <option value="broccoli"></option>
-      <option value="butter"></option>
-      <option value="carrot"></option>
-      <option value="cheese"></option>
-      <option value="chicken"></option>
-      <option value="chili-powder"></option>
-      <option value="cinnamon"></option>
-      <option value="cucumber"></option>
-      <option value="cumin"></option>
-      <option value="egg"></option>
-      <option value="flour"></option>
-      <option value="garlic"></option>
-      <option value="garlic-powder"></option>
-      <option value="ginger"></option>
-      <option value="honey"></option>
-      <option value="ketchup"></option>
-      <option value="lemon"></option>
-      <option value="lettuce"></option>
-      <option value="lime"></option>
-      <option value="mayonnaise"></option>
-      <option value="milk"></option>
-      <option value="mustard"></option>
-      <option value="nutmeg"></option>
-      <option value="olive-oil"></option>
-      <option value="onion"></option>
-      <option value="onion-powder"></option>
-      <option value="paprika"></option>
-      <option value="pasta"></option>
-      <option value="pepper"></option>
-      <option value="pork"></option>
-      <option value="potato"></option>
-      <option value="rice"></option>
-      <option value="rosemary"></option>
-      <option value="salt"></option>
-      <option value="soy-sauce"></option>
-      <option value="spinach"></option>
-      <option value="sugar"></option>
-      <option value="thyme"></option>
-      <option value="tomato"></option>
-      <option value="vanilla-extract"></option>
-      <option value="vinegar"></option>
-      <option value="yogurt"></option>
-    </datalist>
-
-    <button type="submit">Add</button>
-  </form>
-  #need to make function for closing the popup
-</div>
+<script>
+  function addIngredient() {}
+  let stepCount = 0;
+  function addStep() {
+    stepCount++;
+    const stepDiv = document.createElement("div");
+    stepDiv.innerHTML = `
+            <label for="step${stepCount}">Step ${stepCount}:</label>
+            <input type="text" id="step${stepCount}" name="step${stepCount}" required>
+        `;
+    document.getElementById("formSteps").appendChild(stepDiv);
+  }
+</script>
 {% endblock %}
