@@ -1,11 +1,10 @@
 {% extends 'base.html' %} {% block content %} {% if
 current_user.is_authenticated: %}
-<div>User:</div>
 
 <div class="userProfile">
   <img id="userIcon" src="{{ url_for('static', filename='profile.png') }}" />
-  <h1>{{user.name}}</h1>
-  <h4>Create {{user.timestamp}}</h4>
+  <h1>Username: {{user.name}}</h1>
+  <h4>Created on: {{user.timestamp}}</h4>
   {% if user.id == current_user.id %}
   <div class="toolbar">
     <button onclick="populateRecipes()" id="button1">My Recipes</button>
@@ -32,23 +31,21 @@ current_user.is_authenticated: %}
     populateRecipes();
 
     function populateRecipes() {
-      // Reset all buttons to inactive state
-      for (let i = 1; i <= 2; i++) {
+
+      for (let i = 1; i <= 3; i++) {
         document.getElementById(`button${i}`).classList.remove("active");
       }
-      // Activate the clicked button
       document.getElementById(`button${1}`).classList.add("active");
+      
       document.getElementById("recipes").style.display = "block";
       document.getElementById("ratings").style.display = "none";
       document.getElementById("bookomarks").style.display = "none";
     }
 
     function populateRatings() {
-      // Reset all buttons to inactive state
-      for (let i = 1; i <= 2; i++) {
+      for (let i = 1; i <= 3; i++) {
         document.getElementById(`button${i}`).classList.remove("active");
       }
-      // Activate the clicked button
       document.getElementById(`button${2}`).classList.add("active");
 
       document.getElementById("recipes").style.display = "none";
@@ -56,11 +53,9 @@ current_user.is_authenticated: %}
       document.getElementById("bookomarks").style.display = "none";
     }
     function populateBookMarks() {
-      // Reset all buttons to inactive state
       for (let i = 1; i <= 3; i++) {
         document.getElementById(`button${i}`).classList.remove("active");
       }
-      // Activate the clicked button
       document.getElementById(`button${3}`).classList.add("active");
 
       document.getElementById("recipes").style.display = "none";
@@ -90,22 +85,19 @@ current_user.is_authenticated: %}
     populateRecipes();
 
     function populateRecipes() {
-      // Reset all buttons to inactive state
       for (let i = 1; i <= 2; i++) {
         document.getElementById(`button${i}`).classList.remove("active");
       }
-      // Activate the clicked button
       document.getElementById(`button${1}`).classList.add("active");
+      
       document.getElementById("recipes").style.display = "block";
       document.getElementById("ratings").style.display = "none";
     }
 
     function populateRatings() {
-      // Reset all buttons to inactive state
       for (let i = 1; i <= 2; i++) {
         document.getElementById(`button${i}`).classList.remove("active");
       }
-      // Activate the clicked button
       document.getElementById(`button${2}`).classList.add("active");
 
       document.getElementById("recipes").style.display = "none";
@@ -113,7 +105,9 @@ current_user.is_authenticated: %}
     }
   </script>
 
-  {% endif %} {% if follow_button == "follow" %}
+  {% endif %} 
+  <!--- 
+  {% if follow_button == "follow" %}
   <form action="{{ url_for('main.follow', user_id=user.id) }}" method="post">
     <input type="submit" value="Follow" />
   </form>
@@ -122,6 +116,6 @@ current_user.is_authenticated: %}
     <input type="submit" value="Unfollow" />
   </form>
   {% endif %}
+  -->
 </div>
-
 {% endblock %}
