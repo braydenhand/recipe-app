@@ -45,7 +45,7 @@ class Ingredient(db.Model):
     recipe = db.relationship('Recipe', back_populates='ingredients')
     qingredients = db.relationship('QIngredient', back_populates='ingredient')
 
-
+#since there is a new ingredient for every recipe qingredient and ingredient is one to one
 class QIngredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Integer, nullable=False)
@@ -59,9 +59,6 @@ class Step(db.Model):
     position = db.Column(db.Integer, nullable=False)
     recipe_id = db.Column(db.Integer, db.ForeignKey('recipe.id'), nullable=False)
     recipe = db.relationship('Recipe', back_populates='steps')
-
-#If we are supposed to see a User's ratings on their profile page, we should backpopulate 
-#the User with the rating ID.  
 
 class Rating(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -78,15 +75,11 @@ class Photo(db.Model):
     recipe = db.relationship('Recipe', back_populates='photos')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', back_populates='photos')
-
     #need to determine how to store photo
     file_extension = db.Column(db.String(8), nullable=False)
-    
     value = db.Column(db.Integer, nullable=False)    
     timestamp = db.Column(db.DateTime(), nullable=False)
 
-
-#need to add bookmarked entities
 class Bookmark(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

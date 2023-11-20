@@ -24,7 +24,7 @@
 
   <div class="ingredients">
     {%for ingredient in recipe.ingredients%}
-    <div class="ingredient">{{ingredient.postion}}. {{ingredient.name}}</div>
+    <div class="ingredient">{{ingredient.qingredients.quantity}} {{ingredient.qingredients.units}} of {{ingredient.name}}</div>
     {%endfor%}
   </div>
 
@@ -34,11 +34,3 @@
     {%endfor%}
   </div>
 </div>
-
-<!--
-<form action="{{ url_for('bp.upload_photo', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">
-    <input type="file" name="photo" accept="image/jpeg,image/png" required>
-    <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
-    <input type="submit" value="Upload Photo">
-</form>
--->
