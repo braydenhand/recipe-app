@@ -2,7 +2,7 @@ import datetime
 import dateutil.tz
 import flask_login
 import pathlib
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort, current_app1
+from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
 from . import db, bcrypt
 from . import model
 
@@ -11,11 +11,13 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def index():
+
     query = (
         db.select(model.Recipe)
         .limit(10)#can adjust this later
     )
     recipies = db.session.execute(query).scalars().all()
+
     #not sure how to render the recipes here with the filters we're looking for 
     return render_template("main/index.html", recipies=recipies)
 

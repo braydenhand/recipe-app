@@ -98,11 +98,14 @@
     document.getElementById("formSteps").appendChild(stepDiv);
   }
 </script>
-<!--
-<form action="{{ url_for('bp.upload_photo', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">
-    <input type="file" name="photo" accept="image/jpeg,image/png" required>
-    <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
-    <input type="submit" value="Upload Photo">
-</form>
--->
+
+
+<section>
+  <h2>Latest recipies:</h2>
+  {% include 'recipies_template.html' %}
+</section>
+
+
+
+
 {% endblock %}

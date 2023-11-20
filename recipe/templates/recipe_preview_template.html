@@ -10,11 +10,19 @@
         <div class="number-of-people">
             Feeds 
             <span id="numberPeople">{{ recipe.number_people }}</span> 
-            {{ recipe.number_people === 1 ? 'person' : 'people' }}
+            {% if recipe.number_people == 1 %}
+              {{ 'person' }}
+            {% else %}
+              {{ 'people' }}
+            {% endif %}
         </div>
         <div class="cook time">{{recipe.cooking_time}} minutes</div>
         <div class="rating">
           Rated: #need to add a function for accumulating the total rating
+        </div>
+
+        <div class="steps">
+          {{ recipe.steps }}
         </div>
       </span>
     </div>
