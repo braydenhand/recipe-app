@@ -116,6 +116,27 @@ def new_review(value, recipe_id):
     db.session.commit()
     return redirect(url_for("main.post", recipe_id=recipe_id, value = value))
 
+@bp.route("/post/<int:recipe_id>/upload_bookmark", methods=["POST"])
+@flask_login.login_required
+def new_bookmark(recipe_id):
+    bookmark = model.Bookmark(
+        recipe = db.session.get(model.Recipe, recipe_id),
+        user = flask_login.current_user,
+        value = 1,
+        timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
+    )
+    db.session.add(bookmark)
+    db.session.commit()
+    return redirect(url_for("main.post", recipe_id=recipe_id))
+
+@bp.route("/post/<int:recipe_id>/remove_bookmark", methods=["POST"])
+@flask_login.login_required
+def remove_bookmark(recipe_id):
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
+    bookmark = db.session.execute(query).scalars().all()
+    db.session.delete(bookmark)
+    db.session.commit()
+    return redirect(url_for("main.post", recipe_id=recipe_id))
 '''
 @bp.route('/recipe/<int:recipe_id>/upload_photo', methods=['POST'])
 @flask_login.login_required
