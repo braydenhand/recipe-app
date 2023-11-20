@@ -102,49 +102,19 @@ def new_post():
     db.session.add(recipe)
     db.session.commit()
     return redirect(url_for("main.post", recipe_id=recipe.id))
-    '''
-    else:
-        message = model.Message(
-        text = request.form.get("new_post"),
-        user = flask_login.current_user,
-        timestamp=datetime.datetime.now(dateutil.tz.tzlocal()),
-        response_to=db.session.get(model.Message, request.form.get("response_to")),
-        response_to_id=request.form.get("response_to"))
-        db.session.add(message)
-        db.session.commit()
-        return redirect(url_for("main.post", message_id=request.form.get("response_to")))'''
 
-#no use case  for this function yet, possibly can be used for staying up to date on following certain users
-@bp.route("/follow/<int:user_id>", methods=["POST"])
+@bp.route("/post/<int:recipe_id>/upload_rating", methods=["POST"])
 @flask_login.login_required
-def follow(user_id):
-    user = db.session.get(model.User, user_id)
-    if not user:
-        abort(404, "User id {} doesn't exist.".format(user_id))
-    if flask_login.current_user in user.followers:
-        abort(403, "Already following user.")
-    user.followers.append(flask_login.current_user)
-    query = db.select(model.Message).where(model.Message.response_to == None).where(model.Message.user_id == user_id).order_by(model.Message.timestamp.desc()).limit(10)
-    posts = db.session.execute(query).scalars().all()
+def new_review(value, recipe_id):
+    rating = model.Rating(
+        recipe = db.session.get(model.Recipe, recipe_id)
+        user = flask_login.current_user,
+        value = value,
+        timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
+    )
+    db.session.add(rating)
     db.session.commit()
-    following = user.following
-    followers = user.followers
-    return render_template('main/profile.html',user=user, posts=posts,follow_button="unfollow",followers=followers, following=following)
-    
-#no use case yet    
-@bp.route("/unfollow/<int:user_id>", methods=["POST"])
-@flask_login.login_required
-def unfollow(user_id):
-    user = db.session.get(model.User, user_id)
-    if not user:
-        abort(404, "User id {} doesn't exist.".format(user_id))
-    if flask_login.current_user not in user.followers:
-        abort(403, "Not following user.")
-    user.followers.remove(flask_login.current_user)
-    query = db.select(model.Message).where(model.Message.response_to == None).order_by(model.Message.timestamp.desc()).limit(10)
-    posts = db.session.execute(query).scalars().all()
-    db.session.commit()
-    return render_template("main/index.html", posts=posts)
+    return redirect(url_for("main.post", recipe_id=recipe_id, value = value))
 
 '''
 @bp.route('/recipe/<int:recipe_id>/upload_photo', methods=['POST'])
@@ -182,4 +152,38 @@ def upload_photo(recipe_id):
 
     abort(400, "No file uploaded")
 '''
+
+#no use case for this function yet, possibly can be used for staying up to date on following certain users
+@bp.route("/follow/<int:user_id>", methods=["POST"])
+@flask_login.login_required
+def follow(user_id):
+    user = db.session.get(model.User, user_id)
+    if not user:
+        abort(404, "User id {} doesn't exist.".format(user_id))
+    if flask_login.current_user in user.followers:
+        abort(403, "Already following user.")
+    user.followers.append(flask_login.current_user)
+    query = db.select(model.Message).where(model.Message.response_to == None).where(model.Message.user_id == user_id).order_by(model.Message.timestamp.desc()).limit(10)
+    posts = db.session.execute(query).scalars().all()
+    db.session.commit()
+    following = user.following
+    followers = user.followers
+    return render_template('main/profile.html',user=user, posts=posts,follow_button="unfollow",followers=followers, following=following)
+    
+#no use case yet    
+@bp.route("/unfollow/<int:user_id>", methods=["POST"])
+@flask_login.login_required
+def unfollow(user_id):
+    user = db.session.get(model.User, user_id)
+    if not user:
+        abort(404, "User id {} doesn't exist.".format(user_id))
+    if flask_login.current_user not in user.followers:
+        abort(403, "Not following user.")
+    user.followers.remove(flask_login.current_user)
+    query = db.select(model.Message).where(model.Message.response_to == None).order_by(model.Message.timestamp.desc()).limit(10)
+    posts = db.session.execute(query).scalars().all()
+    db.session.commit()
+    return render_template("main/index.html", posts=posts)
+
+
 
