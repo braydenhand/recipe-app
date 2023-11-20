@@ -13,15 +13,15 @@ current_user.is_authenticated: %}
   </div>
   <div class="display">
     <div id="recipes">
-      {% for recipe in recipes %} {% include 'recipe_template.html' %} {% endfor %}
+      {% for recipe in recipes %} {% include 'recipe_preview_template.html' %} {% endfor %}
     </div>
 
     //need to adjust for user specific ratings
     <div id="ratings">
-      {% for rating in ratings %} {% include 'recipe_template.html' %} {% endfor %}
+      {% for rating in ratings %} {% include 'recipe_preview_template.html' %} {% endfor %}
     </div>
     <div id="bookmarks">
-      {% for boomark in bookmarks %} {% include 'recipe_template.html' %} {% endfor %}
+      {% for boomark in bookmarks %} {% include 'recipe_preview_template.html' %} {% endfor %}
     </div>
   </div>
   <script>
@@ -73,12 +73,12 @@ current_user.is_authenticated: %}
   </div>
   <div class="display">
    <div id="recipes">
-      {% for recipe in recipes %} {% include 'recipe_template.html' %} {% endfor %}
+      {% for recipe in recipes %} {% include 'recipe_preview_template.html' %} {% endfor %}
     </div>
 
     //need to adjust for user specific ratings
     <div id="ratings">
-      {% for rating in ratings %} {% include 'recipe_template.html' %} {% endfor %}
+      {% for rating in ratings %} {% include 'recipe_preview_template.html' %} {% endfor %}
     </div>
   </div>
   <script>
@@ -119,10 +119,8 @@ current_user.is_authenticated: %}
   <form action="{{ url_for('main.unfollow', user_id=user.id) }}" method="post">
     <input type="submit" value="Unfollow" />
   </form>
-  
+  {% endif %}
 </div>
 
-
-
-{% endif %} {% endblock %}
+ {% endblock %}
 

@@ -1,0 +1,21 @@
+<div class="recipe_preview">
+    <div>
+      <span class="photo">
+       # we can use chat to get the bookmarking technology down
+        <a><img /></a>
+      </span>
+      <span>
+        <div class="recipe header">{{recipe.name}}</div>
+        <div class="author">by {{ recipe.user.name }}</div>
+        <div class="number-of-people">
+            Feeds 
+            <span id="numberPeople">{{ recipe.number_people }}</span> 
+            {{ recipe.number_people === 1 ? 'person' : 'people' }}
+        </div>
+        <div class="cook time">{{recipe.cooking_time}} minutes</div>
+        <div class="rating">
+          Rated: #need to add a function for accumulating the total rating
+        </div>
+      </span>
+    </div>
+</div>
