@@ -14,9 +14,9 @@
       </div>
       <div class="cook time">{{recipe.cooking_time}} minutes</div>
       <div class="date">Created {{recipe.timestamp}}</div>
-      <div class="rating">
-        Rated: #need to add a function for accumulating the total rating
-      </div>
+      <section class="rating">
+        {% block rating %}{% endblock %}
+      </section>
     </span>
   </div>
 
