@@ -5,6 +5,7 @@ current_user.is_authenticated: %}
 <div class="userProfile">
   <img id="userIcon" src="{{ url_for('static', filename='profile.png') }}" />
   <h1>{{user.name}}</h1>
+  <h4>Create {{user.timestamp}}</h4>
   {% if user.id == current_user.id %}
   <div class="toolbar">
     <button onclick="populateRecipes()" id="button1">My Recipes</button>

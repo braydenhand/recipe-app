@@ -17,6 +17,7 @@ class User(flask_login.UserMixin, db.Model):
     email = db.Column(db.String(128), unique=True, nullable=False)
     name = db.Column(db.String(64), nullable=False)
     password = db.Column(db.String(100), nullable=False)
+    timestamp = db.Column(db.DateTime(), nullable=False)
     recipes = db.relationship('Recipe', back_populates='user')
     ratings = db.relationship('Rating', back_populates='user')
     photos = db.relationship('Photo', back_populates='user')
