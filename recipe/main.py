@@ -30,9 +30,6 @@ def recipe_post():
     number_people = request.form.get("number_people")
     email = request.form.get("email")
     cooking_time = request.form.get("cooking_time")
-    
-
-
 
 #we will need user, recipes, ratings, and bookmarked
 @bp.route('/profile/<int:user_id>')
