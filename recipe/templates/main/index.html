@@ -3,18 +3,18 @@
   Post new recipe:
   <form action="{{ url_for('main.new_post') }}" method="post">
     <label for="new_post">What do want to cook?:</label><br />
-    <input type="text" id="description" name="description" /><br />
-    <input type="number" id="number_people" name="number_people" /><br />
-    <input type="number" id="cooking_time" name="cooking_time" /><br />
+    Name:<input type="text" id="name" name="name" /><br />
+    Description:<input type="text" id="description" name="description" /><br />
+    Number of People:<input type="number" id="number_people" name="number_people"/><br />
+    Cooking Time:<input type="number" id="cooking_time" name="cooking_time" /><br />
     #need to add in a new ingredient button
     <div id="ingredientPopup">
       <h2>Add Ingredient</h2>
       <form id="ingredientForm">
-        <label for="units">Number of Units:</label>
-        <input type="number" id="units" name="units" required /><br />
-
+        <label for="units">Quantity:</label>
+        <input type="number" id="units" name="units" required />
         <label for="unit">Unit:</label>
-        <input type="text" id="unit" name="unit" required /><br />
+        <input type="text" id="unit" name="unit" required />
 
         <label for="ingredientName">Ingredient:</label>
         <input
@@ -71,17 +71,19 @@
           <option value="vinegar"></option>
           <option value="yogurt"></option>
         </datalist>
-
-        <button onclick="addIngredient()" type="submit">Add</button>
+        This add button should be JS that creates another copy of the add ingredient field. It should 
+        not submit until the recipe is submitted. Same as add step
+        <button onclick="addIngredient()" type="button">Add</button>
       </form>
     </div>
     #need to renovate this to allow logging
     <div name="steps">
       Steps:
       <div id="formSteps"></div>
-      <button type="button" onclick="addStep()">Add Step</button>
     </div>
-    <input type="text" id="photo" name="photo" /><br />
+    <input type="text" id="photo" name="photo" />
+      <button type="button" onclick="addStep()">Add Step</button>
+    
     <input type="submit" value="Submit" />
   </form>
 </div>
@@ -99,6 +101,17 @@
   }
 </script>
 
+<script>
+  //this function collects the steps and puts them into an array. 
+  //TODO: Make this function run on form submit
+  //TODO: make stepArr the output of the request form.  
+  var stepArr =[] 
+  $("#formSteps").children("stepDiv").each(function()
+ {
+  stepArr.push($(this))
+ } 
+  );
+</script>
 
 <section>
   <h2>Latest recipies:</h2>

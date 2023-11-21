@@ -23,6 +23,15 @@ def index():
 
 #potential function to append recipe for infinite scroll
 
+@bp.route("/", methods=["POST"])
+def recipe_post():
+    name = request.form.get("name")
+    description = request.form.get("description")
+    number_people = request.form.get("number_people")
+    email = request.form.get("email")
+    cooking_time = request.form.get("cooking_time")
+    
+
 
 
 #we will need user, recipes, ratings, and bookmarked
