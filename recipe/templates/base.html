@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Microblogging app</title>
+    <title>Culinary Chronicles Hub</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='microblog.css') }}"
@@ -11,18 +11,19 @@
   <body>
     <header>
       <h1>
-        <a href="{{ url_for('main.index') }}">Let's Cook:</a>
+        <a href="{{ url_for('main.index') }}">Culinary Chronicles Hub</a>
+        {% if current_user.is_authenticated: %} Welcome back {{current_user.name}}!
+          <span class="banner">
+              <a href="{{ url_for('main.profile', user_id=current_user.id) }}"><img
+                class="image"
+                id="myProfile"
+                src="{{ url_for('static', filename='profile.png') }}" /></a
+          ></span>
+        {% endif %}
 
-        <span class="banner">
-          {% if current_user.is_authenticated: %} Welcome back
-          {{current_user.name}}
-          <a href="{{ url_for('main.profile', user_id=current_user.id) }}"
-            ><img
-              class="image"
-              id="myProfile"
-              src="{{ url_for('static', filename='profile.png') }}" /></a
-        ></span>
-        {% endif %} #add option for login
+        {% if not current_user.is_authenticated and request.endpoint not in ['auth.login', 'auth.signup'] %}
+          <div><label>Oops! Login to continue chronicling </label><a href="/login">here</a></div>
+        {% endif %}
       </h1>
     </header>
 
