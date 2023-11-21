@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Culinary Chronicles Hub</title>
+    <title>Microblogging app</title>
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='microblog.css') }}"
@@ -11,26 +11,19 @@
   <body>
     <header>
       <h1>
-        <a href="{{ url_for('main.index') }}">Culinary Chronichles Hub</a>
+        <a href="{{ url_for('main.index') }}">Let's Cook:</a>
 
         <span class="banner">
-          {% if current_user.is_authenticated: %} Welcome back {{current_user.name}}!
+          {% if current_user.is_authenticated: %} Welcome back
+          {{current_user.name}}
           <a href="{{ url_for('main.profile', user_id=current_user.id) }}"
             ><img
               class="image"
               id="myProfile"
-              src="{{ url_for('static', filename='profile.png') }}" /></a>
-          {% endif %}
-        </span>
+              src="{{ url_for('static', filename='profile.png') }}" /></a
+        ></span>
+        {% endif %} #add option for login
       </h1>
-
-      <h2>
-        <span class="banner">
-          {% if not current_user.is_authenticated: %}
-            <div><label>Oops! Looks like you're not logged in... Login </label><a href="{{ url_for('auth.login') }}">here</a></div>
-          {% endif %}
-        </span>
-      </h2>
     </header>
 
    # Have to include template to display posts
@@ -38,7 +31,7 @@
    {% block content %}{% endblock %}
 
     {% if current_user.is_authenticated: %}
-      <a href="{{ url_for('auth.logout') }}">Logout</a>
+    <a href="{{ url_for('auth.logout') }}">Logout</a>
     {% endif %}
   </body>
 </html>

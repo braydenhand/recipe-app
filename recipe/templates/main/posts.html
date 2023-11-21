@@ -1,3 +1,28 @@
+<<<<<<< HEAD
+{% extends 'base.html' %} {% block content %} {% include 'recipe_template.html'
+%}
+<section class="filter">
+  <span>
+    <form class="settings" action="{{ url_for('main') }}" method="get">
+      #need to add additional filters that will award more functionality here
+      Sort by: <br /><select name="selection">
+        <option>Rating Highest to Lowest</option>
+        <option>Rating Lowest to Highest</option>
+        <option>Cook Time Fastest To Slowest</option>
+        <option>Cook Time Fastest to Slowest</option>
+        <option>Newest</option>
+        <option>Oldest</option></select
+      ><br />
+      <button type="submit" id="button">Go</button>
+    </form>
+  </span>
+  <div id="recipes">
+    {% for recipe in recipes %} {% include 'recipe_preview_template.html' %}
+    {% endfor %}
+  </div>
+
+</section>
+=======
 {% extends 'base.html' %}
   {% block content %}
     {% include 'recipe_template.html' %}
@@ -8,3 +33,4 @@
         </form>
       </div>
   {% endblock %}
+>>>>>>> 1d42858556af8986b105b16c84ea62d08c6155ad

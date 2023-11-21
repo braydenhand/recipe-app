@@ -1,5 +1,4 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <div class="newRecipe">
   Post new recipe:
   <form action="{{ url_for('main.new_post') }}" method="post">
@@ -115,8 +114,8 @@
 </script>
 
 <section>
-  <h2>Latest recipes:</h2>
-  {% include 'recipes_template.html' %}
+  <h2>Latest recipies:</h2>
+  {% include 'recipies_template.html' %}
 </section>
 
 

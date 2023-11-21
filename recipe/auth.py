@@ -1,16 +1,17 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from . import db, bcrypt, model
-import flask_login, datetime, dateutil
+from . import db, bcrypt
+import flask_login
+import datetime
+import dateutil
+from . import model
 
 bp = Blueprint("auth", __name__)
+
 
 @bp.route("/signup")
 def signup():
     return render_template("auth/signup.html")
 
-@bp.route("/login")
-def login():
-    return render_template("auth/login.html")
 
 @bp.route("/signup", methods=["POST"])
 def signup_post():
@@ -33,6 +34,11 @@ def signup_post():
     db.session.commit()
     flash("You've successfully signed up!")
     return redirect(url_for("auth.login"))
+
+@bp.route("/login")
+def login():
+    return render_template("auth/login.html")
+
 
 @bp.route("/login", methods=["POST"])
 def login_post():

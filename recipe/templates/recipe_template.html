@@ -27,8 +27,8 @@
   #need to fix the quantity of ingredients section to render
 
   <div class="ingredients">
-    {%for ingredient in recipe.ingredients%}
-    <div class="ingredient">{{ingredient.qingredients.quantity}} {{ingredient.qingredients.units}} of {{ingredient.name}}</div>
+    {%for qingredient in recipe.qingredients%}
+    <div class="ingredient">{{qingredient.quantity}} {{qingredient.units}} of {{qingredient.ingredient.name}}</div>
     {%endfor%}
   </div>
 
