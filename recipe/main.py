@@ -11,15 +11,57 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/")
 def index():
-
-    query = (
+    choice = request.form.get("selection")
+    if choice == 'Rating Highest to Lowest':
+        query = (
         db.select(model.Recipe)
         .limit(10)#can adjust this later
     )
-    recipies = db.session.execute(query).scalars().all()
-
+        recipes = db.session.execute(query).scalars().all()
+        return render_template("base.html", recipes=recipes)
+    elif choice == 'Rating Lowest to Highest':
+        query = (
+        db.select(model.Recipe)
+        .limit(10)#can adjust this later
+    )
+        recipes = db.session.execute(query).scalars().all()
+        return render_template("base.html", recipes=recipes)
+    elif choice == 'Cook Time Fastest To Slowest':
+        query = (
+        db.select(model.Recipe)
+        .limit(10)#can adjust this later
+    )
+        recipes = db.session.execute(query).scalars().all()
+        return render_template("base.html", recipes=recipes)
+    elif choice == 'Cook Time Slowest To Fastest':
+        query = (
+        db.select(model.Recipe)
+        .limit(10)#can adjust this later
+    )
+        recipes = db.session.execute(query).scalars().all()
+        return render_template("base.html", recipes=recipes)
+    elif choice == 'Newest':
+        query = (
+        db.select(model.Recipe)
+        .limit(10)#can adjust this later
+    )
+        recipes = db.session.execute(query).scalars().all()
+        return render_template("base.html", recipes=recipes)
+    elif choice == 'Oldest':
+        query = (
+        db.select(model.Recipe)
+        .limit(10)#can adjust this later
+    )
+        recipes = db.session.execute(query).scalars().all()
+        return render_template("base.html", recipes=recipes)
+    else:
+        query = (
+        db.select(model.Recipe)
+        .limit(10)#can adjust this later
+    )
+        recipes = db.session.execute(query).scalars().all()
     #not sure how to render the recipes here with the filters we're looking for 
-    return render_template("main/index.html", recipies=recipies)
+    return render_template("base.html", recipes=recipes)
 
 #potential function to append recipe for infinite scroll
 
