@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 {% extends 'base.html' %} {% block content %} {% include 'recipe_template.html'
 %}
 <section class="filter">
@@ -22,15 +21,3 @@
   </div>
 
 </section>
-=======
-{% extends 'base.html' %}
-  {% block content %}
-    {% include 'recipe_template.html' %}
-      <div class="newRecipe">
-        Post reply:
-        <form action="{{ url_for('main.new_post') }}" method="post">
-          
-        </form>
-      </div>
-  {% endblock %}
->>>>>>> 1d42858556af8986b105b16c84ea62d08c6155ad

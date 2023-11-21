@@ -14,49 +14,49 @@ def index():
     choice = request.form.get("selection")
     if choice == 'Rating Highest to Lowest':
         query = (
-        db.select(model.Recipe)
+        db.select(model.Recipe).order_by(model.Recipe.average_rating.desc())
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("base.html", recipes=recipes)
     elif choice == 'Rating Lowest to Highest':
         query = (
-        db.select(model.Recipe)
+        db.select(model.Recipe).order_by(model.Recipe.average_rating)
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("base.html", recipes=recipes)
     elif choice == 'Cook Time Fastest To Slowest':
         query = (
-        db.select(model.Recipe)
+        db.select(model.Recipe).order_by(model.Recipe.cooking_time)
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("base.html", recipes=recipes)
     elif choice == 'Cook Time Slowest To Fastest':
         query = (
-        db.select(model.Recipe)
+        db.select(model.Recipe).order_by(model.Recipe.cooking_time.desc())
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("base.html", recipes=recipes)
     elif choice == 'Newest':
         query = (
-        db.select(model.Recipe)
+        db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("base.html", recipes=recipes)
     elif choice == 'Oldest':
         query = (
-        db.select(model.Recipe)
+        db.select(model.Recipe).order_by(model.Recipe.timestamp)
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("base.html", recipes=recipes)
     else:
         query = (
-        db.select(model.Recipe)
+        db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
@@ -125,6 +125,7 @@ def new_post():
         timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
         number_people = request.form.get("number_people"),
         cooking_time = request.form.get("cooking_time"),
+        average_rating = 0,
     )
         #not sure where to submit the other steps and ingredients
     db.session.add(recipe)

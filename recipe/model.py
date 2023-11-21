@@ -33,6 +33,7 @@ class Recipe(db.Model):
     number_people = db.Column(db.Integer, nullable=False)
     timestamp = db.Column(db.DateTime(), nullable=False)
     qingredients = db.relationship('QIngredient', back_populates='recipe')
+    average_rating = db.Column(db.Integer, nullable=False)
     ratings = db.relationship('Rating', back_populates='recipe')
     steps = db.relationship('Step', back_populates='recipe')
     photos = db.relationship('Photo', back_populates='recipe')
