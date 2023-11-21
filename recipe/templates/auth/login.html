@@ -12,6 +12,7 @@
     <form action="{{ url_for('auth.login') }}" method="post">
         <div><label>Email: <input type="email" name="email" required/></label></div>
         <div><label>Password: <input type="password" name="password" required/></label></div>
+        <div><label>Register for an account </label><a href="/signup">here</a></div>
         <div><input type="submit" value="Login"/></div>
     </form>
 {% endblock %}

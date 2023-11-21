@@ -33,7 +33,9 @@
       </h2>
     </header>
 
-   # Have to include template to display posts 
+   # Have to include template to display posts
+  
+   {% block content %}{% endblock %}
 
     {% if current_user.is_authenticated: %}
       <a href="{{ url_for('auth.logout') }}">Logout</a>
