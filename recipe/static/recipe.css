@@ -18,18 +18,11 @@ header {
     background-color: beige;
     padding: 10px;
     border: 2px solid black;
-    margin: 3px;
-    
+    margin: 3px;  
 }
 
 .metadata {
     font-size: small;
-}
-
-.tweet {
-    font-size: large;
-    
-
 }
 
 .submit {
@@ -39,6 +32,7 @@ header {
     color: white;
     cursor: pointer;
 }
+
 .submit-center {
     padding: 3px;
     background-color: black;
@@ -58,7 +52,6 @@ header {
     text-align: center;
 }
 
-
 #userIcon {
     display: block;
     max-width: 100px;
@@ -71,3 +64,35 @@ header {
     font-size: large;
     background-color: lightcoral;
 }
+
+/* Nav Bar */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+  
+li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover:not(.active) {
+    background-color: #111;
+  }
+  
+  .active {
+    background-color: #04AA6D;
+  }

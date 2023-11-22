@@ -1,13 +1,8 @@
-import datetime
-import dateutil.tz
-import flask_login
-import pathlib
+import datetime, dateutil.tz, flask_login, pathlib
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
-from . import db, bcrypt
-from . import model
+from . import db, bcrypt, model
 
 bp = Blueprint("main", __name__)
-
 
 @bp.route("/", methods=["GET"])
 def index():
@@ -18,49 +13,49 @@ def index():
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-        return render_template("base.html", recipes=recipes)
+        return render_template("main/index.html", recipes=recipes)
     elif choice == 'Rating Lowest to Highest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.average_rating)
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-        return render_template("base.html", recipes=recipes)
+        return render_template("main/index.html", recipes=recipes)
     elif choice == 'Cook Time Fastest To Slowest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.cooking_time)
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-        return render_template("base.html", recipes=recipes)
+        return render_template("main/index.html", recipes=recipes)
     elif choice == 'Cook Time Slowest To Fastest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.cooking_time.desc())
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-        return render_template("base.html", recipes=recipes)
+        return render_template("main/index.html", recipes=recipes)
     elif choice == 'Newest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-        return render_template("base.html", recipes=recipes)
+        return render_template("main/index.html", recipes=recipes)
     elif choice == 'Oldest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.timestamp)
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-        return render_template("base.html", recipes=recipes)
+        return render_template("main/index.html", recipes=recipes)
     else:
         query = (
         db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-        return render_template("base.html", recipes=recipes)
+        return render_template("main/index.html", recipes=recipes)
 
 #potential function to append recipe for infinite scroll
 
@@ -127,14 +122,14 @@ def new_post():
     )
     stepCount = request.form.get("stepCount")
     for i in range(stepCount):
+        i += 1
         name = "stepCount" + i
         step = model.Step(
             text = request.form.get(name),
-            position = i + 1,
+            position = i,
             recipe_id = recipe.id
         )
-        db.session.add(step)   
-    
+        db.session.add(step)
     db.session.add(recipe)
     db.session.commit()
     return redirect(url_for("main.post", recipe_id=recipe.id))
@@ -176,7 +171,6 @@ def bookmark(recipe_id):
         bookmark = model.Bookmark(
         recipe = db.session.get(model.Recipe, recipe_id),
         user = flask_login.current_user,
-        value = 1,
         timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
         )
         db.session.add(bookmark)
@@ -184,6 +178,7 @@ def bookmark(recipe_id):
         db.session.delete(bookmark)
     db.session.commit()
     return redirect(url_for("main.post", recipe_id=recipe_id))
+
 '''
 @bp.route('/recipe/<int:recipe_id>/upload_photo', methods=['POST'])
 @flask_login.login_required
