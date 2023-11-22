@@ -120,6 +120,7 @@ def post(recipe_id):
 @flask_login.login_required
 def new_post():
     recipe = model.Recipe(
+        name = request.form.get("name"),
         description = request.form.get("description"),
         user = flask_login.current_user,
         timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
@@ -128,13 +129,12 @@ def new_post():
         average_rating = 0,
     )
     stepCount = request.form.get("stepCount")
-    for i in range(stepCount):
+    for i in range(int(stepCount)):
         i += 1
-        name = "stepCount" + i
+        name = "stepCount" + str(i)
         step = model.Step(
             text = request.form.get(name),
             position = i,
-            position = i + 1,
             recipe_id = recipe.id
         )
         db.session.add(step)   
