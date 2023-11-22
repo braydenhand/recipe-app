@@ -103,7 +103,7 @@ def post(recipe_id):
     photos = db.session.execute(query).scalars().all()
     
     #not sure if the flask login query will auto fail if not logged in
-    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
     bookmark = db.session.execute(query).scalars().all()
     return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark)
 
@@ -132,7 +132,7 @@ def create_recipe():
     
     db.session.add(recipe)
     db.session.commit()
-    return redirect(url_for("main.post", recipe_id=recipe.id))
+    return redirect(url_for("main/index.html", recipe_id=recipe.id))
 
 @bp.route("/post/<int:recipe_id>/upload_rating", methods=["POST"])
 @flask_login.login_required
@@ -165,7 +165,7 @@ def new_review(value, recipe_id):
 @bp.route("/post/<int:recipe_id>/bookmark", methods=["POST"])
 @flask_login.login_required
 def bookmark(recipe_id):
-    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
     bookmark = db.session.execute(query).scalars().all()
     if not bookmark:
         bookmark = model.Bookmark(
