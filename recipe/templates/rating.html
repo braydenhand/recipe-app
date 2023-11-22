@@ -1,13 +1,109 @@
 {% extends 'base.html' %} {% block rating %}
 <section>
-  <div class="Total Rating">{{recipe.average_rating}} / 5</div>
+  <div class="Total Rating">Overall Rating: {{recipe.average_rating}} / 5</div>
 
-  <div class="User Rating">
-    Your Rating : * * * * * needs to redirect to (".../upload_rating", methods=["POST"])
-    not sure how to pass the value yet
+  {% if current_user.is_authenticated: %} {% {{rating} %}}
+  <div class="User Rating">Your Rating: {{rating.value}} / 5</div>
+  <div class="Change Rating">
+    Rating:
+    <input
+      type="radio"
+      id="star5"
+      name="rating"
+      value="5"
+      onclick="submitRating(5)"
+    /><label for="star5"></label>
+    <input
+      type="radio"
+      id="star4"
+      name="rating"
+      value="4"
+      onclick="submitRating(4)"
+    /><label for="star4"></label>
+    <input
+      type="radio"
+      id="star3"
+      name="rating"
+      value="3"
+      onclick="submitRating(3)"
+    /><label for="star3"></label>
+    <input
+      type="radio"
+      id="star2"
+      name="rating"
+      value="2"
+      onclick="submitRating(2)"
+    /><label for="star2"></label>
+    <input
+      type="radio"
+      id="star1"
+      name="rating"
+      value="1"
+      onclick="submitRating(1)"
+    /><label for="star1"></label>
   </div>
+  {% else %}
+  <div class="Add Rating">
+    Rating:
+    <input
+      type="radio"
+      id="star5"
+      name="rating"
+      value="5"
+      onclick="submitRating(5)"
+    /><label for="star5"></label>
+    <input
+      type="radio"
+      id="star4"
+      name="rating"
+      value="4"
+      onclick="submitRating(4)"
+    /><label for="star4"></label>
+    <input
+      type="radio"
+      id="star3"
+      name="rating"
+      value="3"
+      onclick="submitRating(3)"
+    /><label for="star3"></label>
+    <input
+      type="radio"
+      id="star2"
+      name="rating"
+      value="2"
+      onclick="submitRating(2)"
+    /><label for="star2"></label>
+    <input
+      type="radio"
+      id="star1"
+      name="rating"
+      value="1"
+      onclick="submitRating(1)"
+    /><label for="star1"></label>
+  </div>
+  {% endif %} {% endif %}
 </section>
+
 <script>
-  //this is where we are going to install all the rating logic for the stars (* * * * *)
+  function submitRating(rating) {
+    // Send a request to the Flask server with the selected rating
+
+    //TODO: wire to correct function
+    fetch("/post/<int:recipe_id>/submit_rating", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ rating: rating }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log("Server response:", data);
+        // Handle the server response as needed
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 </script>
 {% endblock %}

@@ -7,9 +7,11 @@ from . import model
 
 bp = Blueprint("auth", __name__)
 
+
 @bp.route("/signup")
 def signup():
     return render_template("auth/signup.html")
+
 
 @bp.route("/signup", methods=["POST"])
 def signup_post():
