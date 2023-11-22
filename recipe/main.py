@@ -59,13 +59,7 @@ def index():
 
 #potential function to append recipe for infinite scroll
 
-@bp.route("/", methods=["POST"])
-def recipe_post():
-    name = request.form.get("name")
-    description = request.form.get("description")
-    number_people = request.form.get("number_people")
-    email = request.form.get("email")
-    cooking_time = request.form.get("cooking_time")
+
 
 #we will need user, recipes, ratings, and bookmarked
 @bp.route('/profile/<int:user_id>')
@@ -109,9 +103,9 @@ def post(recipe_id):
     return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark)
 
 #will need recipe, steps, ingredients, and photo
-@bp.route("/new_post", methods=["POST"])
+@bp.route("/create_recipe", methods=["POST"])
 @flask_login.login_required
-def new_post():
+def create_recipe():
     recipe = model.Recipe(
         description = request.form.get("description"),
         user = flask_login.current_user,
@@ -126,7 +120,10 @@ def new_post():
         name = "stepCount" + i
         step = model.Step(
             text = request.form.get(name),
+<<<<<<< HEAD
             position = i,
+=======
+>>>>>>> 7982c0dac570bb7c8468acbfd5ddb094a5a2e545
             recipe_id = recipe.id
         )
         db.session.add(step)
