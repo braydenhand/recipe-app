@@ -109,9 +109,11 @@ def post(recipe_id):
     photos = db.session.execute(query).scalars().all()
     
     #not sure if the flask login query will auto fail if not logged in
-    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
     bookmark = db.session.execute(query).scalars().all()
-    return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark)
+    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
+    rating = db.session.execute(query).scalars().all()
+    return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark, rating=rating)
 
 #will need recipe, steps, ingredients, and photo
 @bp.route("/new_post", methods=["POST"])
@@ -141,19 +143,23 @@ def new_post():
 
 @bp.route("/post/<int:recipe_id>/upload_rating", methods=["POST"])
 @flask_login.login_required
-def new_review(value, recipe_id):
+def new_review(recipe_id):
     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.user_id)
     rating = db.session.execute(query).scalars().all()
+    
+    data = request.get_json()
+    rating_val = data.get('rating')
+    
     if not rating:
         rating = model.Rating(
             recipe = db.session.get(model.Recipe, recipe_id),
             user = flask_login.current_user,
-            value = value,
+            value = rating_val,
             timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
         )
         db.session.add(rating)
     else:
-        rating.value = value
+        rating.value = rating_val
     db.session.commit()
     #not sure if a commit is needed before drawing but doing it just to be safe
 
@@ -170,7 +176,7 @@ def new_review(value, recipe_id):
 @bp.route("/post/<int:recipe_id>/bookmark", methods=["POST"])
 @flask_login.login_required
 def bookmark(recipe_id):
-    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
     bookmark = db.session.execute(query).scalars().all()
     if not bookmark:
         bookmark = model.Bookmark(

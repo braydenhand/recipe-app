@@ -1,73 +1,99 @@
 .image {
-    max-width: 40px;
-    height: auto;
+  max-width: 40px;
+  height: auto;
 }
 
 header {
-    background: rgb(155, 154, 154);
-    font-size: large;
-    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  background: rgb(155, 154, 154);
+  font-size: large;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
 }
 
 #myProfile {
-    float: right;
+  float: right;
 }
 
 .message {
-    border-radius: 10px;
-    background-color: beige;
-    padding: 10px;
-    border: 2px solid black;
-    margin: 3px;
-    
+  border-radius: 10px;
+  background-color: beige;
+  padding: 10px;
+  border: 2px solid black;
+  margin: 3px;
 }
 
 .metadata {
-    font-size: small;
+  font-size: small;
 }
 
 .tweet {
-    font-size: large;
-    
-
+  font-size: large;
 }
 
 .submit {
-    float: right;
-    padding: 3px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+  float: right;
+  padding: 3px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 .submit-center {
-    padding: 3px;
-    background-color: black;
-    color: white;
-    cursor: pointer;
+  padding: 3px;
+  background-color: black;
+  color: white;
+  cursor: pointer;
 }
 
 .submit:active {
-    background-color: white;
+  background-color: white;
 }
 
 .userProfile {
-    margin: auto;
-    width: 50%;
-    border: 3px solid green;
-    padding: 10px;
-    text-align: center;
+  margin: auto;
+  width: 50%;
+  border: 3px solid green;
+  padding: 10px;
+  text-align: center;
 }
 
-
 #userIcon {
-    display: block;
-    max-width: 100px;
-    height: auto;
-    margin-left: auto;
-    margin-right: auto;
+  display: block;
+  max-width: 100px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .notification {
-    font-size: large;
-    background-color: lightcoral;
+  font-size: large;
+  background-color: lightcoral;
+}
+
+.rating {
+  display: inline-block;
+  unicode-bidi: bidi-override;
+  direction: rtl;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  position: relative;
+  width: 30px; /* Adjust the width based on your star image size */
+  height: 30px; /* Adjust the height based on your star image size */
+  cursor: pointer;
+}
+
+.rating label:before {
+  content: url("/static/star.png"); /* Path to your star image */
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.rating label:hover:before,
+.rating label:hover ~ label:before,
+.rating input:checked ~ label:before {
+  opacity: 0.5; /* Adjust the opacity as needed */
 }
