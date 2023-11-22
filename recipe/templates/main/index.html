@@ -1,8 +1,8 @@
 {% extends 'base.html' %} {% block content %}
 <div class="newRecipe">
   Post new recipe:
-  <form action="{{ url_for('main.new_post') }}" method="post">
-    <label for="new_post">What do want to cook?:</label><br />
+  <form action="{{ url_for('main.create_recipe') }}" method="post">
+    <span>What do want to cook?:</span><br />
     Name:<input type="text" id="name" name="name" /><br />
     Description:<input type="text" id="description" name="description" /><br />
     Number of People:<input type="number" id="number_people" name="number_people"/><br />
@@ -103,7 +103,7 @@
             <input type="text" id="step${stepCount}" name="step${stepCount}" required>
         `;
     document.getElementById("formSteps").appendChild(stepDiv);
-    document.getElementById("stepCount").val() = stepCount;
+    document.getElementById("stepCount").value = stepCount;
   }
   
 </script>
