@@ -1,9 +1,13 @@
 {% extends 'base.html' %} {% block rating %}
+<section>
+  <div class="Total Rating">{{recipe.average_rating}} / 5</div>
 
-this is where we are going to install all the rating logic for the stars
-
-
-needs to redirect to ("/post/<int:recipe_id>/upload_rating", methods=["POST"])
+  <div class="User Rating">
+    Your Rating : * * * * * needs to redirect to (".../upload_rating", methods=["POST"])
     not sure how to pass the value yet
-
+  </div>
+</section>
+<script>
+  //this is where we are going to install all the rating logic for the stars (* * * * *)
+</script>
 {% endblock %}
