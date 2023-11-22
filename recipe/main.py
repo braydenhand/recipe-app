@@ -9,7 +9,7 @@ from . import model
 bp = Blueprint("main", __name__)
 
 
-@bp.route("/")
+@bp.route("/", methods=["GET"])
 def index():
     choice = request.form.get("selection")
     if choice == 'Rating Highest to Lowest':
@@ -60,8 +60,7 @@ def index():
         .limit(10)#can adjust this later
     )
         recipes = db.session.execute(query).scalars().all()
-    #not sure how to render the recipes here with the filters we're looking for 
-    return render_template("base.html", recipes=recipes)
+        return render_template("base.html", recipes=recipes)
 
 #potential function to append recipe for infinite scroll
 
@@ -91,7 +90,6 @@ def profile(user_id):
 
 #we will need recipes, steps, photos, ingredients, and ratings
 @bp.route("/post/<int:recipe_id>")
-@flask_login.login_required
 def post(recipe_id):
     recipe = db.session.get(model.Recipe, recipe_id)
     if not recipe:
@@ -101,19 +99,19 @@ def post(recipe_id):
     steps = db.session.execute(query).scalars().all()
     if not steps:
         abort(410, "Recipe steps for {} doesn't exist.".format(recipe_id))
-
-    #not sure if qingredients should be extracted now as well or in another place
     query = db.select(model.Ingredient).where(model.Ingredient.recipe_id == recipe_id)
     ingredients = db.session.execute(query).scalars().all()
     if not ingredients:
         abort(410, "Recipe ingredients for {} doesn't exist.".format(recipe_id))
-
     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).order_by(model.Rating.timestamp.desc())
     ratings = db.session.execute(query).scalars().all()
     query = db.select(model.Photo).where(model.Photo.recipe_id == recipe_id).order_by(model.Photo.timestamp.desc())
     photos = db.session.execute(query).scalars().all()
-
-    return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos)
+    
+    #not sure if the flask login query will auto fail if not logged in
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
+    bookmark = db.session.execute(query).scalars().all()
+    return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark)
 
 #will need recipe, steps, ingredients, and photo
 @bp.route("/new_post", methods=["POST"])
@@ -135,35 +133,46 @@ def new_post():
 @bp.route("/post/<int:recipe_id>/upload_rating", methods=["POST"])
 @flask_login.login_required
 def new_review(value, recipe_id):
-    rating = model.Rating(
-        recipe = db.session.get(model.Recipe, recipe_id),
-        user = flask_login.current_user,
-        value = value,
-        timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
-    )
-    db.session.add(rating)
+    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.user_id)
+    rating = db.session.execute(query).scalars().all()
+    if not rating:
+        rating = model.Rating(
+            recipe = db.session.get(model.Recipe, recipe_id),
+            user = flask_login.current_user,
+            value = value,
+            timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
+        )
+        db.session.add(rating)
+    else:
+        rating.value = value
     db.session.commit()
-    return redirect(url_for("main.post", recipe_id=recipe_id, value = value))
+    #not sure if a commit is needed before drawing but doing it just to be safe
 
-@bp.route("/post/<int:recipe_id>/upload_bookmark", methods=["POST"])
+    recipe = db.session.get(model.Recipe, recipe_id)
+    counter = 0.0
+    total = 0.0
+    for rating in recipe.ratings:
+        counter = counter + 1
+        total  = total + rating.value
+    recipe.average_rating = round (total/counter, 1)
+    db.session.commit()
+    return redirect(url_for("main.post", recipe_id=recipe_id))
+
+@bp.route("/post/<int:recipe_id>/bookmark", methods=["POST"])
 @flask_login.login_required
-def new_bookmark(recipe_id):
-    bookmark = model.Bookmark(
+def bookmark(recipe_id):
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
+    bookmark = db.session.execute(query).scalars().all()
+    if not bookmark:
+        bookmark = model.Bookmark(
         recipe = db.session.get(model.Recipe, recipe_id),
         user = flask_login.current_user,
         value = 1,
         timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
-    )
-    db.session.add(bookmark)
-    db.session.commit()
-    return redirect(url_for("main.post", recipe_id=recipe_id))
-
-@bp.route("/post/<int:recipe_id>/remove_bookmark", methods=["POST"])
-@flask_login.login_required
-def remove_bookmark(recipe_id):
-    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.User.user_id == flask_login.current_user.id)
-    bookmark = db.session.execute(query).scalars().all()
-    db.session.delete(bookmark)
+        )
+        db.session.add(bookmark)
+    else:
+        db.session.delete(bookmark)
     db.session.commit()
     return redirect(url_for("main.post", recipe_id=recipe_id))
 '''

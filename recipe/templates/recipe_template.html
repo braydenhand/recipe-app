@@ -1,8 +1,18 @@
 <div class="recipe">
   <div>
     <span class="photos">
-      # we can use chat to get the bookmarking technology down
+      # we can use chat to overlay the bookmark
       <a><img /></a>
+      {% if current_user.is_authenticated: %}
+      Placeholder for a cleaner presentation
+      <form action="{{ url_for('') }}" method="post">
+        {% if bookmark %}
+        <button type="submit" id="button">Remove bookmark</button>
+        {% else %}
+        <button type="submit" id="button">Bookmark</button>
+        {% endif %}
+      </form>
+      {% endif %}
     </span>
     <span>
       <div class="recipe header">{{recipe.name}}</div>
