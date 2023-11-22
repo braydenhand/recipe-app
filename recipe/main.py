@@ -122,9 +122,10 @@ def create_recipe():
     stepCount = request.form.get("stepCount")
     for i in range(stepCount):
         i += 1
-        name = "stepCount" + i
+        name = "stepCount" + str(i)
         step = model.Step(
             text = request.form.get(name),
+            position = i,
             recipe_id = recipe.id
         )
         db.session.add(step)   
