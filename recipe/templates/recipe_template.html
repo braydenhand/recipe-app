@@ -33,9 +33,7 @@
       </section>
     </span>
   </div>
-
-  #need to fix the quantity of ingredients section to render
-
+  
   <div class="ingredients">
     {%for qingredient in recipe.qingredients%}
     <div class="ingredient">{{qingredient.quantity}} {{qingredient.units}} of {{qingredient.ingredient.name}}</div>

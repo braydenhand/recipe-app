@@ -7,7 +7,7 @@
     Description:<input type="text" id="description" name="description" /><br />
     Number of People:<input type="number" id="number_people" name="number_people"/><br />
     Cooking Time:<input type="number" id="cooking_time" name="cooking_time" /><br />
-    #need to add in a new ingredient button
+
     <div id="ingredientPopup">
       <h2>Add Ingredient</h2>
       <form id="ingredientForm">
@@ -71,25 +71,30 @@
           <option value="vinegar"></option>
           <option value="yogurt"></option>
         </datalist>
-        This add button should be JS that creates another copy of the add ingredient field. It should 
-        not submit until the recipe is submitted. Same as add step
         <button onclick="addIngredient()" type="button">Add</button>
+        <input type="hidden" id="stepCount" name="stepCount" value="1">
       </form>
     </div>
-    #need to renovate this to allow logging
+
     <div name="steps">
       Steps:
-      <div id="formSteps"></div>
+      <div id="formSteps">
+        <label for="step1">Step 1:</label>
+            <input type="text" id="step1" name="step1" required>
+
+      </div>
     </div>
+    <button type="button" onclick="addStep()">Add Step</button>
+    
+    <label for="photo">Upload a photo (must of type JPEG or PNG):</label>
     <input type="text" id="photo" name="photo" />
-      <button type="button" onclick="addStep()">Add Step</button>
     
     <input type="submit" value="Submit" />
   </form>
 </div>
 <script>
   function addIngredient() {}
-  let stepCount = 0;
+  let stepCount = 1;
   function addStep() {
     stepCount++;
     const stepDiv = document.createElement("div");
@@ -98,7 +103,9 @@
             <input type="text" id="step${stepCount}" name="step${stepCount}" required>
         `;
     document.getElementById("formSteps").appendChild(stepDiv);
+    document.getElementById("stepCount").val() = stepCount;
   }
+  
 </script>
 
 <script>
@@ -112,13 +119,5 @@
  } 
   );
 </script>
-
-<section>
-  <h2>Latest recipies:</h2>
-  {% include 'recipies_template.html' %}
-</section>
-
-
-
 
 {% endblock %}

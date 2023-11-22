@@ -125,7 +125,16 @@ def new_post():
         cooking_time = request.form.get("cooking_time"),
         average_rating = 0,
     )
-        #not sure where to submit the other steps and ingredients
+    stepCount = request.form.get("stepCount")
+    for i in range(stepCount):
+        name = "stepCount" + i
+        step = model.Step(
+            text = request.form.get(name),
+            position = i + 1,
+            recipe_id = recipe.id
+        )
+        db.session.add(step)   
+    
     db.session.add(recipe)
     db.session.commit()
     return redirect(url_for("main.post", recipe_id=recipe.id))
