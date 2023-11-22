@@ -1,5 +1,4 @@
-import datetime
-import dateutil.tz
+import datetime, dateutil.tz
 import flask_login
 import pathlib
 from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
@@ -134,7 +133,6 @@ def new_post():
         step = model.Step(
             text = request.form.get(name),
             position = i,
-            position = i + 1,
             recipe_id = recipe.id
         )
         db.session.add(step)   
