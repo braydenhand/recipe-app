@@ -104,7 +104,9 @@ def post(recipe_id):
     #not sure if the flask login query will auto fail if not logged in
     query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
     bookmark = db.session.execute(query).scalars().all()
-    return render_template("main/posts.html", post=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark)
+    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
+    rating = db.session.execute(query).scalars().all()
+    return render_template("recipe_template.html", recipe=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark, rating=rating)
 
 #will need recipe, steps, ingredients, and photo
 @bp.route("/create_recipe", methods=["POST"])
