@@ -36,23 +36,22 @@ def signup_post():
 def login():
     return render_template("auth/login.html")
 
-
 @bp.route("/login", methods=["POST"])
 def login_post():
-
     email = request.form.get("email")
     password = request.form.get("password")
+    error = None
 
-    # Check if the email is already at the database
     query = db.select(model.User).where(model.User.email == email)
     user = db.session.execute(query).scalar_one_or_none()
+
     if user and bcrypt.check_password_hash(user.password, password):
-        # The user exists and the password is correct
         flask_login.login_user(user)
         return redirect(url_for("main.index"))
     else:
-        flash("Wrong email/password")
-        return redirect(url_for("auth.login"))
+        error = "Wrong email / password"
+
+    return render_template("auth/login.html", error=error)
 
 @bp.route("/logout")
 @flask_login.login_required
