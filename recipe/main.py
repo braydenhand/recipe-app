@@ -1,12 +1,8 @@
-import datetime, dateutil.tz
-import flask_login
-import pathlib
-from flask import Blueprint, render_template, request, redirect, url_for, flash, abort
-from . import db, bcrypt
-from . import model
+import datetime, dateutil.tz, flask_login
+from flask import request, Blueprint, render_template, redirect, url_for, abort
+from . import db, model
 
 bp = Blueprint("main", __name__)
-
 
 @bp.route("/", methods=["GET"])
 def index():
@@ -61,11 +57,9 @@ def index():
         recipes = db.session.execute(query).scalars().all()
         return render_template("main/index.html", recipes=recipes)
 
-#potential function to append recipe for infinite scroll
+# Potential function to append recipe for infinite scroll
 
-
-
-#we will need user, recipes, ratings, and bookmarked
+# We will need user, recipes, ratings, and bookmarked
 @bp.route('/profile/<int:user_id>')
 @flask_login.login_required
 def profile(user_id):
@@ -81,13 +75,12 @@ def profile(user_id):
     bookmarks = db.session.execute(query).scalars().all()
     return render_template('main/profile.html',user=user, recipes=recipes, ratings=ratings, bookmarks=bookmarks)
 
-#we will need recipes, steps, photos, ingredients, and ratings
+# We will need recipes, steps, photos, ingredients, and ratings
 @bp.route("/post/<int:recipe_id>")
 def post(recipe_id):
     recipe = db.session.get(model.Recipe, recipe_id)
     if not recipe:
         abort(404, "Recipe id {} doesn't exist.".format(recipe_id))
-
     query = db.select(model.Step).where(model.Step.recipe_id == recipe_id).order_by(model.Step.position)
     steps = db.session.execute(query).scalars().all()
     if not steps:
@@ -100,15 +93,15 @@ def post(recipe_id):
     ratings = db.session.execute(query).scalars().all()
     query = db.select(model.Photo).where(model.Photo.recipe_id == recipe_id).order_by(model.Photo.timestamp.desc())
     photos = db.session.execute(query).scalars().all()
-    
-    #not sure if the flask login query will auto fail if not logged in
+
+    # Not sure if the flask login query will auto fail if not logged in
     query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
     bookmark = db.session.execute(query).scalars().all()
     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
     rating = db.session.execute(query).scalars().all()
     return render_template("recipe_template.html", recipe=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, bookmark=bookmark, rating=rating)
 
-#will need recipe, steps, ingredients, and photo
+# Will need recipe, steps, ingredients, and photo
 @bp.route("/create_recipe", methods=["POST"])
 @flask_login.login_required
 def create_recipe():
@@ -151,7 +144,7 @@ def new_review(value, recipe_id):
     else:
         rating.value = value
     db.session.commit()
-    #not sure if a commit is needed before drawing but doing it just to be safe
+    #Not sure if a commit is needed before drawing but doing it just to be safe
 
     recipe = db.session.get(model.Recipe, recipe_id)
     counter = 0.0
@@ -180,6 +173,8 @@ def bookmark(recipe_id):
         db.session.delete(bookmark)
     db.session.commit()
     return redirect(url_for("main.post", recipe_id=recipe_id))
+
+# Photo submission controller
 '''
 @bp.route('/recipe/<int:recipe_id>/upload_photo', methods=['POST'])
 @flask_login.login_required

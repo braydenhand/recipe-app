@@ -1,9 +1,6 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
-from . import db, bcrypt
-import flask_login
-import datetime
-import dateutil
-from . import model
+import datetime, dateutil, flask_login
+from flask import request, Blueprint, render_template, redirect, url_for, flash
+from . import db, bcrypt, model
 
 bp = Blueprint("auth", __name__)
 

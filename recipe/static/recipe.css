@@ -69,6 +69,7 @@ header {
   background-color: lightcoral;
 }
 
+/* Star Rating */
 .rating {
   display: inline-block;
   unicode-bidi: bidi-override;
@@ -94,31 +95,45 @@ header {
 }
 
 .rating label:hover:before,
+
 .rating label:hover ~ label:before,
+
 .rating input:checked ~ label:before {
   opacity: 0.5; /* Adjust the opacity as needed */
 }
 
-li {
-    float: left;
+/* Navigation Bar */
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-li.login{
-    float: right;
+li {
+  float: left;
+}
+
+li.login {
+  float: right
 }
 
 li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
 }
-  
+
 li a:hover:not(.active) {
-    background-color: #111;
+  background-color: #111;
 }
-  
+
 .active {
-    background-color: #04AA6D;
+  background-color: #04AA6D;
 }

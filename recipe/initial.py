@@ -1,6 +1,6 @@
-from recipe import db, create_app, model
-import datetime
-import dateutil
+import datetime, dateutil
+from recipe import db, model, create_app
+
 app = create_app()
 with app.app_context():
     user = model.User(

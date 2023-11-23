@@ -1,6 +1,5 @@
-from . import db
 import flask_login
-
+from . import db
 
 # Define an association table for the many-to-many relationship between Recipe and QIngredients
 '''
@@ -9,8 +8,6 @@ recipe_ingredients = db.Table('recipe_ingredients',
     db.Column('ingredient_id', db.Integer, db.ForeignKey('qingredient.id'))
 )
 '''
-
-
 
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -44,7 +41,7 @@ class Ingredient(db.Model):
     name = db.Column(db.String(512), nullable=False)
     qingredients = db.relationship('QIngredient', back_populates='ingredient')
 
-#since there is a new ingredient for every recipe qingredient and ingredient is one to one
+# Since there is a new ingredient for every recipe qingredient and ingredient is one to one
 class QIngredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Float, nullable=False)
@@ -76,7 +73,7 @@ class Photo(db.Model):
     recipe = db.relationship('Recipe', back_populates='photos')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', back_populates='photos')
-    #need to determine how to store photo
+    # Need to determine how to store photo
     file_extension = db.Column(db.String(8), nullable=False)  
     timestamp = db.Column(db.DateTime(), nullable=True)
 
