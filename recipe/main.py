@@ -17,42 +17,42 @@ def index():
     elif choice == 'Rating Lowest to Highest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.average_rating)
-        .limit(10)#can adjust this later
+        .limit(10)
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("main/index.html", recipes=recipes)
     elif choice == 'Cook Time Fastest To Slowest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.cooking_time)
-        .limit(10)#can adjust this later
+        .limit(10)
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("main/index.html", recipes=recipes)
     elif choice == 'Cook Time Slowest To Fastest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.cooking_time.desc())
-        .limit(10)#can adjust this later
+        .limit(10)
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("main/index.html", recipes=recipes)
     elif choice == 'Newest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
-        .limit(10)#can adjust this later
+        .limit(10)
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("main/index.html", recipes=recipes)
     elif choice == 'Oldest':
         query = (
         db.select(model.Recipe).order_by(model.Recipe.timestamp)
-        .limit(10)#can adjust this later
+        .limit(10)
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("main/index.html", recipes=recipes)
     else:
         query = (
         db.select(model.Recipe).order_by(model.Recipe.timestamp.desc())
-        .limit(10)#can adjust this later
+        .limit(10)
     )
         recipes = db.session.execute(query).scalars().all()
         return render_template("main/index.html", recipes=recipes)
