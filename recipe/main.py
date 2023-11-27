@@ -117,6 +117,7 @@ def create_recipe():
     db.session.add(recipe)
     db.session.commit()
     stepCount = int(request.form.get("stepCount"))
+    
     for i in range(stepCount):
         i += 1
         name = "stepCount" + str(i)
@@ -127,7 +128,34 @@ def create_recipe():
         )
         db.session.add(step)   
     
+    ingredientCount = int(request.form.get("ingredient"))
+    for i in range(ingredientCount):
+        i += 1
+        name = "" + str(i)
+        query = db.select(model.QIngredient).where(model.QIngredient.recipe_id == recipe.id)
+        qing = db.session.execute(query).scalars().first()
+        ingredient = model.Ingredient(
+            name = request.form.get(name)
+        )
+        db.session.add(ingredient)
+        
     db.session.commit()
+    
+    #NOT SURE OF THE ORDERING BETWEEN THE TWO
+    for i in range(ingredientCount):
+        i += 1
+        q = "units" + str(i)
+        u = "unit" + str(i)
+        qIngredient = model.QIngredient(
+            quantity = request.form.get(q),
+            units = request.form.get(u),
+            recipe_id = recipe.id,
+        )
+        db.session.add(qIngredient)
+    db.session.commit()    
+        
+        
+    
     return redirect(url_for("main/recipe.html", recipe_id=recipe.id))
 
 @bp.route("/post/<int:recipe_id>/upload_rating", methods=["POST"])
