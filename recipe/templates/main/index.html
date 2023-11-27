@@ -2,39 +2,49 @@
 <div class="newRecipe">
   Post new recipe:
   <form action="{{ url_for('main.create_recipe') }}" method="post">
-    <span>What do want to cook?:</span><br />
-    Name:<input type="text" id="name" name="name" /><br />
+    <span>What do want to cook?</span><br />
+    Recipe Name:<input type="text" id="name" name="name" /><br />
     Description:<input type="text" id="description" name="description" /><br />
-    Number of People:<input type="number" id="number_people" name="number_people"/><br />
-    Cooking Time:<input type="number" id="cooking_time" name="cooking_time" /><br />
+    Number of People:<input
+      type="number"
+      id="number_people"
+      name="number_people"
+    /><br />
+    Cooking Time (in minutes):<input
+      type="number"
+      id="cooking_time"
+      name="cooking_time"
+    /><br />
 
     <div id="ingredientPopup">
-      <input type="hidden" id="ingredientCount" name="ingredientCount" value="1">
+      <input
+        type="hidden"
+        id="ingredientCount"
+        name="ingredientCount"
+        value="1"
+      />
       <h2>Add Ingredients:</h2>
-
-
     </div>
     <button onclick="addIngredient()" type="button">Add Ingredient</button>
     <div name="steps">
-      <input type="hidden" id="stepCount" name="stepCount" value="1">
-      Steps:
+      <input type="hidden" id="stepCount" name="stepCount" value="1" />
+      <h2>Add Ingredients:</h2>
       <div id="formSteps">
         <label for="step1">Step 1:</label>
-            <input type="text" id="stepCount1" name="stepCount1" required>
-
+        <input type="text" id="stepCount1" name="stepCount1" required />
       </div>
     </div>
     <button type="button" onclick="addStep()">Add Step</button>
-    
-    <label for="photo">Upload a photo (must of type JPEG or PNG):</label>
-    <input type="text" id="photo" name="photo" />
-    
+    <div>
+      <label for="photo">Upload a photo (must of type JPEG or PNG):</label>
+      <input type="text" id="photo" name="photo" />
+    </div>
     <input type="submit" value="Submit" />
   </form>
 </div>
 <script>
   let ingredientCount = 0;
-  
+
   function addIngredient() {
     ingredientCount++;
     const ingredientDiv = document.createElement("div");
@@ -102,7 +112,7 @@
     document.getElementById("ingredientPopup").appendChild(ingredientDiv);
     document.getElementById("ingredientCount").value = ingredientCount;
   }
-  addIngredient()
+  addIngredient();
 
   let stepCount = 1;
   function addStep() {
@@ -115,9 +125,6 @@
     document.getElementById("formSteps").appendChild(stepDiv);
     document.getElementById("stepCount").value = stepCount;
   }
-  
 </script>
-
-
 
 {% endblock %}
