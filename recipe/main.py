@@ -106,6 +106,7 @@ def post(recipe_id):
 @flask_login.login_required
 def create_recipe():
     recipe = model.Recipe(
+        name = request.form.get("name"),
         description = request.form.get("description"),
         user = flask_login.current_user,
         timestamp = datetime.datetime.now(dateutil.tz.tzlocal()),
@@ -113,7 +114,9 @@ def create_recipe():
         cooking_time = request.form.get("cooking_time"),
         average_rating = 0,
     )
-    stepCount = request.form.get("stepCount")
+    db.session.add(recipe)
+    db.session.commit()
+    stepCount = int(request.form.get("stepCount"))
     for i in range(stepCount):
         i += 1
         name = "stepCount" + str(i)
@@ -124,9 +127,8 @@ def create_recipe():
         )
         db.session.add(step)   
     
-    db.session.add(recipe)
     db.session.commit()
-    return redirect(url_for("main/index.html", recipe_id=recipe.id))
+    return redirect(url_for("main/recipe.html", recipe_id=recipe.id))
 
 @bp.route("/post/<int:recipe_id>/upload_rating", methods=["POST"])
 @flask_login.login_required

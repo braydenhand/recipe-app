@@ -10,7 +10,6 @@
 
     <div id="ingredientPopup">
       <h2>Add Ingredient</h2>
-      <form id="ingredientForm">
         <label for="units">Quantity:</label>
         <input type="number" id="units" name="units" required />
         <label for="unit">Unit:</label>
@@ -73,14 +72,13 @@
         </datalist>
         <button onclick="addIngredient()" type="button">Add</button>
         <input type="hidden" id="stepCount" name="stepCount" value="1">
-      </form>
     </div>
 
     <div name="steps">
       Steps:
       <div id="formSteps">
         <label for="step1">Step 1:</label>
-            <input type="text" id="step1" name="step1" required>
+            <input type="text" id="stepCount1" name="stepCount1" required>
 
       </div>
     </div>
