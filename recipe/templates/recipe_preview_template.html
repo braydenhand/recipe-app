@@ -1,12 +1,16 @@
 <div class="recipe_preview">
     <div class="flex-container">
       <span class="left-preview">
-       # we can use chat to get the bookmarking technology down for photos
+       Photo:
         <a><img /></a>
       </span>
       <span class="right-preview">
-        <div class="recipe header" href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</div>
-        <div class="author" href="{{ url_for('main.profile', user_id=recipe.user.id) }}">by {{ recipe.user.name }}</div>
+        <div class="recipe header">
+          <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a></div>
+        <div class="author" >
+        <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
+        by {{ recipe.user.name }} </a>
+      </div>
         <div class="number-of-people">
             Feeds 
             <span id="numberPeople">{{ recipe.number_people }}</span> 
@@ -17,8 +21,8 @@
             {% endif %}
         </div>
         <div class="cook time">{{recipe.cooking_time}} minutes</div>
-        <div class="rating">
-          Rated: #need to add a function for accumulating the total rating
+        <div class="prerating">
+          Overall Rating: {{recipe.average_rating}} / 5
         </div>
 
       </span>
