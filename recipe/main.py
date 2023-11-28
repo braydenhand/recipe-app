@@ -1,5 +1,5 @@
-import datetime, dateutil.tz, flask_login
-from flask import request, Blueprint, render_template, redirect, url_for, abort
+import datetime, dateutil.tz, flask_login, pathlib
+from flask import request, current_app, Blueprint, render_template, redirect, url_for, abort
 from . import db, model
 
 bp = Blueprint("main", __name__)
@@ -174,23 +174,22 @@ def bookmark(recipe_id):
     return redirect(url_for("main.post", recipe_id=recipe_id))
 
 # Photo submission controller
-'''
 @bp.route('/recipe/<int:recipe_id>/upload_photo', methods=['POST'])
 @flask_login.login_required
 def upload_photo(recipe_id):
-    recipe = Recipe.query.get_or_404(recipe_id)
     uploaded_file = request.files['photo']
 
-    if uploaded_file.filename != '':
-        content_type = uploaded_file.content_type
-        if content_type == "image/png":
-            file_extension = "png"
-        elif content_type == "image/jpeg":
-            file_extension = "jpg"
-        else:
-            abort(400, f"Unsupported file type {content_type}")
+    content_type = uploaded_file.content_type
+    if content_type == "image/png":
+        file_extension = "png"
+    elif content_type == "image/jpeg":
+        file_extension = "jpg"
+    else:
+        abort(400, f"Unsupported file type {content_type}")
 
-        photo = Photo(
+    if uploaded_file.filename != '':
+        recipe = model.Recipe.query.get_or_404(recipe_id)
+        photo = model.Photo(
             user=flask_login.current_user,
             recipe=recipe,
             file_extension=file_extension
@@ -206,7 +205,4 @@ def upload_photo(recipe_id):
         )
         uploaded_file.save(path)
 
-        return redirect(url_for('recipe_view', recipe_id=recipe_id))
-
-    abort(400, "No file uploaded")
-'''
+    return redirect(url_for('main.recipe', recipe_id=recipe_id))

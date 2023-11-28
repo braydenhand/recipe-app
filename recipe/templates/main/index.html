@@ -1,4 +1,5 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 <section class="filter">
   <span>
     <form class="settings" action="{{ url_for('main.index') }}" method="get">
@@ -15,14 +16,11 @@
     </form>
   </span>
   <div id="recipes">
-    {% for recipe in recipes %} {% include 'recipe_template.html' %}
+    {% for recipe in recipes %} {% include 'recipe_preview_template.html' %}
     {% endfor %}
   </div>
 
 </section>
-
-
-
 
 <div class="newRecipe">
   Post new recipe:
@@ -60,10 +58,6 @@
       </div>
     </div>
     <button type="button" onclick="addStep()">Add Step</button>
-    <div>
-      <label for="photo">Upload a photo (must of type JPEG or PNG):</label>
-      <input type="text" id="photo" name="photo" />
-    </div>
     <input type="submit" value="Submit" />
   </form>
 </div>

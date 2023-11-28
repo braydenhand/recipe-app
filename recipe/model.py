@@ -73,7 +73,6 @@ class Photo(db.Model):
     recipe = db.relationship('Recipe', back_populates='photos')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     user = db.relationship('User', back_populates='photos')
-    # Need to determine how to store photo
     file_extension = db.Column(db.String(8), nullable=False)  
     timestamp = db.Column(db.DateTime(), nullable=True)
 
