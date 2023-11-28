@@ -19,7 +19,7 @@ def create_app(test_config=None):
     app.config["SECRET_KEY"] = "93220d9b340cf9a6c39bac99cce7daf220167498f91fa"
     app.config[
         "SQLALCHEMY_DATABASE_URI"
-    ] = "mysql+mysqldb://24_webapp_035:,yBoVEKv@mysql.lab.it.uc3m.es/24_webapp_035c"
+    ] = "mysql+mysqldb://24_webapp_035:,yBoVEKv@mysql.lab.it.uc3m.es/24_webapp_035d"
     # Register blueprints
     db.init_app(app)
     # (we import main from here to avoid circular imports in the next lab)

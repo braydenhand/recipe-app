@@ -1,11 +1,10 @@
 <div class="recipe">
   <div>
     <span class="photos">
-      # we can use chat to overlay the bookmark
       <a><img /></a>
       {% if current_user.is_authenticated: %}
       Placeholder for a cleaner presentation
-      <form action="{{ url_for('') }}" method="post">
+      <form action="{{ url_for('main.bookmark', recipe_id=recipe.id) }}" method="post">
         {% if bookmark %}
         <button type="submit" id="button">Remove bookmark</button>
         {% else %}
@@ -36,7 +35,7 @@
   
   <div class="ingredients">
     {%for qingredient in recipe.qingredients%}
-    <div class="ingredient">{{qingredient.quantity}} {{qingredient.units}} of {{qingredient.ingredient.name}}</div>
+    <div class="ingredient">{{qingredient.quantity}} {{qingredient.unit}} of {{qingredient.ingredient.name}}</div>
     {%endfor%}
   </div>
 

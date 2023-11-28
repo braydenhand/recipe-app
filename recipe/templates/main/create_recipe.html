@@ -1,29 +1,4 @@
 {% extends 'base.html' %} {% block content %}
-<section class="filter">
-  <span>
-    <form class="settings" action="{{ url_for('main.index') }}" method="get">
-      #need to add additional filters that will award more functionality here
-      Sort by: <br /><select name="selection">
-        <option>Rating Highest to Lowest</option>
-        <option>Rating Lowest to Highest</option>
-        <option>Cook Time Fastest To Slowest</option>
-        <option>Cook Time Fastest to Slowest</option>
-        <option>Newest</option>
-        <option>Oldest</option></select
-      ><br />
-      <button type="submit" id="button">Go</button>
-    </form>
-  </span>
-  <div id="recipes">
-    {% for recipe in recipes %} {% include 'recipe_template.html' %}
-    {% endfor %}
-  </div>
-
-</section>
-
-
-
-
 <div class="newRecipe">
   Post new recipe:
   <form action="{{ url_for('main.create_recipe') }}" method="post">
