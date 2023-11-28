@@ -14,25 +14,44 @@
       {% endif %}
     </span>
     <span>
-      <div class="recipe header">{{recipe.name}}</div>
-      <div class="author">by {{ recipe.user.name }}</div>
+      <div class="recipe header">
+        <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
+      </div>
+      <div class="author">
+        <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
+          by {{ recipe.user.name }} </a>
+      </div>
       <div class="number-of-people">
         Feeds
         <span id="numberPeople">{{ recipe.number_people }}</span>
         {% if recipe.number_people == 1 %}
         {{ 'person' }}
-      {% else %}
+        {% else %}
         {{ 'people' }}
-      {% endif %}
+        {% endif %}
       </div>
       <div class="cook time">{{recipe.cooking_time}} minutes</div>
       <div class="date">Created {{recipe.timestamp}}</div>
-      <section class="rating">
-        {% block rating %}{% endblock %}
+      <section>
+        <div class="Total Rating">Overall Rating: {{recipe.average_rating}} / 5</div>
+        {% if current_user.is_authenticated: %}
+        <div class="User Rating">Your Rating: {{rating.value}} / 5</div>
+        {% endif %}
+
+        <div class="Change Rating">
+          Rating:
+          <input type="radio" id="star5" class="rating" value="5" onclick="submitRating(5)" /><label for="star5"></label>
+          <input type="radio" id="star4" class="rating" value="4" onclick="submitRating(4)" /><label for="star4"></label>
+          <input type="radio" id="star3" class="rating" value="3" onclick="submitRating(3)" /><label for="star3"></label>
+          <input type="radio" id="star2" class="rating" value="2" onclick="submitRating(2)" /><label for="star2"></label>
+          <input type="radio" id="star1" class="rating" value="1" onclick="submitRating(1)" /><label for="star1"></label>
+        </div>
+        
+        {% block content %}{% endblock %}
       </section>
     </span>
   </div>
-  
+
   <div class="ingredients">
     {%for qingredient in recipe.qingredients%}
     <div class="ingredient">{{qingredient.quantity}} {{qingredient.unit}} of {{qingredient.ingredient.name}}</div>

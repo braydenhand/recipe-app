@@ -12,18 +12,17 @@
   </div>
   <div class="display">
     <div id="recipes">
-      {% for recipe in recipes %} {% include 'recipe_template.html' %}
+      {% for recipe in recipes %} {% include 'recipe_preview_template.html' %}
       {% endfor %}
     </div>
 
-    //need to adjust for user specific ratings
     <div id="ratings">
       {% for rating in ratings %} recipe = {{rating.recipe}} {% include
-      'recipe_template.html' %} {% endfor %}
+      'recipe_preview_template.html' %} {% endfor %}
     </div>
     <div id="bookmarks">
       {% for bookmark in bookmarks %} recipe = {{bookmark.recipe}} {% include
-      'recipe_template.html' %} {% endfor %}
+      'recipe_preview_template.html' %} {% endfor %}
     </div>
   </div>
   <script>
@@ -70,14 +69,13 @@
   </div>
   <div class="display">
     <div id="recipes">
-      {% for recipe in recipes %} {% include 'recipe_template.html' %}
+      {% for recipe in recipes %} {% include 'recipe_preview_template.html' %}
       {% endfor %}
     </div>
-
-    //need to adjust for user specific ratings
+    
     <div id="ratings">
       {% for rating in ratings %} recipe = {{rating.recipe}} {% include
-      'recipe_template.html' %} {% endfor %}
+      'recipe_preview_template.html' %} {% endfor %}
     </div>
   </div>
   <script>

@@ -69,7 +69,7 @@ header {
 }
 
 /* Star Rating */
-.rating {
+.ChangeRating {
   display: inline-block;
   unicode-bidi: bidi-override;
   direction: rtl;
@@ -81,24 +81,26 @@ header {
 
 .rating label {
   position: relative;
-  width: 30px; /* Adjust the width based on your star image size */
-  height: 30px; /* Adjust the height based on your star image size */
+  width: 30px; 
+  height: 30px; 
   cursor: pointer;
-}
-
-.rating label:before {
+} 
+.rating {
   content: url("/static/star.png"); /* Path to your star image */
   display: block;
   width: 100%;
   height: 100%;
+  width: 30px; 
+  height: 30px; 
 }
+
 
 .rating label:hover:before,
 
 .rating label:hover ~ label:before,
 
 .rating input:checked ~ label:before {
-  opacity: 0.5; /* Adjust the opacity as needed */
+  opacity: 0.5;
 }
 
 /* Navigation Bar */
