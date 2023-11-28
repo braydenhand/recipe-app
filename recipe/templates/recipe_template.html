@@ -39,12 +39,14 @@
         {% endif %}
 
         <div class="Change Rating">
-          Rating:
-          <input type="radio" id="star5" class="rating" value="5" onclick="submitRating(5)" /><label for="star5"></label>
-          <input type="radio" id="star4" class="rating" value="4" onclick="submitRating(4)" /><label for="star4"></label>
-          <input type="radio" id="star3" class="rating" value="3" onclick="submitRating(3)" /><label for="star3"></label>
-          <input type="radio" id="star2" class="rating" value="2" onclick="submitRating(2)" /><label for="star2"></label>
-          <input type="radio" id="star1" class="rating" value="1" onclick="submitRating(1)" /><label for="star1"></label>
+          Rating NEED TO PROPERLY REDIRECT TO MAIN.RATE:
+          <form action="{{ url_for('main.recipe', recipe_id=recipe.id) }}" method="get" >
+          <button type="submit" id="star5" name="star" class="rating" value="5" >
+          <input type="radio" id="star4" name="star" class="rating" value="4" onclick="submitRating(4)" /><label for="star4"></label>
+          <input type="radio" id="star3" name="star" class="rating" value="3" onclick="submitRating(3)" /><label for="star3"></label>
+          <input type="radio" id="star2" name="star" class="rating" value="2" onclick="submitRating(2)" /><label for="star2"></label>
+          <input type="radio" id="star1" name="star" class="rating" value="1" onclick="submitRating(1)" /><label for="star1"></label>
+        </form>
         </div>
         
         {% block content %}{% endblock %}

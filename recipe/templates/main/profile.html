@@ -17,11 +17,11 @@
     </div>
 
     <div id="ratings">
-      {% for rating in ratings %} recipe = {{rating.recipe}} {% include
+      {% for recipe in ratings %}{% include
       'recipe_preview_template.html' %} {% endfor %}
     </div>
     <div id="bookmarks">
-      {% for bookmark in bookmarks %} recipe = {{bookmark.recipe}} {% include
+      {% for recipe in bookmarks %}{% include
       'recipe_preview_template.html' %} {% endfor %}
     </div>
   </div>
@@ -37,7 +37,7 @@
       
       document.getElementById("recipes").style.display = "block";
       document.getElementById("ratings").style.display = "none";
-      document.getElementById("bookomarks").style.display = "none";
+      document.getElementById("bookmarks").style.display = "none";
     }
 
     function populateRatings() {
@@ -48,7 +48,7 @@
 
       document.getElementById("recipes").style.display = "none";
       document.getElementById("ratings").style.display = "block";
-      document.getElementById("bookomarks").style.display = "none";
+      document.getElementById("bookmarks").style.display = "none";
     }
     function populateBookMarks() {
       for (let i = 1; i <= 3; i++) {
@@ -58,7 +58,7 @@
 
       document.getElementById("recipes").style.display = "none";
       document.getElementById("ratings").style.display = "none";
-      document.getElementById("bookomarks").style.display = "block";
+      document.getElementById("bookmarks").style.display = "block";
     }
   </script>
 
@@ -74,7 +74,7 @@
     </div>
     
     <div id="ratings">
-      {% for rating in ratings %} recipe = {{rating.recipe}} {% include
+      {% for recipe in ratings %}{% include
       'recipe_preview_template.html' %} {% endfor %}
     </div>
   </div>

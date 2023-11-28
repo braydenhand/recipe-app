@@ -18,9 +18,6 @@
 
 <script>
   function submitRating(rating) {
-    // Send a request to the Flask server with the selected rating
-
-    //TODO: wire to correct function
     fetch("/post/<int:recipe_id>/submit_rating", {
       method: "POST",
       headers: {
