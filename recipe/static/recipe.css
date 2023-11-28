@@ -233,3 +233,16 @@ img.avatar {
   from {transform: scale(0)} 
   to {transform: scale(1)}
 }
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-preview {
+  border: 1.5px solid #111;
+}
+
+.right-preview {
+  border: 1.5px solid #111;
+}
