@@ -4,22 +4,18 @@ from . import db, bcrypt, model
 
 bp = Blueprint("auth", __name__)
 
-
 @bp.route("/signup")
 def signup():
     return render_template("auth/signup.html")
-
 
 @bp.route("/signup", methods=["POST"])
 def signup_post():
     email = request.form.get("email")
     username = request.form.get("username")
     password = request.form.get("password")
-    # Check that passwords are equal
     if password != request.form.get("password_repeat"):
         flash("Sorry, passwords are different")
         return redirect(url_for("auth.signup"))
-    # Check if the email is already at the database
     query = db.select(model.User).where(model.User.email == email)
     user = db.session.execute(query).scalar_one_or_none()
     if user:

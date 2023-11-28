@@ -1,13 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  <header>
     <h2>Sign Up to Start Chronicling!</h2>
+  </header>
+  <body>
 
     {% with messages = get_flashed_messages() %}
     {% for message in messages %}
         <div class="notification">{{ message }}</div>
     {% endfor %}
     {% endwith %}
+
+    <button class="login-button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+    <div id="id01" class="modal">
+      <form class="modal-content animate" action="{{ url_for('auth.signup') }}" method="post">
+        <div class="container">
+          <label for="email"><b>Email</b></label>
+          <input type="text" placeholder="Enter Email" name="email" required class="login-input">
+
+          <label for="password"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" name="password" required class="login-input">
+              
+          <button type="submit" class="login-button">Login</button>
+          
+          <p style="color: red;">{{ error }}</p>
+        </div>
+      </form>
+    </div>
+    <script>
+      var modal = document.getElementById('id01');
+      window.onclick = function(event) {
+          if (event.target == modal) {
+              modal.style.display = "none";
+          }
+      }
+    </script>
+  </body>
+{% endblock %}
 
     <form action="{{ url_for('auth.signup') }}" method="post">
         <div><label>Email: <input type="email" name="email" required/></label></div>
