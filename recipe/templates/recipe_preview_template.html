@@ -7,9 +7,9 @@
       <span class="right-preview">
         <div class="recipe header">
           <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a></div>
-        <div class="author" >
+        <div class="author" >by
         <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
-        by {{ recipe.user.name }} </a>
+         {{ recipe.user.name }} </a>
       </div>
         <div class="number-of-people">
             Feeds 
@@ -20,7 +20,11 @@
               {{ 'people' }}
             {% endif %}
         </div>
-        <div class="cook time">{{recipe.cooking_time}} minutes</div>
+        <div class="cook time">{{recipe.cooking_time}} {% if recipe.cooking_time == 1 %}
+          {{ 'minute' }}
+          {% else %}
+          {{ 'minutes' }}
+          {% endif %}</div>
         <div class="prerating">
           Overall Rating: {{recipe.average_rating}} / 5
         </div>

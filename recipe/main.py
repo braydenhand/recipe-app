@@ -77,11 +77,22 @@ def recipe(recipe_id):
    # if current_user.is_authenticated():
    #     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
    #     rating = db.session.execute(query).scalars().first()
+   # query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
+   #     bookmark = db.session.execute(query).scalars().first()
+   # else:
+   #     bookmark = None
+
+   # if current_user.is_authenticated():
+   #     
    # else:
    #     rating = None
+
+    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
+    bookmark = db.session.execute(query).scalars().first()
+
     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
     rating = db.session.execute(query).scalars().first()
-    return render_template("main/recipe.html", recipe=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, rating=rating)
+    return render_template("main/recipe.html", recipe=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, rating=rating, bookmark=bookmark)
 
 # Will need recipe, steps, ingredients, and photo
 @bp.route("/create_recipe", methods=["POST"])
@@ -141,7 +152,6 @@ def create_recipe_get():
 @bp.route("/rate/<int:recipe_id>/<int:value>", methods=["POST","GET"])
 @flask_login.login_required
 def rate(recipe_id, value):
-   # value = request.form.get("star")
     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
     rating = db.session.execute(query).scalars().first()
     if not rating:
