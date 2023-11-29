@@ -138,11 +138,11 @@ def create_recipe():
 def create_recipe_get():
     return render_template("main/create_recipe.html")
 
-@bp.route("/rate/<int:recipe_id>", methods=["POST","GET"])
+@bp.route("/rate/<int:recipe_id>/<int:value>", methods=["POST","GET"])
 @flask_login.login_required
-def new_review(recipe_id):
-    value = request.form.get("star")
-    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.user_id)
+def rate(recipe_id, value):
+   # value = request.form.get("star")
+    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
     rating = db.session.execute(query).scalars().first()
     if not rating:
         rating = model.Rating(

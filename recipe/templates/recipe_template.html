@@ -38,17 +38,26 @@
         <div class="User Rating">Your Rating: {{rating.value}} / 5</div>
         {% endif %}
 
-        <div class="Change Rating">
-          Rating NEED TO PROPERLY REDIRECT TO MAIN.RATE:
-          <form action="{{ url_for('main.recipe', recipe_id=recipe.id) }}" method="get" >
-          <button type="submit" id="star5" name="star" class="rating" value="5" >
-          <input type="radio" id="star4" name="star" class="rating" value="4" onclick="submitRating(4)" /><label for="star4"></label>
-          <input type="radio" id="star3" name="star" class="rating" value="3" onclick="submitRating(3)" /><label for="star3"></label>
-          <input type="radio" id="star2" name="star" class="rating" value="2" onclick="submitRating(2)" /><label for="star2"></label>
-          <input type="radio" id="star1" name="star" class="rating" value="1" onclick="submitRating(1)" /><label for="star1"></label>
-        </form>
+        <div class="flex-container">
+
+          <form action="{{ url_for('main.rate', recipe_id=recipe.id, value = 1) }}" method="post">
+            <button type="submit" id="star1" name="star" class="rating">1</button>
+          </form>
+          <form action="{{ url_for('main.rate', recipe_id=recipe.id, value = 2) }}" method="post">
+            <button type="submit" id="star2" name="star" class="rating">2</button>
+          </form>
+          <form action="{{ url_for('main.rate', recipe_id=recipe.id, value = 3) }}" method="post">
+            <button type="submit" id="star3" name="star" class="rating">3</button>
+          </form>
+          <form action="{{ url_for('main.rate', recipe_id=recipe.id, value = 4) }}" method="post">
+            <button type="submit" id="star4" name="star" class="rating">4</button>
+          </form>
+          <form action="{{ url_for('main.rate', recipe_id=recipe.id, value = 5) }}" method="post">
+            <button type="submit" id="star5" name="star" class="rating">5</button>
+          </form>
+
         </div>
-        
+
         {% block content %}{% endblock %}
       </section>
     </span>
@@ -67,19 +76,19 @@
   </div>
 
   {% if recipe.photos %}
-    <div>
-        {% for photo in recipe.photos %}
-            <img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
-        {% endfor %}
-    </div>
+  <div>
+    {% for photo in recipe.photos %}
+    <img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
+    {% endfor %}
+  </div>
   {% endif %}
 
   <div>
-      <form action="{{ url_for('main.upload_photo', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">
-          <input type="file" name="photo" accept="image/jpeg,image/png" required>
-          <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
-          <br>
-          <input type="submit" value="Upload Photo">
-      </form>
+    <form action="{{ url_for('main.upload_photo', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">
+      <input type="file" name="photo" accept="image/jpeg,image/png" required>
+      <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
+      <br>
+      <input type="submit" value="Upload Photo">
+    </form>
   </div>
 </div>
