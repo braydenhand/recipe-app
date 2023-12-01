@@ -1,33 +1,47 @@
 <div class="recipe_preview">
-    <div class="flex-container">
-      <span class="left-preview">
-       Photo:
-        <a><img /></a>
-      </span>
-      <span class="right-preview">
-        <div class="recipe header">
-          <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a></div>
-        <div class="author" >by
-        <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
-         {{ recipe.user.name }} </a>
+  <div class="flex-container">
+    <span class="left-preview">
+
+      {% if recipe.photos %}
+      <div>
+        {% set photo = recipe.photos[0] %}
+        <img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}"
+          alt="photo">
       </div>
-        <div class="number-of-people">
-            Feeds 
-            <span id="numberPeople">{{ recipe.number_people }}</span> 
-            {% if recipe.number_people == 1 %}
-              {{ 'person' }}
-            {% else %}
-              {{ 'people' }}
-            {% endif %}
-        </div>
-        <div class="cook time">{{recipe.cooking_time}} {% if recipe.cooking_time == 1 %}
-          {{ 'minute' }}
-          {% else %}
-          {{ 'minutes' }}
-          {% endif %}</div>
-        <div class="prerating">
-          Overall Rating: {{recipe.average_rating}} / 5
-        </div>
-      </span>
-    </div>
+      {% else %} 
+      <div>
+        {% set photo = recipe.photos[0] %}
+        <img src="{{ url_for('static', filename='star') }}"
+          alt="No photo available">
+      </div>
+      {% endif %}
+
+    </span>
+    <span class="right-preview">
+      <div class="recipe header">
+        <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
+      </div>
+      <div class="author">by
+        <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
+          {{ recipe.user.name }} </a>
+      </div>
+      <div class="number-of-people">
+        Feeds
+        <span id="numberPeople">{{ recipe.number_people }}</span>
+        {% if recipe.number_people == 1 %}
+        {{ 'person' }}
+        {% else %}
+        {{ 'people' }}
+        {% endif %}
+      </div>
+      <div class="cook time">{{recipe.cooking_time}} {% if recipe.cooking_time == 1 %}
+        {{ 'minute' }}
+        {% else %}
+        {{ 'minutes' }}
+        {% endif %}</div>
+      <div class="prerating">
+        Overall Rating: {{recipe.average_rating}} / 5
+      </div>
+    </span>
+  </div>
 </div>

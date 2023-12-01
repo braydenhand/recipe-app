@@ -1,9 +1,7 @@
 <div class="recipe">
   <div>
-    <span class="photos">
-      <a><img /></a>
+    
       {% if current_user.is_authenticated: %}
-      Placeholder for a cleaner presentation
       <form action="{{ url_for('main.bookmark', recipe_id=recipe.id) }}" method="post">
         {% if bookmark %}
         <button type="submit" id="button">Remove bookmark</button>
@@ -12,8 +10,9 @@
         {% endif %}
       </form>
       {% endif %}
-    </span>
+    
     <span>
+      
       <div class="recipe header">
         <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
       </div>

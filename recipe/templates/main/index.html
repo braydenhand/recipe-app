@@ -3,147 +3,24 @@
 <section class="filter">
   <span>
     <form class="settings" action="{{ url_for('main.index') }}" method="get">
-      #need to add additional filters that will award more functionality here
-      Sort by: <br /><select name="selection">
-        <option>Rating Highest to Lowest</option>
-        <option>Rating Lowest to Highest</option>
-        <option>Cook Time Fastest To Slowest</option>
-        <option>Cook Time Fastest to Slowest</option>
-        <option>Newest</option>
-        <option>Oldest</option></select
-      ><br />
-      <button type="submit" id="button">Go</button>
+      <div class="flex-container">
+        Sort by: <br /><select name="selection">
+          <option value="" selected disabled hidden>Choose here</option>
+          <option>Rating Highest to Lowest</option>
+          <option>Rating Lowest to Highest</option>
+          <option>Cook Time Fastest To Slowest</option>
+          <option>Cook Time Fastest to Slowest</option>
+          <option>Newest</option>
+          <option>Oldest</option>
+        </select><br />
+        <button type="submit" id="button">Go</button>
+      </div>
     </form>
+    <br>
   </span>
   <div id="recipes">
     {% for recipe in recipes %} {% include 'recipe_preview_template.html' %}
     {% endfor %}
   </div>
-
 </section>
-
-<div class="newRecipe">
-  Post new recipe:
-  <form action="{{ url_for('main.create_recipe') }}" method="post">
-    <span>What do want to cook?</span><br />
-    Recipe Name:<input type="text" id="name" name="name" /><br />
-    Description:<input type="text" id="description" name="description" /><br />
-    Number of People:<input
-      type="number"
-      id="number_people"
-      name="number_people"
-    /><br />
-    Cooking Time (in minutes):<input
-      type="number"
-      id="cooking_time"
-      name="cooking_time"
-    /><br />
-
-    <div id="ingredientPopup">
-      <input
-        type="hidden"
-        id="ingredientCount"
-        name="ingredientCount"
-        value="1"
-      />
-      <h2 id="ingredientHeader">Add Ingredients:</h2>
-    </div>
-    <button onclick="addIngredient()" type="button">Add Ingredient</button>
-    <div name="steps">
-      <input type="hidden" id="stepCount" name="stepCount" value="1" />
-      <h2 id="stepHeader">Add Steps:</h2>
-      <div id="formSteps">
-        <label for="step1">Step 1:</label>
-        <input type="text" id="stepCount1" name="stepCount1" required />
-      </div>
-    </div>
-    <button type="button" onclick="addStep()">Add Step</button>
-    <input type="submit" value="Submit" />
-  </form>
-</div>
-<script>
-  let ingredientCount = 0;
-
-  function addIngredient() {
-    ingredientCount++;
-    const ingredientDiv = document.createElement("div");
-    ingredientDiv.innerHTML = `
-    <label for="units${ingredientCount}">Quantity:</label>
-        <input type="number" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
-        <label "unit${ingredientCount}">Unit:</label>
-        <input type="text" id="unit${ingredientCount}" name="unit${ingredientCount}" required />
-        <label for="ingredientName${ingredientCount}">Ingredient:</label>
-        <input
-          type="text"
-          id="ingredientName${ingredientCount}"
-          name="ingredientName${ingredientCount}"
-          list="ingredients"
-          required
-        /><br />
-        <datalist id="ingredients">
-          <option value="basil"></option>
-          <option value="beef"></option>
-          <option value="bell-pepper"></option>
-          <option value="broccoli"></option>
-          <option value="butter"></option>
-          <option value="carrot"></option>
-          <option value="cheese"></option>
-          <option value="chicken"></option>
-          <option value="chili-powder"></option>
-          <option value="cinnamon"></option>
-          <option value="cucumber"></option>
-          <option value="cumin"></option>
-          <option value="egg"></option>
-          <option value="flour"></option>
-          <option value="garlic"></option>
-          <option value="garlic-powder"></option>
-          <option value="ginger"></option>
-          <option value="honey"></option>
-          <option value="ketchup"></option>
-          <option value="lemon"></option>
-          <option value="lettuce"></option>
-          <option value="lime"></option>
-          <option value="mayonnaise"></option>
-          <option value="milk"></option>
-          <option value="mustard"></option>
-          <option value="nutmeg"></option>
-          <option value="olive-oil"></option>
-          <option value="onion"></option>
-          <option value="onion-powder"></option>
-          <option value="paprika"></option>
-          <option value="pasta"></option>
-          <option value="pepper"></option>
-          <option value="pork"></option>
-          <option value="potato"></option>
-          <option value="rice"></option>
-          <option value="rosemary"></option>
-          <option value="salt"></option>
-          <option value="soy-sauce"></option>
-          <option value="spinach"></option>
-          <option value="sugar"></option>
-          <option value="thyme"></option>
-          <option value="tomato"></option>
-          <option value="vanilla-extract"></option>
-          <option value="vinegar"></option>
-          <option value="yogurt"></option>
-        </datalist>
-        `;
-    document.getElementById("ingredientPopup").appendChild(ingredientDiv);
-    document.getElementById("ingredientCount").value = ingredientCount;
-  }
-  addIngredient();
-
-  let stepCount = 1;
-  function addStep() {
-    stepCount++;
-    const stepDiv = document.createElement("div");
-    stepDiv.innerHTML = `
-            <label for="step${stepCount}">Step ${stepCount}:</label>
-            <input type="text" id="step${stepCount}" name="step${stepCount}" required>
-        `;
-    document.getElementById("formSteps").appendChild(stepDiv);
-    document.getElementById("stepCount").value = stepCount;
-  }
-</script>
-
 {% endblock %}
