@@ -1,40 +1,29 @@
 {% extends 'base.html' %} {% block content %}
 <div class="newRecipe">
-  Post new recipe:
+  <h2>Create a new recipe:</h2>
+  
   <form action="{{ url_for('main.create_recipe') }}" method="post">
-    <span>What do want to cook?</span><br />
-    Recipe Name:<input type="text" id="name" name="name" /><br />
-    Description:<input type="text" id="description" name="description" /><br />
-    Number of People:<input
-      type="number"
-      id="number_people"
-      name="number_people"
-    /><br />
-    Cooking Time (in minutes):<input
-      type="number"
-      id="cooking_time"
-      name="cooking_time"
-    /><br />
+    Recipe Name:<input type="text" id="name" name="name" required/><br />
+    Description:<input type="text" id="description" name="description" required/><br />
+    
+    Number of People:<input type="number" id="number_people" name="number_people" required/><br />
+    Cooking Time (in minutes):<input type="number" id="cooking_time" name="cooking_time" required/><br />
 
     <div id="ingredientPopup">
-      <input
-        type="hidden"
-        id="ingredientCount"
-        name="ingredientCount"
-        value="1"
-      />
-      <h2 id="ingredientHeader">Add Ingredients:</h2>
+      <input type="hidden" id="ingredientCount" name="ingredientCount" value="1" />
+      <h3 id="ingredientHeader">Add Ingredients:</h3>
     </div>
     <button onclick="addIngredient()" type="button">Add Ingredient</button>
     <div name="steps">
       <input type="hidden" id="stepCount" name="stepCount" value="1" />
-      <h2 id="stepHeader">Add Steps:</h2>
+      <h3 id="stepHeader">Add Steps:</h3>
       <div id="formSteps">
         <label for="step1">Step 1:</label>
         <input type="text" class="step" id="stepCount1" name="stepCount1" required />
       </div>
     </div>
     <button type="button" onclick="addStep()">Add Step</button>
+    <br>
     <input type="submit" value="Submit" />
   </form>
 </div>
@@ -48,7 +37,32 @@
     <label for="units${ingredientCount}">Quantity:</label>
         <input type="number" class="quantity" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
         <label "unit${ingredientCount}">Unit:</label>
-        <input type="text" class="unit" id="unit${ingredientCount}" name="unit${ingredientCount}" required />
+        <input type="text" 
+          class="unit" 
+          id="unit${ingredientCount}" 
+          name="unit${ingredientCount}"
+          list="unitlist" 
+          required />
+          <datalist id="unitlist">
+            <option value="Teaspoon (tsp)"></option>
+    <option value="Tablespoon (tbsp)"></option>
+    <option value="Cup"></option>
+    <option value="Fluid Ounce (fl oz)"></option>
+    <option value="Ounce (oz)"></option>
+    <option value="Pound (lb)"></option>
+    <option value="Gram (g)"></option>
+    <option value="Kilogram (kg)"></option>
+    <option value="Milliliter (ml)"></option>
+    <option value="Liter (L)"></option>
+    <option value="Quart (qt)"></option>
+    <option value="Pint (pt)"></option>
+    <option value="Gallon (gal)"></option>
+    <option value="Inch (in)"></option>
+    <option value="Centimeter (cm)"></option>
+    </datalist>
+
+
+          
         <label for="ingredientName${ingredientCount}">Ingredient:</label>
         <input
           type="text"

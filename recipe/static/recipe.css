@@ -345,6 +345,7 @@ label {
   box-sizing: border-box;
 }
 
+
 .step {
   margin-bottom: 10px;
   padding: 8px;
@@ -367,15 +368,17 @@ label {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 15%; /* Set a specific width for quantity and unit */
+  width: 24.2%; /* Set a specific width for quantity and unit */
   box-sizing: border-box;
 }
 .ingredientName {
     margin-bottom: 10px;
-    padding: 8px;
+    padding-left: 8px;
+    padding-top: 8px;
+    padding-bottom: 8px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    width: 40%; /* Set a specific width for quantity and unit */
+    width: 35%; /* Set a specific width for quantity and unit */
     box-sizing: border-box;
 }
 
