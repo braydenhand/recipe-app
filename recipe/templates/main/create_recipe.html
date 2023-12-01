@@ -7,7 +7,7 @@
     Description:<input type="text" id="description" name="description" required/><br />
     
     Number of People:<input type="number" id="number_people" name="number_people" required/><br />
-    Cooking Time (in minutes):<input type="number" id="cooking_time" name="cooking_time" required/><br />
+    Cooking Time (in minutes):<input type="number" id="cooking_time" name="cooking_time" required/>
 
     <div id="ingredientPopup">
       <input type="hidden" id="ingredientCount" name="ingredientCount" value="1" />
@@ -18,7 +18,7 @@
       <input type="hidden" id="stepCount" name="stepCount" value="1" />
       <h3 id="stepHeader">Add Steps:</h3>
       <div id="formSteps">
-        <label for="step1">Step 1:</label>
+        <label for="step1">Step 1:</label><br>
         <input type="text" class="step" id="stepCount1" name="stepCount1" required />
       </div>
     </div>
@@ -130,7 +130,7 @@
     stepCount++;
     const stepDiv = document.createElement("div");
     stepDiv.innerHTML = `
-            <label for="step${stepCount}">Step ${stepCount}:</label>
+            <label for="step${stepCount}">Step ${stepCount}:</label><br>
             <input type="text" class="step" id="step${stepCount}" name="step${stepCount}" required>
         `;
     document.getElementById("formSteps").appendChild(stepDiv);

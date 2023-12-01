@@ -4,7 +4,7 @@
   <span>
     <form class="settings" action="{{ url_for('main.index') }}" method="get">
       <div class="flex-container">
-        Sort by: <br /><select name="selection">
+        Sort by: <select name="filter">
           <option value="" selected disabled hidden>Choose here</option>
           <option>Rating Highest to Lowest</option>
           <option>Rating Lowest to Highest</option>
@@ -12,7 +12,7 @@
           <option>Cook Time Fastest to Slowest</option>
           <option>Newest</option>
           <option>Oldest</option>
-        </select><br />
+        </select>
         <button type="submit" id="button">Go</button>
       </div>
     </form>

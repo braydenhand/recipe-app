@@ -43,9 +43,7 @@ header {
   cursor: pointer;
 }
 
-.submit:active {
-  background-color: white;
-}
+
 
 .userProfile {
   margin: auto;
@@ -351,7 +349,7 @@ label {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 90%;
+  width: 100%;
   box-sizing: border-box;
 }
 
@@ -394,4 +392,8 @@ button {
 
 button:hover {
   background-color: #008152;
+}
+
+button:active {
+  background-color: 008152;
 }
