@@ -25,20 +25,12 @@
         </ul>
         <a href="{{ url_for('main.index') }}">Culinary Chronicles Hub</a>
         {% if current_user.is_authenticated: %}
-          <div><span> Welcome back {{current_user.name}}!</span></div>
-          <span class="banner">
-              <a href="{{ url_for('main.profile', user_id=current_user.id) }}"><img
-                class="image"
-                id="myProfile"
-                src="{{ url_for('static', filename='profile.png') }}"/></a>
-          </span>
+          <div><span> Welcome, {{current_user.name}}!</span></div>
         {% endif %}
-
       </h1>
     </header>
     <section class="content">
       {% block content %}{% endblock %}
     </section>
- 
   </body>
 </html>

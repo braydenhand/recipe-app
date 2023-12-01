@@ -2,17 +2,12 @@
 
 {% block content %}
   <header>
-    <h2>Login to the Hub</h2>
+    <h2>Login to Continue Creating Recipies!</h2>
   </header>
   <body>
     <button class="login-button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
     <div id="id01" class="modal">
       <form class="modal-content animate" action="{{ url_for('auth.login') }}" method="post">
-        <div class="imgcontainer">
-          <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-          <img src="static/profile.png" alt="Avatar" class="avatar">
-        </div>
-
         <div class="container">
           <label for="email"><b>Email</b></label>
           <input type="text" placeholder="Enter Email" name="email" required class="login-input">

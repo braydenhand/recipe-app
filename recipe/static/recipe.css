@@ -163,21 +163,8 @@ li a:hover:not(.active) {
   opacity: 0.8;
 }
 
-/* Center image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
-
-/* Resize profile picture */
-img.avatar {
-  width: 10%;
-  border-radius: 50%;
-}
-
 .container {
-  padding: 16px;
+  padding: 25px;
 }
 
 /* Pop-Up background */
@@ -199,7 +186,7 @@ img.avatar {
 .modal-content {
   background-color: #fefefe;
   margin: 5% auto 15% auto;
-  border: 1px solid #888;
+  border: 3px solid #c6c6c6;
   width: 60%;
 }
 
