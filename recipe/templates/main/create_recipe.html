@@ -31,7 +31,7 @@
       <h2 id="stepHeader">Add Steps:</h2>
       <div id="formSteps">
         <label for="step1">Step 1:</label>
-        <input type="text" id="stepCount1" name="stepCount1" required />
+        <input type="text" class="step" id="stepCount1" name="stepCount1" required />
       </div>
     </div>
     <button type="button" onclick="addStep()">Add Step</button>
@@ -46,12 +46,13 @@
     const ingredientDiv = document.createElement("div");
     ingredientDiv.innerHTML = `
     <label for="units${ingredientCount}">Quantity:</label>
-        <input type="number" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
+        <input type="number" class="quantity" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
         <label "unit${ingredientCount}">Unit:</label>
-        <input type="text" id="unit${ingredientCount}" name="unit${ingredientCount}" required />
+        <input type="text" class="unit" id="unit${ingredientCount}" name="unit${ingredientCount}" required />
         <label for="ingredientName${ingredientCount}">Ingredient:</label>
         <input
           type="text"
+          class="ingredientName"
           id="ingredientName${ingredientCount}"
           name="ingredientName${ingredientCount}"
           list="ingredients"
@@ -116,7 +117,7 @@
     const stepDiv = document.createElement("div");
     stepDiv.innerHTML = `
             <label for="step${stepCount}">Step ${stepCount}:</label>
-            <input type="text" id="step${stepCount}" name="step${stepCount}" required>
+            <input type="text" class="step" id="step${stepCount}" name="step${stepCount}" required>
         `;
     document.getElementById("formSteps").appendChild(stepDiv);
     document.getElementById("stepCount").value = stepCount;
