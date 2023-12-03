@@ -2,7 +2,7 @@
 
 <div class="userProfile">
   <img id="userIcon" src="{{ url_for('static', filename='profile.png') }}" />
-  <h1>Username: {{user.name}}</h1>
+  <h1>{{user.name}}</h1>
   <h4>Created on: {{user.timestamp}}</h4>
   {% if user.id == current_user.id %}
   <div class="toolbar">

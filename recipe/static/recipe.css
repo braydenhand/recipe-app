@@ -133,6 +133,10 @@ li a:hover:not(.active) {
 }
 
 .active {
+  background-color: #008152;
+}
+
+.activetab {
   background-color: #04AA6D;
 }
 
@@ -395,5 +399,5 @@ button:hover {
 }
 
 button:active {
-  background-color: 008152;
+  background-color: #008152;
 }
