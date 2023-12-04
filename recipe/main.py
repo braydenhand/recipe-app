@@ -6,15 +6,15 @@ bp = Blueprint("main", __name__)
 
 @bp.route("/", methods=["GET"])
 def index():
-    choice = request.args.get("selection")
+    choice = request.args.get("filter")
     
-    if choice == 'Rating Highest To Lowest':
+    if choice == 'Rating Highest to Lowest':
         order_by = model.Recipe.average_rating.desc()
-    elif choice == 'Rating Lowest To Highest':
+    elif choice == 'Rating Lowest to Highest':
         order_by = model.Recipe.average_rating
-    elif choice == 'Cook Time Fastest To Slowest':
+    elif choice == 'Cook Time Fastest to Slowest':
         order_by = model.Recipe.cooking_time
-    elif choice == 'Cook Time Slowest To Fastest':
+    elif choice == 'Cook Time Slowest to Fastest':
         order_by = model.Recipe.cooking_time.desc()
     elif choice == 'Newest':
         order_by = model.Recipe.timestamp.desc()
