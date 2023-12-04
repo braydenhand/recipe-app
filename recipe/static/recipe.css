@@ -237,6 +237,24 @@ li a:hover:not(.active) {
   display: flex;
 }
 
+#formdiv{
+  justify-content: space-between;
+  
+  
+} 
+#cooktime{
+  text-align: left;
+  flex: 50%;
+}
+#numpeople{
+  text-align: left;
+  flex: 50%;
+}
+
+
+
+
+
 .left-preview {
   flex: 40%; /* Adjust the width of the left side */
 }
@@ -336,15 +354,33 @@ label {
 }
 
 #name,
-#description,
-#number_people,
-#cooking_time{
+#description{
   margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 100%;
   box-sizing: border-box;
+}
+
+#number_people{
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 40%;
+  box-sizing: border-box;
+  text-align: left;
+}
+
+#cooking_time{
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 50%;
+  box-sizing: border-box;
+  text-align: left;
 }
 
 

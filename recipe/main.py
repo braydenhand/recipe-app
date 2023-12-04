@@ -113,7 +113,7 @@ def create_recipe():
     
     for i in range(stepCount):
         i += 1
-        name = "stepCount" + str(i)
+        name = "step" + str(i)
         step = model.Step(
             text = request.form.get(name),
             position = i,
