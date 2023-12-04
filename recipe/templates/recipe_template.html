@@ -15,11 +15,11 @@
       
       <div class="recipe header">
         <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
-      </div>
-      <div class="author">by
+        by
         <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
            {{ recipe.user.name }} </a>
       </div>
+      
       <div class="number-of-people">
         Feeds
         <span id="numberPeople">{{ recipe.number_people }}</span>
@@ -66,16 +66,18 @@
       </section>
     </span>
   </div>
-
+  <br>
   <div class="ingredients">
+    <h3 id="ingredientHeader">Ingredients:</h3>
     {%for qingredient in recipe.qingredients%}
     <div class="ingredient">{{qingredient.quantity}} {{qingredient.unit}} of {{qingredient.ingredient.name}}</div>
     {%endfor%}
   </div>
-
+  
   <div class="steps">
+    <h3 id="stepHeader">Steps:</h3>
     {%for step in recipe.steps%}
-    <div class="step">{{step.postion}}. {{step.text}}</div>
+    <div class="step">{{step.position}}. {{step.text}}</div>
     {%endfor%}
   </div>
 
