@@ -28,7 +28,7 @@
     </div>
     <button type="button" onclick="addStep()">Add Step</button>
     <br>
-    <input type="submit" value="Submit" />
+    <input type="submit" value="Submit Recipe" />
   </form>
 </div>
 <script>
@@ -142,8 +142,7 @@
     const stepDiv = document.createElement("div");
     stepDiv.innerHTML = `
             <label for="step${stepCount}">Step ${stepCount}:</label><br>
-            <textarea type="text" class="step" id="step${stepCount}" name="step${stepCount}" oninput="autoExpand(this)" required>
-        `;
+            <textarea type="text" class="step" id="step${stepCount}" name="step${stepCount}" oninput="autoExpand(this)" required>`;
     document.getElementById("formSteps").appendChild(stepDiv);
     document.getElementById("stepCount").value = stepCount;
   }
