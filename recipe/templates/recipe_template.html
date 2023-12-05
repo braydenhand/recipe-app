@@ -84,7 +84,7 @@
   {% if recipe.photos %}
   <div>
     {% for photo in recipe.photos %}
-    <img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
+    <img class=recipe-image src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
     {% endfor %}
   </div>
   {% endif %}

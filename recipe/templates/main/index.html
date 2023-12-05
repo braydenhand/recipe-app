@@ -7,6 +7,8 @@
       <div>
         {% if current_user.is_authenticated: %}
         <div class="app-mainpage-welcome"> Hey, {{current_user.name}}!</div>
+       {% else %}
+       <div class="app-mainpage-welcome"> <a href="{{ url_for('auth.login') }}">Login</a></div>
       {% endif %}
         <p class="app-description-header">Start your cooking journey with us today.
         </p>
@@ -17,7 +19,9 @@
 
   </div>
 </section>
+
 <section class="filter">
+  <h2>Latest Recipies:</h2>
   <span>
     <form class="settings" action="{{ url_for('main.index') }}" method="get">
       <div class="flex-container">

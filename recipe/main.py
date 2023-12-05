@@ -74,24 +74,20 @@ def recipe(recipe_id):
     photos = db.session.execute(query).scalars().all()
 
     # TODO fix flask login to check authentication before pulling rating
-   # if current_user.is_authenticated():
-   #     query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
-   #     rating = db.session.execute(query).scalars().first()
-   # query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
-   #     bookmark = db.session.execute(query).scalars().first()
-   # else:
-   #     bookmark = None
+    if flask_login.current_user.is_authenticated:
+       query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
+       rating = db.session.execute(query).scalars().first()
+       query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
+       bookmark = db.session.execute(query).scalars().first()
+    else:
+       bookmark = None
+       rating = None
 
-   # if current_user.is_authenticated():
-   #     
-   # else:
-   #     rating = None
+    # query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
+    # bookmark = db.session.execute(query).scalars().first()
 
-    query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
-    bookmark = db.session.execute(query).scalars().first()
-
-    query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
-    rating = db.session.execute(query).scalars().first()
+    # query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
+    # rating = db.session.execute(query).scalars().first()
     return render_template("main/recipe.html", recipe=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, rating=rating, bookmark=bookmark)
 
 # Will need recipe, steps, ingredients, and photo
