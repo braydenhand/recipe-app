@@ -11,7 +11,7 @@
     </form>
     {% endif %}
 
-    <div class="recipe header">
+    <div class="recipe header" id="recipehead">
       <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
       by
       <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
@@ -19,6 +19,17 @@
     </div>
 
     <span class="flex-container2">
+      <span>
+        {% if recipe.photos %}
+        <div>
+          {% for photo in recipe.photos %}
+          <img class=recipe-image
+            src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </span>
       <span class="details">
         
 
@@ -70,17 +81,7 @@
         </div>
         {% endif %}
       </span>
-      <span>
-        {% if recipe.photos %}
-        <div>
-          {% for photo in recipe.photos %}
-          <img class=recipe-image
-            src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
-          {% endfor %}
-        </div>
-        {% endif %}
-
-      </span>
+      
     </span>
   </div>
   <br>
@@ -99,13 +100,14 @@
   </div>
 
 
-
+  <h3 id="photoHeader">Add a Photo:</h3>
   <div>
     <form action="{{ url_for('main.upload_photo', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">
+      <div>
       <input type="file" name="photo" accept="image/jpeg,image/png" required>
+      <input type="submit" id="photosubmit" value="Upload Photo">
       <input type="hidden" name="recipe_id" value="{{ recipe.id }}">
-      <br>
-      <input type="submit" value="Upload Photo">
+    </div>
     </form>
   </div>
 </div>

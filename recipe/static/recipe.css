@@ -99,6 +99,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-right: 20%;
 }
 .flex-container3 {
   display: flex;
@@ -311,7 +312,9 @@ img {
   font-size: 1.2em;
   font-weight: bold;
 }
-
+#recipehead {
+  text-align: center;
+} 
 
 
 
