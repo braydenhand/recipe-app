@@ -1,47 +1,53 @@
 <div class="recipe">
   <div>
-    
-      {% if current_user.is_authenticated: %}
-      <form action="{{ url_for('main.bookmark', recipe_id=recipe.id) }}" method="post">
-        {% if bookmark %}
-        <button type="submit" id="button">Remove bookmark</button>
-        {% else %}
-        <button type="submit" id="button">Bookmark</button>
-        {% endif %}
-      </form>
+
+    {% if current_user.is_authenticated: %}
+    <form action="{{ url_for('main.bookmark', recipe_id=recipe.id) }}" method="post">
+      {% if bookmark %}
+      <button type="submit" id="button">Remove bookmark</button>
+      {% else %}
+      <button type="submit" id="button">Bookmark</button>
       {% endif %}
-    
-    <span>
-      
-      <div class="recipe header">
-        <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
-        by
-        <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
-           {{ recipe.user.name }} </a>
-      </div>
-      
-      <div class="number-of-people">
-        Feeds
-        <span id="numberPeople">{{ recipe.number_people }}</span>
-        {% if recipe.number_people == 1 %}
-        {{ 'person' }}
-        {% else %}
-        {{ 'people' }}
-        {% endif %}
-      </div>
-      <div class="cook time">{{recipe.cooking_time}} 
-        {% if recipe.cooking_time == 1 %}
-        {{ 'minute' }}
-        {% else %}
-        {{ 'minutes' }}
-        {% endif %}
-      </div>
-      <div class="date">Created {{recipe.timestamp}}</div>
-      <section>
-        <div class="Total Rating">Overall Rating: {{recipe.average_rating}} / 5</div>
-        {% if current_user.is_authenticated: %}
-        <div class="User Rating">Your Rating: {{rating.value}} / 5</div>
+    </form>
+    {% endif %}
+
+    <div class="recipe header">
+      <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
+      by
+      <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
+        {{ recipe.user.name }} </a>
+    </div>
+
+    <span class="flex-container2">
+      <span class="details">
         
+
+        <div class="number-of-people">
+          Feeds: 
+          <span id="numberPeople">{{ recipe.number_people }}</span>
+          {% if recipe.number_people == 1 %}
+          {{ 'person' }}
+          {% else %}
+          {{ 'people' }}
+          {% endif %}
+        </div>
+        <div class="cook time">Cook Time: {{recipe.cooking_time}}
+          {% if recipe.cooking_time == 1 %}
+          {{ 'minute' }}
+          {% else %}
+          {{ 'minutes' }}
+          {% endif %}
+        </div>
+        <div class="date">Created: {{recipe.timestamp}}</div>
+        <div class="totalrating"><span>Overall Rating: {{recipe.average_rating}} / 5</span></div>
+        {% if current_user.is_authenticated: %}
+       {% if rating %} 
+        <div class="userrating">Your Rating: {{rating.value}} / 5</div>
+        <div class="userrating">Change your Rating:</div>
+       {% else %}
+       <div class="userrating">Add a Rating:</div>
+        
+       {% endif %} 
 
         <div class="flex-container">
 
@@ -60,10 +66,21 @@
           <form action="{{ url_for('main.rate', recipe_id=recipe.id, value = 5) }}" method="post">
             <button type="submit" id="star5" name="star" class="rating">5</button>
           </form>
-          
+
         </div>
         {% endif %}
-      </section>
+      </span>
+      <span>
+        {% if recipe.photos %}
+        <div>
+          {% for photo in recipe.photos %}
+          <img class=recipe-image
+            src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
+          {% endfor %}
+        </div>
+        {% endif %}
+
+      </span>
     </span>
   </div>
   <br>
@@ -73,7 +90,7 @@
     <div class="ingredient">{{qingredient.quantity}} {{qingredient.unit}} of {{qingredient.ingredient.name}}</div>
     {%endfor%}
   </div>
-  
+
   <div class="steps">
     <h3 id="stepHeader">Steps:</h3>
     {%for step in recipe.steps%}
@@ -81,13 +98,7 @@
     {%endfor%}
   </div>
 
-  {% if recipe.photos %}
-  <div>
-    {% for photo in recipe.photos %}
-    <img class=recipe-image src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
-    {% endfor %}
-  </div>
-  {% endif %}
+
 
   <div>
     <form action="{{ url_for('main.upload_photo', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">

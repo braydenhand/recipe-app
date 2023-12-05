@@ -95,12 +95,27 @@ header {
   align-items: center;
   justify-content: center;
 }
-
-#recipes {
+.flex-container2 {
   display: flex;
-  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+.flex-container3 {
+  display: flex;
+  
   justify-content: center;
 }
+
+.details{
+  align-self: left;
+} 
+
+
+#recipes {
+  align-content: center;
+  align-self: center;
+  justify-content: center;
+} 
 
 
 
@@ -248,15 +263,11 @@ li a:hover:not(.active) {
 
 
 .recipe_preview {
-  width: 80%; /* Adjust the width as needed */
+  width: 100%; /* Adjust the width as needed */
   box-sizing: border-box;
   border: 1px solid #ddd; /* Optional: Add a border for visual separation */
-  padding: 10px;
+  
   margin-bottom: 20px; /* Optional: Add margin for spacing between recipe previews */
-}
-
-.flex-container {
-  display: flex;
 }
 
 #formdiv{
@@ -284,6 +295,9 @@ li a:hover:not(.active) {
 .right-preview {
   flex: 60%; /* Adjust the width of the right side */
   padding-left: 20px; /* Optional: Add padding for spacing between photo and details */
+  background-color: #ececec;
+  
+  
 }
 
 img {
@@ -298,14 +312,8 @@ img {
   font-weight: bold;
 }
 
-.author a {
-  text-decoration: none;
-  color: #007BFF;
-}
 
-.number-of-people, .cook.time, .prerating {
-  margin-top: 10px; /* Optional: Add margin for spacing between details */
-}
+
 
 .recipe {
   max-width: 800px;
@@ -315,10 +323,6 @@ img {
   background-color: #f9f9f9;
 }
 
-.flex-container {
-  display: flex;
-  
-}
 
 .photos {
   display: flex;
@@ -375,20 +379,39 @@ img {
 
 /* Colors */
 .recipe.header a {
-  color: #333;
+  color: #111;
 }
 
-.author a {
-  color: #007BFF;
+.recipeheader a {
+  text-decoration: none;
+  color: #333;
 }
 
 .number-of-people,
 .cook.time,
 .date,
-.Total.Rating,
-.User.Rating {
-  color: #555;
+.totalrating,
+.userrating,
+.details {
+  color: #333;
+  margin-top: 10px;
+  text-align: left;
 }
+
+.prerating {
+  color: #333;
+  margin-top: 10px;
+  text-align: left;
+  margin-bottom: 10px;
+}
+
+.recipeheader{
+  color: #333;
+  text-align: left;
+  font-size: 120%;
+  margin-top: 10px;
+} 
+
 
 .newRecipe {
   max-width: 600px;

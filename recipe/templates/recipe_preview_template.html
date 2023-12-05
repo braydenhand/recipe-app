@@ -1,5 +1,5 @@
 <div class="recipe_preview">
-  <div class="flex-container">
+  <div class="flex-container3">
     <span class="left-preview">
 
       {% if recipe.photos %}
@@ -18,15 +18,14 @@
 
     </span>
     <span class="right-preview">
-      <div class="recipe header">
-        <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a>
-      </div>
-      <div class="author">by
+      <div class="recipeheader"> <b>
+        <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a> </b>
+         by
         <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
           {{ recipe.user.name }} </a>
       </div>
       <div class="number-of-people">
-        Feeds
+        Feeds:
         <span id="numberPeople">{{ recipe.number_people }}</span>
         {% if recipe.number_people == 1 %}
         {{ 'person' }}
@@ -34,13 +33,13 @@
         {{ 'people' }}
         {% endif %}
       </div>
-      <div class="cook time">{{recipe.cooking_time}} {% if recipe.cooking_time == 1 %}
+      <div class="cook time">Cook Time: {{recipe.cooking_time}} {% if recipe.cooking_time == 1 %}
         {{ 'minute' }}
         {% else %}
         {{ 'minutes' }}
         {% endif %}</div>
       <div class="prerating">
-        Overall Rating: {{recipe.average_rating}} / 5
+        Overall <span>Rating:</span> {{recipe.average_rating}} / 5
       </div>
     </span>
   </div>
