@@ -99,7 +99,7 @@
     {%endfor%}
   </div>
 
-
+  {% if current_user.is_authenticated: %}
   <h3 id="photoHeader">Add a Photo:</h3>
   <div>
     <form action="{{ url_for('main.upload_photo', recipe_id=recipe.id) }}" method="post" enctype="multipart/form-data">
@@ -110,4 +110,5 @@
     </div>
     </form>
   </div>
+  {% endif %}
 </div>
