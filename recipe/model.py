@@ -41,7 +41,6 @@ class Ingredient(db.Model):
     name = db.Column(db.String(512), nullable=False)
     qingredients = db.relationship('QIngredient', back_populates='ingredient')
 
-# Since there is a new ingredient for every recipe qingredient and ingredient is one to one
 class QIngredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     quantity = db.Column(db.Float, nullable=False)

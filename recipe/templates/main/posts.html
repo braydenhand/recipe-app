@@ -2,15 +2,15 @@
 <section class="filter">
   <span>
     <form class="settings" action="{{ url_for('main') }}" method="get">
-      #need to add additional filters that will award more functionality here
-      Sort by: <br /><select name="selection">
+      Sort by:
+        <select name="selection">
         <option>Rating Highest to Lowest</option>
         <option>Rating Lowest to Highest</option>
         <option>Cook Time Fastest To Slowest</option>
-        <option>Cook Time Fastest to Slowest</option>
+        <option>Cook Time Slowest to Fastest</option>
         <option>Newest</option>
         <option>Oldest</option></select
-      ><br />
+      ><br>
       <button type="submit" id="button">Go</button>
     </form>
   </span>
@@ -18,5 +18,4 @@
     {% for recipe in recipes %} {% include 'recipe_template.html' %}
     {% endfor %}
   </div>
-
 </section>

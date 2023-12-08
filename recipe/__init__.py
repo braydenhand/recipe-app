@@ -22,7 +22,6 @@ def create_app(test_config=None):
     ] = "mysql+mysqldb://24_webapp_035:,yBoVEKv@mysql.lab.it.uc3m.es/24_webapp_035d"
     # Register blueprints
     db.init_app(app)
-    # (we import main from here to avoid circular imports in the next lab)
     from . import main
     from . import auth
     app.register_blueprint(main.bp)

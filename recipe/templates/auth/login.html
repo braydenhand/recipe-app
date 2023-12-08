@@ -2,7 +2,7 @@
 
 {% block content %}
   <header>
-    <h2>Login to Continue Creating Recipies!</h2>
+    <h2>Login to Continue Creating Recipes!</h2>
   </header>
   <body>
     <button class="login-button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
@@ -21,14 +21,16 @@
           <p style="color: red;">{{ error }}</p>
         </div>
       </form>
+
     </div>
 
     <header>
       <h2>Don't have an account?</h2>
     </header>
-    <form action="{{ url_for('auth.signup') }}" method="get">
-      <button type="submit">Go to Signup</button>
-  </form>
+      <form action="{{ url_for('auth.signup') }}" method="get">
+        <button class="signup-button" type="submit">Go to Signup Page</button>
+      </form>
+
     <script>
       var modal = document.getElementById('id01');
       window.onclick = function(event) {

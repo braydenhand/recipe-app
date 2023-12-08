@@ -1,8 +1,6 @@
 {% extends 'recipe_template.html' %}
 {% block content %}
 <section>
-  
-
   {% if current_user.is_authenticated: %}
   <div class="User Rating">Your Rating: {{rating.value}} / 5</div>
   <div class="ChangeRating">
@@ -13,7 +11,6 @@
     <input type="radio" id="star2" class="rating" value="2" onclick="submitRating(2)" /><label for="star2"></label>
     <input type="radio" id="star1" class="rating" value="1" onclick="submitRating(1)" /><label for="star1"></label>
   </div>
-
 </section>
 
 <script>

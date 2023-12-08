@@ -3,7 +3,6 @@
   height: auto;
 }
 
-
 header {
   font-size: large;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
@@ -29,8 +28,6 @@ header {
   font-size: large;
 }
 
-
-
 #addSubmit{
   padding: 8px;
   width: 35%;
@@ -45,7 +42,6 @@ header {
 #addSubmit:hover{
   background-color: #111;
 } 
-
 
 .userProfile {
   margin: auto;
@@ -74,9 +70,10 @@ header {
   unicode-bidi: bidi-override;
   direction: rtl;
 }
+
 .filter {
   text-align: center;
-  padding: 20px; /* Adjust the padding as needed */
+  padding: 20px;
 }
 
 .recipe-image{
@@ -84,10 +81,9 @@ header {
 
 } 
 
-
 .settings {
   display: inline-block;
-  margin-bottom: 20px; /* Adjust the margin as needed */
+  margin-bottom: 20px;
 }
 
 .flex-container {
@@ -95,15 +91,16 @@ header {
   align-items: center;
   justify-content: center;
 }
+
 .flex-container2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding-right: 20%;
 }
+
 .flex-container3 {
   display: flex;
-  
   justify-content: center;
 }
 
@@ -111,17 +108,11 @@ header {
   align-self: left;
 } 
 
-
 #recipes {
   align-content: center;
   align-self: center;
   justify-content: center;
 } 
-
-
-
-
-
 
 .rating label {
   position: relative;
@@ -129,14 +120,14 @@ header {
   height: 30px; 
   cursor: pointer;
 } 
+
 .rating {
-  /*background: url("/static/star.png"); /* Path to your star image */
+  /*Legacy feature: background: url("/static/star.png") */
   width: 100%;
   height: 100%;
   width: 30px; 
   height: 30px; 
 }
-
 
 /* Navigation Bar */
 ul {
@@ -185,19 +176,32 @@ li a:hover:not(.active) {
   padding: 12px 20px;
   margin: 8px 0;
   display: inline-block;
-  border: 1px solid #ccc;
+  border: 1px solid grey;
+  border-radius: 5px;
   box-sizing: border-box;
 }
 
 .login-button {
   background-color: #04AA6D;
   color: white;
+  font-weight: bold;
   padding: 14px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
   width: 100%;
 }
+
+.signup-button{
+  background-color: #04AA6D;
+  color: white;
+  font-weight: bold;
+  padding: 14px 14px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 12%;
+} 
 
 .login-button:hover {
   opacity: 0.8;
@@ -211,50 +215,26 @@ li a:hover:not(.active) {
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
-  left: 0;
-  top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgb(0,0,0);
-  background-color: rgba(0,0,0,0.4);
-  padding-top: 60px;
-}
-
-/* Pop-Up Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto;
-  border: 3px solid #c6c6c6;
-  width: 60%;
-}
-
-/* Close button */
-.close {
-  position: absolute;
-  right: 25px;
+  left: 0;
   top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
+  overflow: auto;
+  padding-top: 50px;
+  background-color: rgba(0,0,0,0.5);
 }
 
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
+/* Pop-Up Box */
+.modal-content {
+  background-color: white;
+  border-radius: 5px;
+  margin: 5% auto;
+  width: 60%;
 }
 
 /* Animation */
 .animate {
-  -webkit-animation: animatezoom 0.5s;
   animation: animatezoom 0.5s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
 }
   
 @keyframes animatezoom {
@@ -262,32 +242,26 @@ li a:hover:not(.active) {
   to {transform: scale(1)}
 }
 
-
 .recipe_preview {
   width: 100%; /* Adjust the width as needed */
   box-sizing: border-box;
   border: 1px solid #ddd; /* Optional: Add a border for visual separation */
-  
   margin-bottom: 20px; /* Optional: Add margin for spacing between recipe previews */
 }
 
 #formdiv{
   justify-content: space-between;
-  
-  
-} 
+}
+
 #cooktime{
   text-align: left;
   flex: 50%;
 }
+
 #numpeople{
   text-align: left;
   flex: 50%;
 }
-
-
-
-
 
 .left-preview {
   flex: 40%; /* Adjust the width of the left side */
@@ -297,8 +271,6 @@ li a:hover:not(.active) {
   flex: 60%; /* Adjust the width of the right side */
   padding-left: 20px; /* Optional: Add padding for spacing between photo and details */
   background-color: #ececec;
-  
-  
 }
 
 img {
@@ -312,11 +284,10 @@ img {
   font-size: 1.2em;
   font-weight: bold;
 }
+
 #recipehead {
   text-align: center;
 } 
-
-
 
 .recipe {
   max-width: 800px;
@@ -325,7 +296,6 @@ img {
   border: 1px solid #ddd;
   background-color: #f9f9f9;
 }
-
 
 .photos {
   display: flex;
@@ -355,8 +325,7 @@ img {
   margin-right: 20px; 
   margin-left: 20px;
   background-color: #111;
-  border-radius: 10%;
-  
+  border-radius: 10%; 
 }
 
 .app-description {
@@ -364,6 +333,7 @@ img {
   color: #b3b3b3; 
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+
 .app-description-header {
   font-size: 50px; 
   color: #fff; 
@@ -378,7 +348,6 @@ img {
   color: #008152; 
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
-
 
 /* Colors */
 .recipe.header a {
@@ -414,7 +383,6 @@ img {
   font-size: 120%;
   margin-top: 10px;
 } 
-
 
 .newRecipe {
   max-width: 600px;
@@ -463,7 +431,6 @@ label {
   text-align: left;
 }
 
-
 .step {
   margin-bottom: 10px;
   padding: 8px;
@@ -473,8 +440,6 @@ label {
   box-sizing: border-box;
 }
 
-
-
 .quantity {
     margin-bottom: 10px;
     padding: 8px;
@@ -483,6 +448,7 @@ label {
     width: 10%; /* Set a specific width for quantity and unit */
     box-sizing: border-box;
 }
+
 .unit {
   margin-bottom: 10px;
   padding: 8px;
@@ -491,6 +457,7 @@ label {
   width: 24.2%; /* Set a specific width for quantity and unit */
   box-sizing: border-box;
 }
+
 .ingredientName {
     margin-bottom: 10px;
     padding-left: 8px;

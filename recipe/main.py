@@ -139,7 +139,6 @@ def create_recipe():
     
     return redirect(url_for("main.recipe", recipe_id=recipe.id))
 
-
 @bp.route("/create_recipe", methods=["GET"])
 @flask_login.login_required
 def create_recipe_get():
@@ -162,7 +161,6 @@ def rate(recipe_id, value):
         rating.value = value
     db.session.commit()
     #Not sure if a commit is needed before drawing but doing it just to be safe
-
     recipe = db.session.get(model.Recipe, recipe_id)
     counter = 0.0
     total = 0.0
