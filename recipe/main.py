@@ -32,7 +32,6 @@ def index():
 
 # We will need user, recipes, ratings, and bookmarked
 @bp.route('/profile/<int:user_id>')
-@flask_login.login_required
 def profile(user_id):
     user = db.session.get(model.User, user_id)
     if not user:
