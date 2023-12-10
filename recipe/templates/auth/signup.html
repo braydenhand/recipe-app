@@ -8,7 +8,9 @@
 
     {% with messages = get_flashed_messages() %}
     {% for message in messages %}
+    {% if message != "Please log in to access this page." %}
         <div class="notification">{{ message }}</div>
+        {% endif %}
     {% endfor %}
     {% endwith %}
 
