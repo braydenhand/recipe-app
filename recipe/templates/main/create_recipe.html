@@ -11,8 +11,8 @@
       <span id="cooktime">Cooking Time (in minutes):</span>
     </span>
     <span class="flex-container" id="formdiv">
-    <input type="number" id="number_people" name="number_people" required />
-    <input type="number" id="cooking_time" name="cooking_time" required />
+    <input type="number" min=1 id="number_people" name="number_people" required />
+    <input type="number" min=1 id="cooking_time" name="cooking_time" required />
   </span>
     <div id="ingredientPopup">
       <input type="hidden" id="ingredientCount" name="ingredientCount" value="1" />
@@ -46,7 +46,7 @@
     const ingredientDiv = document.createElement("div");
     ingredientDiv.innerHTML = `
     <label for="units${ingredientCount}">Quantity:</label>
-        <input type="number" class="quantity" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
+        <input type="number" min=1 class="quantity" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
         <label "unit${ingredientCount}">Unit:</label>
         <input type="text" 
           class="unit" 
