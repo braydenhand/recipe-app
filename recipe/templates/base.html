@@ -1,40 +1,79 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Culinary Chronicles Hub</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='recipe.css') }}"/>
-  </head>
-  <body>
-    <header>
-      <h1>
-        <ul>
-          <li>
-            <a class="activetab" href="{{ url_for('main.index') }}">Home</a>
-          </li>
-          <li>
-            <a href="{{ url_for('main.create_recipe') }}">Create Recipe</a>
-          </li>
-          <li class="login">
-            {% if current_user.is_authenticated: %}
-              <a href="{{ url_for('auth.logout') }}">Logout</a>
-            {% elif request.endpoint not in ['auth.login', 'auth.signup'] %}
-              <a href="{{ url_for('auth.login') }}">Login</a></div>
-            {% endif %}
-          </li>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Culinary Chronicles Hub</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='recipe.css') }}" />
+</head>
+
+<body>
+  <header>
+    <h1>
+      <ul>
+        <li>
+          <a class="activetab" href="{{ url_for('main.index') }}">Home</a>
+        </li>
+        <li>
+          <a href="{{ url_for('main.create_recipe') }}">Create Recipe</a>
+        </li>
+        <li class="login">
           {% if current_user.is_authenticated: %}
-          <li>
-            <div class="banner-pfp">
-              <a href="{{ url_for('main.profile', user_id=current_user.id) }}"><img class="image" id="myProfile" src="{{ url_for('static', filename='profile.png') }}"></a>
-            </div>
-          </li>
+          <a href="{{ url_for('auth.logout') }}">Logout</a>
+          {% elif request.endpoint not in ['auth.login', 'auth.signup'] %}
+          <a href="{{ url_for('auth.login') }}">Login</a></div>
           {% endif %}
-        </ul>
-        <a href="{{ url_for('main.index') }}">Culinary Chronicles Hub</a>
-      </h1>
-    </header>
-    <section class="content">
-      {% block content %}{% endblock %}
-    </section>
-  </body>
+        </li>
+        {% if current_user.is_authenticated: %}
+        <li>
+          <div class="banner-pfp">
+            <a href="{{ url_for('main.profile', user_id=current_user.id) }}"><img class="image" id="myProfile"
+                src="{{ url_for('static', filename='profile.png') }}"></a>
+          </div>
+        </li>
+        {% endif %}
+      </ul>
+      <a href="{{ url_for('main.index') }}">Culinary Chronicles Hub</a>
+    </h1>
+  </header>
+  <section class="content">
+    {% block content %}{% endblock %}
+  </section>
+  <div id="user-status" data-is-authenticated="{{ current_user.is_authenticated|lower }}"></div>
+</body>
+<script>
+  const timeoutDuration = 15 * 60 * 1000;
+
+  let timeout;
+
+  const userIsLoggedIn = document.getElementById('user-status').getAttribute('data-is-authenticated') === 'true';
+
+  function resetTimeout() {
+    clearTimeout(timeout);
+    if (userIsLoggedIn) {
+      timeout = setTimeout(logoutUser, timeoutDuration);
+    }
+  }
+  // Make an Ajax request to logout endpoint
+  function logoutUser() {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', '/logout', true);
+    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        window.location.replace('/login');
+        alert('You have been logged out due to inactivity. Please log in to continue your activity.');
+        
+      }
+    };
+    xhr.send();
+  }
+
+  document.addEventListener('mousemove', resetTimeout);
+  document.addEventListener('keydown', resetTimeout);
+
+  //Initialize the timer
+  resetTimeout();
+</script>
+
 </html>
