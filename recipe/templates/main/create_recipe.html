@@ -46,7 +46,7 @@
     const ingredientDiv = document.createElement("div");
     ingredientDiv.innerHTML = `
     <label for="quantity${ingredientCount}">Quantity:</label>
-        <input type="number" min=1 class="quantity" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
+        <input type="number" min=0.000001 class="quantity" id="quantity${ingredientCount}" name="quantity${ingredientCount}" required />
         <label for="unit${ingredientCount}">Unit:</label>
         <input type="text" 
           class="unit" 
