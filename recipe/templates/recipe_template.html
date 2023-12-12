@@ -25,11 +25,17 @@
           {% for photo in recipe.photos %}
           <img class=recipe-image
             src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo">
-          {% endfor %}
+          <div class="poster">
+            Posted by: {{ photo.user.name }} 
+          </div>
+            {% endfor %}
         </div>
         {% endif %}
       </span>
       <span class="details">
+        <div class="description">
+         {{ recipe.description }} 
+        </div>
         <div class="number-of-people">
           Feeds: 
           <span id="numberPeople">{{ recipe.number_people }}</span>

@@ -404,11 +404,12 @@ label {
 #name,
 #description{
   margin-bottom: 10px;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  margin-top: 20px;
+  padding: 4px;
   width: 100%;
   box-sizing: border-box;
+  text-align: left;
+
 }
 
 #number_people{
