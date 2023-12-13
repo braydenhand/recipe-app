@@ -25,7 +25,6 @@ def signup_post():
     new_user = model.User(email=email, name=username, password=password_hash, timestamp=datetime.datetime.now(dateutil.tz.tzlocal()))
     db.session.add(new_user)
     db.session.commit()
-    # Log in user after successful signup
     flask_login.login_user(new_user)
     return redirect(url_for("main.index"))
 

@@ -1,14 +1,6 @@
 import flask_login
 from . import db
 
-# Define an association table for the many-to-many relationship between Recipe and QIngredients
-'''
-recipe_ingredients = db.Table('recipe_ingredients',
-    db.Column('recipe_id', db.Integer, db.ForeignKey('recipe.id')),
-    db.Column('ingredient_id', db.Integer, db.ForeignKey('qingredient.id'))
-)
-'''
-
 class User(flask_login.UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(128), unique=True, nullable=False)

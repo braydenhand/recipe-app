@@ -28,9 +28,6 @@ def index():
 
     return render_template("main/index.html", recipes=recipes)
 
-# Potential function to append recipe for infinite scroll
-
-# We will need user, recipes, ratings, and bookmarked
 @bp.route('/profile/<int:user_id>')
 def profile(user_id):
     user = db.session.get(model.User, user_id)
@@ -53,7 +50,6 @@ def profile(user_id):
 
     return render_template('main/profile.html',user=user, recipes=recipes, ratings=rates, bookmarks=books)
 
-# We will need recipes, steps, photos, ingredients, and ratings
 @bp.route("/recipe/<int:recipe_id>")
 def recipe(recipe_id):
     recipe = db.session.get(model.Recipe, recipe_id)
@@ -72,7 +68,6 @@ def recipe(recipe_id):
     query = db.select(model.Photo).where(model.Photo.recipe_id == recipe_id).order_by(model.Photo.timestamp.desc())
     photos = db.session.execute(query).scalars().all()
 
-    # TODO fix flask login to check authentication before pulling rating
     if flask_login.current_user.is_authenticated:
        query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
        rating = db.session.execute(query).scalars().first()
@@ -82,14 +77,8 @@ def recipe(recipe_id):
        bookmark = None
        rating = None
 
-    # query = db.select(model.Bookmark).where(model.Bookmark.recipe_id == recipe_id).where(model.Bookmark.user_id == flask_login.current_user.id)
-    # bookmark = db.session.execute(query).scalars().first()
-
-    # query = db.select(model.Rating).where(model.Rating.recipe_id == recipe_id).where(model.Rating.user_id == flask_login.current_user.id)
-    # rating = db.session.execute(query).scalars().first()
     return render_template("main/recipe.html", recipe=recipe, steps=steps, ingredients=ingredients, ratings=ratings, photos=photos, rating=rating, bookmark=bookmark)
 
-# Will need recipe, steps, ingredients, and photo
 @bp.route("/create_recipe", methods=["POST"])
 @flask_login.login_required
 def create_recipe():
@@ -159,15 +148,12 @@ def rate(recipe_id, value):
     else:
         rating.value = value
     db.session.commit()
-    #Not sure if a commit is needed before drawing but doing it just to be safe
     recipe = db.session.get(model.Recipe, recipe_id)
     counter = 0.0
     total = 0.0
     for rating in recipe.ratings:
         counter = counter + 1
         total  = total + rating.value
-    #Rounding needs to allow for floats 
-    #recipe.average_rating = round (total/counter, 1)
     recipe.average_rating = int (total/counter)
 
     db.session.commit()
@@ -189,7 +175,6 @@ def bookmark(recipe_id):
     db.session.commit()
     return redirect(url_for("main.recipe", recipe_id=recipe_id))
 
-# Photo submission controller
 @bp.route('/recipe/<int:recipe_id>/upload_photo', methods=['POST'])
 @flask_login.login_required
 def upload_photo(recipe_id):

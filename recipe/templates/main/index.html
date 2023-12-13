@@ -3,19 +3,19 @@
 {% block content %}
 <section>
   <div class="app-mainpage">
-      <img src="../static/cover.jpg" alt="App Image" style="max-width: 100%;">
-      <div>
-        {% if current_user.is_authenticated: %}
-        <div class="app-mainpage-welcome"> Hey, {{current_user.name}}!</div>
-       {% else %}
-       <div class="app-mainpage-welcome"> <a href="{{ url_for('auth.login') }}">Login</a></div>
+    <img src="../static/cover.jpg" alt="App Image" style="max-width: 100%;">
+    <div>
+      {% if current_user.is_authenticated: %}
+      <div class="app-mainpage-welcome"> Hey, {{current_user.name}}!</div>
+      {% else %}
+      <div class="app-mainpage-welcome"> <a href="{{ url_for('auth.login') }}">Login</a></div>
       {% endif %}
-        <p class="app-description-header">Start your cooking journey with us today.
-        </p>
-        <p class="app-description">Our app is here to help. Upload your favorite recipes, 
-          get ideas, and rate other's recipies. 
+      <p class="app-description-header">Start your cooking journey with us today.
       </p>
-      </div>
+      <p class="app-description">Our app is here to help. Upload your favorite recipes,
+        get ideas, and rate other's recipies.
+      </p>
+    </div>
   </div>
 </section>
 

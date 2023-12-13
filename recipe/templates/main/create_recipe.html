@@ -4,16 +4,17 @@
 
   <form action="{{ url_for('main.create_recipe') }}" method="post">
     Recipe Name:<input type="text" id="name" name="name" required /><br />
-    Description:<textarea type="text" id="description" name="description" oninput="autoExpand(this)" required ></textarea><br />
+    Description:<textarea type="text" id="description" name="description" oninput="autoExpand(this)"
+      required></textarea><br />
 
     <span class="flex-container" id="formdiv">
       <span id="numpeople">Number of People:</span>
       <span id="cooktime">Cooking Time (in minutes):</span>
     </span>
     <span class="flex-container" id="formdiv">
-    <input type="number" min=1 id="number_people" name="number_people" required />
-    <input type="number" min=1 id="cooking_time" name="cooking_time" required />
-  </span>
+      <input type="number" min=1 id="number_people" name="number_people" required />
+      <input type="number" min=1 id="cooking_time" name="cooking_time" required />
+    </span>
     <div id="ingredientPopup">
       <input type="hidden" id="ingredientCount" name="ingredientCount" value="1" />
       <h3 id="ingredientHeader">Add Ingredients:</h3>
@@ -23,7 +24,7 @@
       <input type="hidden" id="stepCount" name="stepCount" value="1" />
       <h3 id="stepHeader">Add Steps:</h3>
       <div id="formSteps">
-        
+
       </div>
     </div>
     <button type="button" onclick="addStep()">Add Step</button>
@@ -33,9 +34,7 @@
 </div>
 <script>
   function autoExpand(textarea) {
-    // Reset the height to default to get the scroll height
     textarea.style.height = "auto";
-    // Set the height to the scroll height, plus a little extra to avoid cutting off text
     textarea.style.height = (textarea.scrollHeight + 5) + "px";
   }
 

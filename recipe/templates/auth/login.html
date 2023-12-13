@@ -1,43 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<header>
+  <h2>Login to Continue Creating Recipes!</h2>
+</header>
+
+<body>
+  <button class="login-button" onclick="document.getElementById('id01').style.display='block'"
+    style="width:auto;">Login</button>
+  <div id="id01" class="modal">
+    <form class="modal-content animate" action="{{ url_for('auth.login') }}" method="post">
+      <div class="container">
+        <label for="email"><b>Email</b></label>
+        <input type="text" id="email" placeholder="Enter Email" name="email" required class="login-input"
+          autocomplete="off">
+        <br>
+        <br>
+        <label for="password"><b>Password</b></label>
+        <input type="password" id="password" placeholder="Enter Password" name="password" required class="login-input">
+
+        <button type="submit" class="login-button">Login</button>
+
+        <p style="color: red;">{{ error }}</p>
+      </div>
+    </form>
+
+  </div>
+
   <header>
-    <h2>Login to Continue Creating Recipes!</h2>
+    <h2>Don't have an account?</h2>
   </header>
-  <body>
-    <button class="login-button" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
-    <div id="id01" class="modal">
-      <form class="modal-content animate" action="{{ url_for('auth.login') }}" method="post">
-        <div class="container">
-          <label for="email"><b>Email</b></label>
-          <input type="text" id="email" placeholder="Enter Email" name="email" required class="login-input" autocomplete="off">
-          <br>
-          <br>
-          <label for="password"><b>Password</b></label>
-          <input type="password" id= "password" placeholder="Enter Password" name="password" required class="login-input">
-              
-          <button type="submit" class="login-button">Login</button>
-          
-          <p style="color: red;">{{ error }}</p>
-        </div>
-      </form>
+  <form action="{{ url_for('auth.signup') }}" method="get">
+    <button class="signup-button" type="submit">Go to Signup Page</button>
+  </form>
 
-    </div>
-
-    <header>
-      <h2>Don't have an account?</h2>
-    </header>
-      <form action="{{ url_for('auth.signup') }}" method="get">
-        <button class="signup-button" type="submit">Go to Signup Page</button>
-      </form>
-
-    <script>
-      var modal = document.getElementById('id01');
-      window.onclick = function(event) {
-          if (event.target == modal) {
-              modal.style.display = "none";
-          }
+  <script>
+    var modal = document.getElementById('id01');
+    window.onclick = function (event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
 {% endblock %}

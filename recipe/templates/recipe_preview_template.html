@@ -8,24 +8,23 @@
         <img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}"
           alt="photo">
       </div>
-      {% else %} 
+      {% else %}
       <div>
         {% set photo = recipe.photos[0] %}
-        <img src="{{ url_for('static', filename='star') }}"
-          alt="No photo available">
+        <img src="{{ url_for('static', filename='star') }}" alt="No photo available">
       </div>
       {% endif %}
 
     </span>
     <span class="right-preview">
       <div class="recipeheader"> <b>
-        <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a> </b>
-         by
+          <a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{recipe.name}}</a> </b>
+        by
         <a href="{{ url_for('main.profile', user_id=recipe.user.id) }}">
           {{ recipe.user.name }} </a>
       </div>
       <div class="description">
-       <span id="description">{{ recipe.description }}</span> 
+        <span id="description">{{ recipe.description }}</span>
       </div>
       <div class="number-of-people">
         Feeds:

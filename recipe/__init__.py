@@ -15,12 +15,10 @@ def create_app(test_config=None):
     @login_manager.user_loader
     def load_user(user_id):
         return db.session.get(model.User, int(user_id))
-    # A secret for signing session cookies
     app.config["SECRET_KEY"] = "93220d9b340cf9a6c39bac99cce7daf220167498f91fa"
     app.config[
         "SQLALCHEMY_DATABASE_URI"
     ] = "mysql+mysqldb://24_webapp_021:uEhvMmM7@mysql.lab.it.uc3m.es/24_webapp_021c"
-    # Register blueprints
     db.init_app(app)
     from . import main
     from . import auth

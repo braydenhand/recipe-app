@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block content %} 
+{% extends 'base.html' %} {% block content %}
 
 <div class="userProfile">
   <img id="userIcon" src="{{ url_for('static', filename='profile.png') }}" />
@@ -35,7 +35,7 @@
         document.getElementById(`button${i}`).classList.remove("active");
       }
       document.getElementById(`button${1}`).classList.add("active");
-      
+
       document.getElementById("recipes").style.display = "block";
       document.getElementById("ratings").style.display = "none";
       document.getElementById("bookmarks").style.display = "none";
@@ -73,7 +73,7 @@
       {% for recipe in recipes %} {% include 'recipe_preview_template.html' %}
       {% endfor %}
     </div>
-    
+
     <div id="ratings">
       {% for recipe in ratings %}{% include
       'recipe_preview_template.html' %} {% endfor %}
@@ -87,7 +87,7 @@
         document.getElementById(`button${i}`).classList.remove("active");
       }
       document.getElementById(`button${1}`).classList.add("active");
-      
+
       document.getElementById("recipes").style.display = "block";
       document.getElementById("ratings").style.display = "none";
     }
@@ -103,6 +103,6 @@
     }
   </script>
 
-  {% endif %} 
+  {% endif %}
 </div>
 {% endblock %}

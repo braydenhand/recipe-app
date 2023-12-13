@@ -28,7 +28,7 @@ header {
   font-size: large;
 }
 
-#addSubmit{
+#addSubmit {
   padding: 8px;
   width: 35%;
   background-color: #333;
@@ -37,11 +37,11 @@ header {
   border-radius: 6px;
   cursor: pointer;
   align-self: center;
-} 
+}
 
-#addSubmit:hover{
+#addSubmit:hover {
   background-color: #111;
-} 
+}
 
 .userProfile {
   margin: auto;
@@ -76,10 +76,10 @@ header {
   padding: 20px;
 }
 
-.recipe-image{
+.recipe-image {
   max-width: 400px;
 
-} 
+}
 
 .settings {
   display: inline-block;
@@ -104,29 +104,40 @@ header {
   justify-content: center;
 }
 
-.details{
+.flex-container4 {
+  display: flex;
+  justify-content: center;
+  padding-right: 25px;
+}
+
+.flex-container5 {
+  display: flex;
+  justify-content: left;
+}
+
+.details {
   align-self: left;
-} 
+}
 
 #recipes {
   align-content: center;
   align-self: center;
   justify-content: center;
-} 
+}
 
 .rating label {
   position: relative;
-  width: 30px; 
-  height: 30px; 
+  width: 30px;
+  height: 30px;
   cursor: pointer;
-} 
+}
 
 .rating {
   /*Legacy feature: background: url("/static/star.png") */
   width: 100%;
   height: 100%;
-  width: 30px; 
-  height: 30px; 
+  width: 30px;
+  height: 30px;
 }
 
 /* Navigation Bar */
@@ -192,7 +203,7 @@ li a:hover:not(.active) {
   width: 100%;
 }
 
-.signup-button{
+.signup-button {
   background-color: #04AA6D;
   color: white;
   font-weight: bold;
@@ -201,7 +212,7 @@ li a:hover:not(.active) {
   border: none;
   cursor: pointer;
   width: 12%;
-} 
+}
 
 .login-button:hover {
   opacity: 0.8;
@@ -221,7 +232,7 @@ li a:hover:not(.active) {
   top: 0;
   overflow: auto;
   padding-top: 50px;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Pop-Up Box */
@@ -236,46 +247,59 @@ li a:hover:not(.active) {
 .animate {
   animation: animatezoom 0.5s
 }
-  
+
 @keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
+  from {
+    transform: scale(0)
+  }
+
+  to {
+    transform: scale(1)
+  }
 }
 
 .recipe_preview {
-  width: 100%; /* Adjust the width as needed */
+  width: 100%;
+  /* Adjust the width as needed */
   box-sizing: border-box;
-  border: 1px solid #ddd; /* Optional: Add a border for visual separation */
-  margin-bottom: 20px; /* Optional: Add margin for spacing between recipe previews */
+  border: 1px solid #ddd;
+  /* Optional: Add a border for visual separation */
+  margin-bottom: 20px;
+  /* Optional: Add margin for spacing between recipe previews */
 }
 
-#formdiv{
+#formdiv {
   justify-content: space-between;
 }
 
-#cooktime{
+#cooktime {
   text-align: left;
   flex: 50%;
 }
 
-#numpeople{
+#numpeople {
   text-align: left;
   flex: 50%;
 }
 
 .left-preview {
-  flex: 40%; /* Adjust the width of the left side */
+  flex: 40%;
+  /* Adjust the width of the left side */
 }
 
 .right-preview {
-  flex: 60%; /* Adjust the width of the right side */
-  padding-left: 20px; /* Optional: Add padding for spacing between photo and details */
+  flex: 60%;
+  /* Adjust the width of the right side */
+  padding-left: 20px;
+  /* Optional: Add padding for spacing between photo and details */
   background-color: #ececec;
 }
 
 img {
-  max-width: 100%; /* Make sure the image doesn't exceed its container */
-  height: auto; /* Maintain the aspect ratio of the image */
+  max-width: 100%;
+  /* Make sure the image doesn't exceed its container */
+  height: auto;
+  /* Maintain the aspect ratio of the image */
   display: block;
 }
 
@@ -287,7 +311,7 @@ img {
 
 #recipehead {
   text-align: center;
-} 
+}
 
 .recipe {
   max-width: 800px;
@@ -315,28 +339,28 @@ img {
 .app-mainpage {
   display: flex;
   align-items: center;
-  padding: 80px 0; 
+  padding: 80px 0;
   background-color: #333;
   margin: 20px 0;
 }
 
 .app-mainpage img {
-  width: 45%; 
-  margin-right: 20px; 
+  width: 45%;
+  margin-right: 20px;
   margin-left: 20px;
   background-color: #111;
-  border-radius: 10%; 
+  border-radius: 10%;
 }
 
 .app-description {
-  font-size: 24px; 
-  color: #b3b3b3; 
+  font-size: 24px;
+  color: #b3b3b3;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .app-description-header {
-  font-size: 50px; 
-  color: #fff; 
+  font-size: 50px;
+  color: #fff;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: #555;
   padding: 10px;
@@ -344,8 +368,8 @@ img {
 }
 
 .app-mainpage-welcome {
-  font-size: 50px; 
-  color: #008152; 
+  font-size: 50px;
+  color: #008152;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -377,12 +401,12 @@ img {
   margin-bottom: 10px;
 }
 
-.recipeheader{
+.recipeheader {
   color: #333;
   text-align: left;
   font-size: 120%;
   margin-top: 10px;
-} 
+}
 
 .newRecipe {
   max-width: 600px;
@@ -402,7 +426,7 @@ label {
 }
 
 #name,
-#description{
+#description {
   margin-bottom: 10px;
   margin-top: 20px;
   padding: 4px;
@@ -412,7 +436,7 @@ label {
 
 }
 
-#number_people{
+#number_people {
   margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ccc;
@@ -422,7 +446,7 @@ label {
   text-align: left;
 }
 
-#cooking_time{
+#cooking_time {
   margin-bottom: 10px;
   padding: 8px;
   border: 1px solid #ccc;
@@ -442,12 +466,13 @@ label {
 }
 
 .quantity {
-    margin-bottom: 10px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 10%; /* Set a specific width for quantity and unit */
-    box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 10%;
+  /* Set a specific width for quantity and unit */
+  box-sizing: border-box;
 }
 
 .unit {
@@ -455,19 +480,21 @@ label {
   padding: 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  width: 24.2%; /* Set a specific width for quantity and unit */
+  width: 24.2%;
+  /* Set a specific width for quantity and unit */
   box-sizing: border-box;
 }
 
 .ingredientName {
-    margin-bottom: 10px;
-    padding-left: 8px;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 35%; /* Set a specific width for quantity and unit */
-    box-sizing: border-box;
+  margin-bottom: 10px;
+  padding-left: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 35%;
+  /* Set a specific width for quantity and unit */
+  box-sizing: border-box;
 }
 
 button {
